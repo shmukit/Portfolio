@@ -149,7 +149,7 @@ export default function Home() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen relative">
+      <main className="min-h-screen relative" role="main">
         {/* Animated Background - Multiple Layers */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
           {/* Base gradient layer */}
@@ -1062,7 +1062,7 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </main>
     </ErrorBoundary>
   );
 }

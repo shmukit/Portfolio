@@ -1,12 +1,83 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import StructuredData from './components/StructuredData';
+
+const siteUrl = 'https://www.mukit.xyz';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#a855f7',
+};
 
 export const metadata: Metadata = {
-  title: 'Mukit - Product Builder',
-  description: 'Entrepreneur & Philomath, learning by doing. Product Ethos: Data (analysis), Decision (strategy) & (service) Design.',
-  keywords: ['portfolio', 'product builder', 'entrepreneur', 'data analysis', 'product strategy', 'service design'],
-  authors: [{ name: 'Mukit' }],
-  viewport: 'width=device-width, initial-scale=1',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
+    template: '%s | Mukit - Product Manager',
+  },
+  description: 'Portfolio of Shazzad Hossain Mukit – a data-driven Product Manager passionate about learning by doing, building impactful products, and driving growth through analytics, design, and AI. Product work at 10 Minute School (10MS) including World Bank/IFC impact assessment, conversion optimization, and EdTech market research.',
+  keywords: [
+    // Professional Identity
+    'Product Manager Portfolio',
+    'AI Product Manager',
+    'Growth Product Manager',
+    'Product Leader Portfolio',
+    'Shazzad Hossain Mukit',
+    'Mukit',
+    
+    // Core PM Skills
+    'Data-driven Product Management',
+    'Product Strategy',
+    'Growth Product Management',
+    'Product Analytics',
+    'Conversion Rate Optimization',
+    'Conversion Optimization',
+    'Dashboard Audit',
+    'Feature Experimentation',
+    'A/B Testing',
+    'User Research',
+    
+    // Mindset & Philosophy
+    'Learning by Doing',
+    'Philomath',
+    'Problem Solving',
+    'Continuous Learning',
+    'System Thinking',
+    
+    // Domain & Industry
+    'EdTech Product Manager',
+    '10 Minute School',
+    '10MS',
+    'Bangladesh Tech',
+    'Digital Learning',
+    'AI for Education',
+    
+    // Tools & Technology
+    'Supabase',
+    'Next.js',
+    'Product Case Studies',
+    
+    // Specific Achievements
+    'World Bank IFC',
+    'Market Research',
+    'Free to Paid Conversion',
+    'Product Portfolio',
+  ],
+  authors: [{ name: 'Shazzad Hossain Mukit', url: siteUrl }],
+  creator: 'Mukit',
+  publisher: 'Mukit',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -27,17 +98,24 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/manifest.json',
-  themeColor: '#a855f7',
   openGraph: {
-    title: 'Mukit - Product Builder',
-    description: 'Entrepreneur & Philomath, learning by doing. Product Ethos: Data (analysis), Decision (strategy) & (service) Design.',
     type: 'website',
     locale: 'en_US',
+    url: siteUrl,
+    siteName: 'Shazzad Hossain Mukit - Product Manager Portfolio',
+    title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
+    description: 'Portfolio of Shazzad Hossain Mukit – a data-driven Product Manager passionate about learning by doing, building impactful products, and driving growth through analytics, design, and AI.',
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Shazzad Hossain Mukit - Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
+      },
+    ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mukit - Product Builder',
-    description: 'Entrepreneur & Philomath, learning by doing. Product Ethos: Data (analysis), Decision (strategy) & (service) Design.',
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
@@ -48,6 +126,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData />
+      </head>
       <body className="antialiased">
         {children}
       </body>
