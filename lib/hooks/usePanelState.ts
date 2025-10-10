@@ -20,14 +20,12 @@ export const usePanelState = (): PanelStateHookReturn => {
 
   const closePanel = useCallback(() => {
     setIsOpen(false);
+    setSelectedProject(null); // Clear immediately
 
-    // Restore body scroll after animation completes
-    setTimeout(() => {
-      setSelectedProject(null);
-      if (typeof window !== 'undefined') {
-        document.body.style.overflow = 'unset';
-      }
-    }, 300); // Match animation duration
+    // Restore body scroll
+    if (typeof window !== 'undefined') {
+      document.body.style.overflow = 'unset';
+    }
   }, []);
 
   // Close panel on escape key
