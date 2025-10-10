@@ -3,22 +3,16 @@
 import { ErrorBoundary } from './components/ErrorBoundary';
 import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
-import { usePanelState } from '../lib/hooks/usePanelState';
 import { Project } from '../types/project';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
 import { 
-  pillHover, 
   pillTap, 
-  pillContainer, 
-  pillItem,
-  modalOverlay,
-  modalContent,
-  breathe,
   swipeCard,
   swipeContainer,
   pillBreathe
 } from '../lib/utils/animations';
+import AnimatedCTA from './components/AnimatedCTA';
 
 export default function Home() {
   const { projects, loading, error } = useProjects();
@@ -26,22 +20,32 @@ export default function Home() {
   const [isPinned, setIsPinned] = useState(false); // Track if modal is pinned (clicked)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [glowColors, setGlowColors] = useState<Record<string, string>>({});
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const shouldReduceMotion = useReducedMotion();
 
-
-  // Get unique years for sidebar
-  const years = Array.from(new Set(projects.map(p => p.year))).sort((a, b) => b - a);
-
-  // Group projects by year
-  const projectsByYear = projects.reduce((acc, project) => {
-    if (!acc[project.year]) {
-      acc[project.year] = [];
+  // Initialize theme from localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
     }
-    acc[project.year].push(project);
-    return acc;
-  }, {} as Record<number, Project[]>);
+  }, []);
 
-  // Generate random gradient colors for breathing effect (white + color)
-  const getRandomGradient = () => {
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+
+  // Projects are already available from useProjects hook
+  // Removed unused years and projectsByYear variables
+
+  // Generate random gradient colors for breathing effect (white + color) - memoized
+  const getRandomGradient = useCallback(() => {
     const gradients = [
       'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(6, 182, 212, 0.2))',   // white to cyan
       'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(147, 51, 234, 0.2))',  // white to purple
@@ -49,19 +53,19 @@ export default function Home() {
       'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(236, 72, 153, 0.2))'   // white to pink
     ];
     return gradients[Math.floor(Math.random() * gradients.length)];
-  };
+  }, []);
 
   // Handle project hover (desktop)
   const handleProjectHover = (project: Project | null) => {
     // Always allow showing new project on hover (closes previous)
     if (project) {
-      setHoveredProject(project);
+    setHoveredProject(project);
       setIsPinned(false); // Unpin when hovering over new project
       if (!glowColors[project.id]) {
-        setGlowColors(prev => ({
-          ...prev,
-          [project.id]: getRandomGradient()
-        }));
+      setGlowColors(prev => ({
+        ...prev,
+        [project.id]: getRandomGradient()
+      }));
       }
     } else {
       // Only close on hover end if not pinned
@@ -145,157 +149,323 @@ export default function Home() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen relative overflow-hidden">
+      <div className="min-h-screen relative">
         {/* Animated Background - Multiple Layers */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
+        <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
           {/* Base gradient layer */}
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/30 via-blue-50/30 to-pink-50/30"></div>
+          <div className={`absolute inset-0 transition-colors duration-300 ${
+            theme === 'dark'
+              ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+              : 'bg-gradient-to-br from-gray-50 via-white to-gray-50'
+          }`}></div>
           
-          {/* Animated gradient blobs - very subtle movement */}
+          {/* Optimized animated gradient blobs - cyan */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute"
             style={{
-              background: "radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)"
+              width: '120%',
+              height: '120%',
+              left: '-10%',
+              top: '-10%',
+              background: theme === 'dark'
+                ? "radial-gradient(ellipse 1200px 900px at 20% 30%, rgba(6, 182, 212, 0.35) 0%, rgba(6, 182, 212, 0.22) 25%, rgba(6, 182, 212, 0.14) 45%, rgba(6, 182, 212, 0.08) 65%, transparent 90%)"
+                : "radial-gradient(ellipse 1200px 900px at 20% 30%, rgba(6, 182, 212, 0.20) 0%, rgba(6, 182, 212, 0.12) 25%, rgba(6, 182, 212, 0.06) 45%, rgba(6, 182, 212, 0.03) 65%, transparent 90%)",
+              mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+              filter: 'blur(1px)'
             }}
-            animate={{
-              x: [0, 10, 0],
-              y: [0, 5, 0],
-              scale: [1, 1.02, 1]
+            animate={shouldReduceMotion ? {} : {
+              x: [0, 20, -15, 18, 0],
+              y: [0, 15, -20, 25, 0],
+              scale: [1, 1.02, 0.98, 1.04, 1]
             }}
             transition={{
-              duration: 15,
+              duration: 30,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "linear"
             }}
           />
+          {/* Optimized animated gradient blobs - blue */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute"
             style={{
-              background: "radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)"
+              width: '120%',
+              height: '120%',
+              left: '-10%',
+              top: '-10%',
+              background: theme === 'dark'
+                ? "radial-gradient(ellipse 1000px 1100px at 80% 70%, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0.22) 25%, rgba(59, 130, 246, 0.14) 45%, rgba(59, 130, 246, 0.08) 65%, transparent 90%)"
+                : "radial-gradient(ellipse 1000px 1100px at 80% 70%, rgba(59, 130, 246, 0.20) 0%, rgba(59, 130, 246, 0.12) 25%, rgba(59, 130, 246, 0.06) 45%, rgba(59, 130, 246, 0.03) 65%, transparent 90%)",
+              mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+              filter: 'blur(1px)'
             }}
-            animate={{
-              x: [0, -8, 0],
-              y: [0, -5, 0],
-              scale: [1, 1.03, 1]
+            animate={shouldReduceMotion ? {} : {
+              x: [0, -18, 25, -12, 0],
+              y: [0, -22, 18, -28, 0],
+              scale: [1, 0.98, 1.02, 0.96, 1]
             }}
             transition={{
-              duration: 18,
+              duration: 35,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "linear"
             }}
           />
+          {/* Optimized animated gradient blobs - purple */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute"
             style={{
-              background: "radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 50%)"
+              width: '120%',
+              height: '120%',
+              left: '-10%',
+              top: '-10%',
+              background: theme === 'dark'
+                ? "radial-gradient(ellipse 900px 1000px at 60% 40%, rgba(147, 51, 234, 0.48) 0%, rgba(147, 51, 234, 0.32) 25%, rgba(147, 51, 234, 0.20) 45%, rgba(147, 51, 234, 0.12) 65%, transparent 90%)"
+                : "radial-gradient(ellipse 900px 1000px at 60% 40%, rgba(147, 51, 234, 0.18) 0%, rgba(147, 51, 234, 0.10) 25%, rgba(147, 51, 234, 0.05) 45%, rgba(147, 51, 234, 0.03) 65%, transparent 90%)",
+              mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+              filter: 'blur(1px)'
             }}
-            animate={{
-              x: [0, 5, 0],
-              y: [0, -3, 0],
-              scale: [1, 1.01, 1]
+            animate={shouldReduceMotion ? {} : {
+              x: [0, 15, -22, 20, 0],
+              y: [0, -18, 15, -25, 0],
+              scale: [1, 1.02, 0.98, 1.04, 1]
             }}
             transition={{
-              duration: 20,
+              duration: 32,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "linear"
+            }}
+          />
+          {/* Optimized animated gradient blobs - pink */}
+          <motion.div
+            className="absolute"
+            style={{
+              width: '120%',
+              height: '120%',
+              left: '-10%',
+              top: '-10%',
+              background: theme === 'dark'
+                ? "radial-gradient(ellipse 1100px 800px at 40% 80%, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.30) 25%, rgba(236, 72, 153, 0.19) 45%, rgba(236, 72, 153, 0.11) 65%, transparent 90%)"
+                : "radial-gradient(ellipse 1100px 800px at 40% 80%, rgba(236, 72, 153, 0.18) 0%, rgba(236, 72, 153, 0.10) 25%, rgba(236, 72, 153, 0.05) 45%, rgba(236, 72, 153, 0.03) 65%, transparent 90%)",
+              mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+              filter: 'blur(1px)'
+            }}
+            animate={shouldReduceMotion ? {} : {
+              x: [0, 16, -20, 22, 0],
+              y: [0, -15, 12, -22, 0],
+              scale: [1, 1.02, 0.98, 1.04, 1]
+            }}
+            transition={{
+              duration: 33,
+              repeat: Infinity,
+              ease: "linear"
             }}
           />
         </div>
 
+        {/* Theme Toggle Button - Smaller */}
+        <motion.button
+          onClick={toggleTheme}
+          className={`fixed top-6 right-6 z-50 w-11 h-6 rounded-full flex items-center transition-all duration-500 shadow-lg ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-r from-blue-600 to-purple-600' 
+              : 'bg-gradient-to-r from-yellow-400 to-orange-500'
+          }`}
+          aria-label="Toggle theme"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div
+            className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-500 ${
+              theme === 'dark' ? 'bg-white' : 'bg-white'
+            }`}
+            animate={{
+              x: theme === 'dark' ? 20 : 2,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 30
+            }}
+          >
+            <motion.div
+              animate={{
+                rotate: theme === 'dark' ? 180 : 0,
+                scale: theme === 'dark' ? 0.8 : 1,
+              }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut"
+              }}
+            >
+              {theme === 'light' ? (
+                <svg className="w-3.5 h-3.5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-3.5 h-3.5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </motion.div>
+          </motion.div>
+        </motion.button>
+
         {/* Mobile: Static About Section at Top */}
-        <div className="lg:hidden bg-transparent p-6">
+        <div className="lg:hidden bg-transparent p-6 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            className="text-left"
           >
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">
-              Your Name
+            <h1 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+              Hi, <motion.span 
+                role="img" 
+                aria-label="waving hand"
+                className="inline-block origin-[70%_70%]"
+                animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                transition={{ 
+                  duration: 2.5, 
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatDelay: 1
+                }}
+              >👋🏼</motion.span> I am Mukit
             </h1>
-            <p className="text-sm text-accent font-medium">
-              Product Designer & Developer
+            <p className={`text-sm leading-relaxed mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+              Entrepreneur & Philomath, learning by doing.
             </p>
+            <p className={`text-sm leading-relaxed mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+              Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
+            </p>
+            
+            {/* Mobile CTA Buttons */}
+            <div className="flex flex-wrap gap-4 lg:gap-8 pt-2">
+              <AnimatedCTA 
+                type="cv" 
+                label="CV" 
+                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                theme={theme}
+              />
+
+              <AnimatedCTA 
+                type="email" 
+                label="Email" 
+                href="mailto:shazzadhossainmukit@gmail.com"
+                theme={theme}
+              />
+
+              <AnimatedCTA 
+                type="linkedin" 
+                label="LinkedIn" 
+                href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
+                theme={theme}
+              />
+
+              <AnimatedCTA 
+                type="github" 
+                label="GitHub" 
+                href="https://github.com/shmukit"
+                theme={theme}
+              />
+
+              <AnimatedCTA 
+                type="tools" 
+                label="Tools" 
+                href="#tools"
+                theme={theme}
+              />
+            </div>
           </motion.div>
         </div>
 
-        {/* Desktop Layout */}
-        <div className="hidden lg:grid lg:grid-cols-10 min-h-screen">
-          {/* Column 1 - Empty spacer */}
-          <div className="hidden lg:block"></div>
-
-          {/* Columns 2-3 - Direct Project Navigation with Enhanced Interactions */}
-          <motion.div 
-            className="lg:col-span-2 lg:flex lg:items-start lg:justify-center lg:h-screen lg:py-8 lg:overflow-y-auto lg:scrollbar-hide"
-            variants={pillContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="space-y-2 lg:py-4 w-full px-4">
-              {projects.map((project, index) => (
-                <motion.div 
-                  key={project.id} 
-                  className="relative"
-                  variants={pillItem}
-                >
-                  {/* Project Pill Button with Enhanced Interactions */}
-                  <motion.button
-                    className="w-full text-left px-6 py-3 rounded-3xl cursor-pointer flex flex-col relative overflow-hidden border backdrop-blur-md text-black"
-                    onClick={() => handleProjectSelect(project)}
+        {/* Desktop Layout - Scrollable Page with Fixed Center */}
+        <div className="hidden lg:block relative z-10">
+          {/* Main scrollable container */}
+          <div className="flex">
+            {/* Left Project Pane - Scrolls with page */}
+            <div className="w-80 z-30">
+              <div className="pl-24 pr-4 py-8">
+                {/* Project pills */}
+                <div className="space-y-3">
+                  {projects.map((project) => (
+                    <motion.button
+                    key={project.id} 
+                      className={`w-full text-left px-4 py-2 rounded-2xl cursor-pointer flex flex-col relative overflow-hidden border backdrop-blur-md ${
+                        theme === 'dark' ? 'text-white' : 'text-black'
+                      }`}
+                      onClick={() => handleProjectSelect(project)}
                     onHoverStart={() => handleProjectHover(project)}
                     onHoverEnd={() => handleProjectHover(null)}
-                    whileTap={pillTap}
-                    animate={hoveredProject?.id === project.id ? "breathing" : "idle"}
-                    variants={{
-                      breathing: pillBreathe,
-                      idle: {}
-                    }}
-                    style={{
-                      background: hoveredProject?.id === project.id 
-                        ? glowColors[project.id] || 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(99, 102, 241, 0.2))'
-                        : 'transparent',
-                      borderColor: hoveredProject?.id === project.id 
-                        ? 'rgba(200, 200, 200, 0.3)'
-                        : 'transparent',
-                      boxShadow: hoveredProject?.id === project.id 
-                        ? '0 4px 20px rgba(99, 102, 241, 0.2)' 
-                        : 'none'
-                    }}
-                  >
-                    {/* Year on first line */}
-                    <span className="relative z-10 text-sm font-medium text-gray-500 mb-1">
-                      {project.year}
-                    </span>
-                    {/* Project title on second line */}
-                    <span className="relative z-10 text-base font-medium text-gray-900">
-                      {project.title}
-                    </span>
-                  </motion.button>
-                </motion.div>
-              ))}
+                      whileTap={pillTap}
+                      animate={shouldReduceMotion ? {} : (hoveredProject?.id === project.id ? "breathing" : "idle")}
+                      variants={{
+                        breathing: pillBreathe,
+                        idle: {}
+                      }}
+                      style={{
+                        background: hoveredProject?.id === project.id 
+                          ? glowColors[project.id] || (theme === 'dark' 
+                            ? 'linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(99, 102, 241, 0.3))'
+                            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(99, 102, 241, 0.2))')
+                          : 'transparent',
+                        borderColor: hoveredProject?.id === project.id 
+                          ? (theme === 'dark' ? 'rgba(100, 116, 139, 0.4)' : 'rgba(200, 200, 200, 0.3)')
+                          : 'transparent',
+                        boxShadow: hoveredProject?.id === project.id 
+                          ? '0 4px 20px rgba(99, 102, 241, 0.2)' 
+                          : 'none'
+                      }}
+                    >
+                      {/* Year on first line */}
+                      <span className={`relative z-10 text-xs font-medium mb-1 ${
+                        theme === 'dark' ? 'text-gray-200' : 'text-gray-500'
+                      }`}>
+                        {project.year}
+                      </span>
+                      {/* Project title on second line */}
+                      <span className={`relative z-10 text-sm font-medium ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>
+                        {project.title}
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
             </div>
-          </motion.div>
 
-          {/* Columns 4-8 - Central Content Area (Conditional) */}
-          <div className="lg:col-span-5 flex items-center justify-center h-screen px-6 lg:px-12 py-16 relative overflow-y-auto scrollbar-hide">
+            {/* Right Content Area */}
+            <div className="flex-1 relative">
+
+              {/* Fixed Center Content Area */}
+                <div className="fixed left-[352px] right-0 top-0 h-screen flex items-center justify-center pointer-events-none z-20">
+                <div className="w-full max-w-5xl px-6 lg:px-12 pointer-events-auto">
             {hoveredProject ? (
               /* Project Detail Modal Content */
               <motion.div 
-                className="w-full max-w-7xl max-h-full overflow-y-auto scrollbar-hide bg-white border border-gray-200 rounded-3xl shadow-2xl p-8 relative"
+                  className={`w-full max-h-[85vh] overflow-y-auto scrollbar-hide rounded-3xl shadow-2xl p-8 relative ${
+                    theme === 'dark' 
+                      ? 'bg-gray-800 border border-gray-700' 
+                      : 'bg-white border border-gray-200'
+                  }`}
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                {/* Close Button */}
-                <button
-                  onClick={handleProjectClose}
-                  className="absolute top-6 right-6 z-20 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
-                  aria-label="Close"
-                >
-                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                  {/* Close Button */}
+                  <button
+                    onClick={handleProjectClose}
+                    className={`absolute top-6 right-6 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                      theme === 'dark'
+                        ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+                    }`}
+                    aria-label="Close"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
 
                 {/* Project Header */}
                 <div className="mb-6 lg:mb-8">
@@ -307,16 +477,26 @@ export default function Home() {
                       </div>
                     )}
                     {hoveredProject.projectType && (
-                      <div className="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-medium">
+                        <div className={`px-4 py-2 rounded-full text-sm font-medium border ${
+                          theme === 'dark'
+                            ? 'bg-blue-900/30 text-blue-300 border-blue-700'
+                            : 'bg-blue-50 text-blue-700 border-blue-200'
+                        }`}>
                         {hoveredProject.projectType}
                       </div>
                     )}
-                    <div className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                      <div className={`px-4 py-2 rounded-full text-sm font-medium ${
+                        theme === 'dark'
+                          ? 'bg-gray-700 text-gray-300'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}>
                       {hoveredProject.year}
                     </div>
                   </div>
 
-                  <h2 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
+                    <h2 className={`text-2xl lg:text-4xl font-bold mb-3 leading-tight ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>
                     {hoveredProject.title}
                   </h2>
                   <p className="text-lg lg:text-xl text-accent font-medium mb-6">
@@ -324,7 +504,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Project Image - full width, prominent */}
+                {/* Project Image - full width, prominent with lazy loading */}
                 {hoveredProject.imageUrl && (
                   <div className="w-full aspect-video lg:aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6 lg:mb-8">
                     <Image
@@ -333,6 +513,9 @@ export default function Home() {
                       width={1200}
                       height={750}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     />
                   </div>
                 )}
@@ -346,8 +529,12 @@ export default function Home() {
                     {/* Situation */}
                     {hoveredProject.situation && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Situation</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                          <h3 className={`text-lg font-semibold mb-3 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Situation</h3>
+                          <p className={`leading-relaxed ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
                           {hoveredProject.situation}
                         </p>
                       </div>
@@ -356,8 +543,12 @@ export default function Home() {
                     {/* Task */}
                     {hoveredProject.task && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Task</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                          <h3 className={`text-lg font-semibold mb-3 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Task</h3>
+                          <p className={`leading-relaxed ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
                           {hoveredProject.task}
                         </p>
                       </div>
@@ -366,8 +557,12 @@ export default function Home() {
                     {/* Result */}
                     {hoveredProject.result && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Result</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                          <h3 className={`text-lg font-semibold mb-3 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Result</h3>
+                          <p className={`leading-relaxed ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
                           {hoveredProject.result}
                         </p>
                       </div>
@@ -375,13 +570,17 @@ export default function Home() {
 
                     {/* My Contributions */}
                     {hoveredProject.contributions && hoveredProject.contributions.length > 0 && (
-                      <div className="bg-gray-50 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">My Contribution</h3>
+                        <div className={`rounded-2xl p-6 ${
+                          theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                        }`}>
+                          <h3 className={`text-lg font-semibold mb-4 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>My Contribution</h3>
                         <ul className="space-y-2">
                           {hoveredProject.contributions.map((contribution: string, idx: number) => (
                             <li key={idx} className="flex items-start">
                               <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                              <span className="text-gray-700">{contribution}</span>
+                                <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>{contribution}</span>
                             </li>
                           ))}
                         </ul>
@@ -394,15 +593,29 @@ export default function Home() {
                     
                     {/* Key Metrics */}
                     {hoveredProject.metrics && hoveredProject.metrics.length > 0 && (
-                      <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Results</h3>
+                        <div className={`rounded-2xl p-6 border ${
+                          theme === 'dark'
+                            ? 'bg-gray-700/50 border-gray-600'
+                            : 'bg-white border-gray-200'
+                        }`}>
+                          <h3 className={`text-lg font-semibold mb-4 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Key Results</h3>
                         <div className="space-y-4">
-                          {hoveredProject.metrics.map((metric: any, idx: number) => (
-                            <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
-                              <div className="text-2xl font-bold text-gray-900 mb-1">{metric.value}</div>
-                              <div className="text-sm font-medium text-gray-700 mb-1">{metric.label}</div>
+                          {hoveredProject.metrics.map((metric: { value: string; label: string; description?: string }, idx: number) => (
+                              <div key={idx} className={`border-b pb-4 last:border-b-0 last:pb-0 ${
+                                theme === 'dark' ? 'border-gray-600' : 'border-gray-100'
+                              }`}>
+                                <div className={`text-2xl font-bold mb-1 ${
+                                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                                }`}>{metric.value}</div>
+                                <div className={`text-sm font-medium mb-1 ${
+                                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                                }`}>{metric.label}</div>
                               {metric.description && (
-                                <div className="text-xs text-gray-500">{metric.description}</div>
+                                  <div className={`text-xs ${
+                                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                                  }`}>{metric.description}</div>
                               )}
                             </div>
                           ))}
@@ -412,13 +625,23 @@ export default function Home() {
 
                     {/* Tags */}
                     {hoveredProject.tags && hoveredProject.tags.length > 0 && (
-                      <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Skills & Technologies</h3>
+                        <div className={`rounded-2xl p-6 border ${
+                          theme === 'dark'
+                            ? 'bg-gray-700/50 border-gray-600'
+                            : 'bg-white border-gray-200'
+                        }`}>
+                          <h3 className={`text-lg font-semibold mb-4 ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          }`}>Skills & Technologies</h3>
                         <div className="flex flex-wrap gap-2">
                           {hoveredProject.tags.map((tag: string, idx: number) => (
                             <span
                               key={idx}
-                              className="px-3 py-2 bg-blue-50 text-blue-700 text-sm rounded-lg font-medium border border-blue-200"
+                                className={`px-3 py-2 text-sm rounded-lg font-medium border ${
+                                  theme === 'dark'
+                                    ? 'bg-blue-900/30 text-blue-300 border-blue-700'
+                                    : 'bg-blue-50 text-blue-700 border-blue-200'
+                                }`}
                             >
                               {tag}
                             </span>
@@ -448,64 +671,106 @@ export default function Home() {
               </motion.div>
             ) : (
               /* Default Name/Title/CV Section */
-              <div className="text-center space-y-6 lg:space-y-8 max-w-2xl">
+                <div className="text-left space-y-4 lg:space-y-5 max-w-2xl">
                 <div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 lg:mb-5">
-                    Your Name
+                    <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 lg:mb-8 ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>
+                    Hi, <motion.span 
+                      role="img" 
+                      aria-label="waving hand"
+                      className="inline-block origin-[70%_70%]"
+                      animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                      transition={{ 
+                        duration: 2.5, 
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatDelay: 1
+                      }}
+                    >👋🏼</motion.span> I am Mukit
                   </h1>
-                  <p className="text-xl lg:text-2xl text-accent font-medium mb-3">
-                    Product Designer & Developer
+                    <p className={`text-base lg:text-lg leading-relaxed mb-3 ${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                    Entrepreneur & Philomath, learning by doing.
                   </p>
-                  <p className="text-gray-600 text-lg lg:text-xl leading-relaxed">
-                    Passionate about creating meaningful digital experiences
+                    <p className={`text-base lg:text-lg leading-relaxed ${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                    Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
                   </p>
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-wrap gap-3 lg:gap-4 justify-center pt-4">
-                  <a
-                    href="#"
-                    className="px-6 lg:px-8 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all hover:shadow-lg text-base"
-                  >
-                    About / CV
-                  </a>
-                  <a
-                    href="mailto:your.email@example.com"
-                    className="px-6 lg:px-8 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all text-base"
-                  >
-                    Email
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/yourusername"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 lg:px-8 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all text-base"
-                  >
-                    LinkedIn
-                  </a>
+                <div className="flex flex-wrap gap-6 lg:gap-8 pt-4">
+                  <AnimatedCTA 
+                    type="cv" 
+                    label="CV" 
+                    href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                    theme={theme}
+                  />
+
+                  <AnimatedCTA 
+                    type="email" 
+                    label="Email" 
+                    href="mailto:shazzadhossainmukit@gmail.com"
+                    theme={theme}
+                  />
+
+                  <AnimatedCTA 
+                    type="linkedin" 
+                    label="LinkedIn" 
+                    href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
+                    theme={theme}
+                  />
+
+                  <AnimatedCTA 
+                    type="github" 
+                    label="GitHub" 
+                    href="https://github.com/shmukit"
+                    theme={theme}
+                  />
+
+                  <AnimatedCTA 
+                    type="tools" 
+                    label="Tools" 
+                    href="#tools"
+                    theme={theme}
+                  />
                 </div>
 
                 {/* Last Update */}
-                <div className="text-sm text-gray-500 pt-8">
-                  Last update: Aug &apos;22
+                  <div className={`text-xs pt-6 ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  }`}>
+                  Last update: Oct &apos;25
                 </div>
               </div>
             )}
-          </div>
+                </div>
+              </div>
 
-          {/* Columns 9-10 - Empty spacers */}
-          <div className="lg:col-span-2 hidden lg:block"></div>
+              {/* Scrollable Page Content - Creates page-wide scroll */}
+              <div className="min-h-screen">
+                {/* Content that pushes the page height to enable scrolling */}
+                <div className="pt-screen pb-20">
+                  {/* Empty space to enable scrolling without showing generic content */}
+                  <div className="h-screen"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Mobile Layout - Swipeable Cards */}
-        <div className="lg:hidden py-8 px-4">
+        <div className="lg:hidden py-8 px-4 relative z-10">
           <motion.div 
             className="space-y-2 max-w-md mx-auto"
             variants={swipeContainer}
             initial="initial"
             animate="animate"
           >
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 className="relative"
@@ -522,15 +787,19 @@ export default function Home() {
                 variants={swipeCard}
               >
                 <motion.button
-                  className="w-full text-left px-6 py-3 rounded-3xl flex flex-col relative overflow-hidden border backdrop-blur-md text-black"
+                  className={`w-full text-left px-4 py-2 rounded-2xl flex flex-col relative overflow-hidden border backdrop-blur-md ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
+                  }`}
                   onClick={() => handleProjectSelect(project)}
                   whileTap={pillTap}
                   style={{
                     background: hoveredProject?.id === project.id 
-                      ? glowColors[project.id] || 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(99, 102, 241, 0.2))'
+                      ? glowColors[project.id] || (theme === 'dark' 
+                        ? 'linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(99, 102, 241, 0.3))'
+                        : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(99, 102, 241, 0.2))')
                       : 'transparent',
                     borderColor: hoveredProject?.id === project.id 
-                      ? 'rgba(200, 200, 200, 0.3)'
+                      ? (theme === 'dark' ? 'rgba(100, 116, 139, 0.4)' : 'rgba(200, 200, 200, 0.3)')
                       : 'transparent',
                     boxShadow: hoveredProject?.id === project.id 
                       ? `0 4px 20px ${glowColors[project.id] || 'rgba(99, 102, 241, 0.15)'}` 
@@ -538,11 +807,15 @@ export default function Home() {
                   }}
                 >
                   {/* Year on first line */}
-                  <span className="relative z-10 text-sm font-medium text-gray-500 mb-1">
+                  <span className={`relative z-10 text-xs font-medium mb-1 ${
+                    theme === 'dark' ? 'text-gray-200' : 'text-gray-500'
+                  }`}>
                     {project.year}
                   </span>
                   {/* Project title on second line */}
-                  <span className="relative z-10 text-base font-medium text-gray-900">
+                  <span className={`relative z-10 text-sm font-medium ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {project.title}
                   </span>
                 </motion.button>
@@ -578,7 +851,11 @@ export default function Home() {
               </button>
 
               <motion.div
-                className="relative bg-white border border-gray-200 rounded-3xl shadow-2xl max-h-[85vh] w-full max-w-lg overflow-y-auto"
+                className={`relative rounded-3xl shadow-2xl max-h-[85vh] w-full max-w-lg overflow-y-auto border ${
+                  theme === 'dark'
+                    ? 'bg-gray-800 border-gray-700'
+                    : 'bg-white border-gray-200'
+                }`}
                 initial={{ opacity: 0, scale: 0.8, y: 50 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 50 }}
@@ -598,16 +875,26 @@ export default function Home() {
                         </div>
                       )}
                       {hoveredProject.projectType && (
-                        <div className="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full text-sm font-medium">
+                        <div className={`px-4 py-2 rounded-full text-sm font-medium border ${
+                          theme === 'dark'
+                            ? 'bg-blue-900/30 text-blue-300 border-blue-700'
+                            : 'bg-blue-50 text-blue-700 border-blue-200'
+                        }`}>
                           {hoveredProject.projectType}
                         </div>
                       )}
-                      <div className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                      <div className={`px-4 py-2 rounded-full text-sm font-medium ${
+                        theme === 'dark'
+                          ? 'bg-gray-700 text-gray-300'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}>
                         {hoveredProject.year}
                       </div>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
+                    <h2 className={`text-2xl font-bold mb-3 leading-tight ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>
                       {hoveredProject.title}
                     </h2>
                     <p className="text-lg text-accent font-medium mb-4">
@@ -615,7 +902,7 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* Project Image */}
+                  {/* Project Image with lazy loading */}
                   {hoveredProject.imageUrl && (
                     <div className="w-full aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6">
                       <Image
@@ -624,6 +911,9 @@ export default function Home() {
                         width={800}
                         height={450}
                         className="w-full h-full object-cover"
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                       />
                     </div>
                   )}
@@ -633,8 +923,12 @@ export default function Home() {
                     {/* Situation */}
                     {hoveredProject.situation && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Situation</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className={`text-lg font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>Situation</h3>
+                        <p className={`leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
                           {hoveredProject.situation}
                         </p>
                       </div>
@@ -643,8 +937,12 @@ export default function Home() {
                     {/* Task */}
                     {hoveredProject.task && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Task</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className={`text-lg font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>Task</h3>
+                        <p className={`leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
                           {hoveredProject.task}
                         </p>
                       </div>
@@ -653,8 +951,12 @@ export default function Home() {
                     {/* Result */}
                     {hoveredProject.result && (
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Result</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className={`text-lg font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>Result</h3>
+                        <p className={`leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
                           {hoveredProject.result}
                         </p>
                       </div>
@@ -662,15 +964,29 @@ export default function Home() {
 
                     {/* Key Metrics */}
                     {hoveredProject.metrics && hoveredProject.metrics.length > 0 && (
-                      <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Results</h3>
+                      <div className={`rounded-2xl p-6 border ${
+                        theme === 'dark'
+                          ? 'bg-gray-700/50 border-gray-600'
+                          : 'bg-white border-gray-200'
+                      }`}>
+                        <h3 className={`text-lg font-semibold mb-4 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>Key Results</h3>
                         <div className="space-y-4">
-                          {hoveredProject.metrics.map((metric: any, idx: number) => (
-                            <div key={idx} className="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
-                              <div className="text-2xl font-bold text-gray-900 mb-1">{metric.value}</div>
-                              <div className="text-sm font-medium text-gray-700 mb-1">{metric.label}</div>
+                          {hoveredProject.metrics.map((metric: { value: string; label: string; description?: string }, idx: number) => (
+                            <div key={idx} className={`border-b pb-4 last:border-b-0 last:pb-0 ${
+                              theme === 'dark' ? 'border-gray-600' : 'border-gray-100'
+                            }`}>
+                              <div className={`text-2xl font-bold mb-1 ${
+                                theme === 'dark' ? 'text-white' : 'text-gray-900'
+                              }`}>{metric.value}</div>
+                              <div className={`text-sm font-medium mb-1 ${
+                                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                              }`}>{metric.label}</div>
                               {metric.description && (
-                                <div className="text-xs text-gray-500">{metric.description}</div>
+                                <div className={`text-xs ${
+                                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                                }`}>{metric.description}</div>
                               )}
                             </div>
                           ))}
@@ -680,13 +996,17 @@ export default function Home() {
 
                     {/* My Contributions */}
                     {hoveredProject.contributions && hoveredProject.contributions.length > 0 && (
-                      <div className="bg-gray-50 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">My Contribution</h3>
+                      <div className={`rounded-2xl p-6 ${
+                        theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                      }`}>
+                        <h3 className={`text-lg font-semibold mb-4 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>My Contribution</h3>
                         <ul className="space-y-2">
                           {hoveredProject.contributions.map((contribution: string, idx: number) => (
                             <li key={idx} className="flex items-start">
                               <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                              <span className="text-gray-700">{contribution}</span>
+                              <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>{contribution}</span>
                             </li>
                           ))}
                         </ul>
@@ -695,13 +1015,23 @@ export default function Home() {
 
                     {/* Tags */}
                     {hoveredProject.tags && hoveredProject.tags.length > 0 && (
-                      <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Skills & Technologies</h3>
+                      <div className={`rounded-2xl p-6 border ${
+                        theme === 'dark'
+                          ? 'bg-gray-700/50 border-gray-600'
+                          : 'bg-white border-gray-200'
+                      }`}>
+                        <h3 className={`text-lg font-semibold mb-4 ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>Skills & Technologies</h3>
                         <div className="flex flex-wrap gap-2">
                           {hoveredProject.tags.map((tag: string, idx: number) => (
                             <span
                               key={idx}
-                              className="px-3 py-2 bg-blue-50 text-blue-700 text-sm rounded-lg font-medium border border-blue-200"
+                              className={`px-3 py-2 text-sm rounded-lg font-medium border ${
+                                theme === 'dark'
+                                  ? 'bg-blue-900/30 text-blue-300 border-blue-700'
+                                  : 'bg-blue-50 text-blue-700 border-blue-200'
+                              }`}
                             >
                               {tag}
                             </span>
