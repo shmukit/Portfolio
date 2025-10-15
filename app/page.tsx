@@ -652,8 +652,11 @@ export default function Home() {
             >
               {/* Close Button - Outside the card, at the top */}
               <button
-                onClick={handleProjectClose}
-                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleProjectClose();
+                }}
+                className="absolute top-4 right-4 z-30 w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors"
                 aria-label="Close"
               >
                 <svg className="w-5 h-5" fill="none" stroke="#ffffff" viewBox="0 0 24 24">
@@ -664,8 +667,11 @@ export default function Home() {
               {/* Click Areas for Navigation - Left Side */}
               {currentProjectIndex > 0 && (
                 <button
-                  onClick={handleModalSwipeRight}
-                  className="absolute left-0 top-0 w-1/3 h-full z-20 pointer-events-auto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleModalSwipeRight();
+                  }}
+                  className="absolute left-0 top-16 w-1/3 h-[calc(100%-4rem)] z-20 pointer-events-auto"
                   aria-label="Previous project"
                 />
               )}
@@ -673,8 +679,11 @@ export default function Home() {
               {/* Click Areas for Navigation - Right Side */}
               {currentProjectIndex < projects.length - 1 && (
                 <button
-                  onClick={handleModalSwipeLeft}
-                  className="absolute right-0 top-0 w-1/3 h-full z-20 pointer-events-auto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleModalSwipeLeft();
+                  }}
+                  className="absolute right-0 top-16 w-1/3 h-[calc(100%-4rem)] z-20 pointer-events-auto"
                   aria-label="Next project"
                 />
               )}
