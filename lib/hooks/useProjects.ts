@@ -26,7 +26,7 @@ export const useProjects = (): UseProjectsReturn => {
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
       const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-      if (supabaseUrl && supabaseKey && supabaseUrl !== 'https://your-project.supabase.co') {
+      if (supabaseUrl && supabaseKey && supabaseUrl !== 'https://your-project.supabase.co' && supabase) {
         try {
           const { data, error: supabaseError } = await supabase
             .from('projects')
