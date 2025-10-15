@@ -18,6 +18,8 @@ import ThemeToggle from './components/ThemeToggle';
 import AnimatedBackground from './components/AnimatedBackground';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
+import UrlCTA from './components/UrlCTA';
+import { isValidImageUrl } from '../lib/utils/imageValidation';
 
 
 export default function Home() {
@@ -341,8 +343,8 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Project Image - full width, prominent with lazy loading */}
-                {hoveredProject.imageUrl && (
+                {/* Project Image - Only show if image exists and is valid */}
+                {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
                   <div className="w-full aspect-video lg:aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6 lg:mb-8">
                     <Image
                       src={hoveredProject.imageUrl}
@@ -358,20 +360,68 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* Two Column Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                {/* Project Content - Two Column Layout */}
+                <div className="flex gap-8 h-full">
                   
-                  {/* Left Column - Main Content */}
-                  <div className="lg:col-span-2 space-y-6">
+                  {/* Left Column - Project Details */}
+                  <div className="flex-1 space-y-6">
+                    
+                    {/* Project Header */}
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap gap-2">
+                        {hoveredProject.category && (
+                          <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.category}
+                          </div>
+                        )}
+                        {hoveredProject.phase && (
+                          <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.phase}
+                          </div>
+                        )}
+                        {hoveredProject.projectType && (
+                          <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.projectType}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Project Description */}
+                      {hoveredProject.description && (
+                        <div className={`text-base leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          {hoveredProject.description}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Main Content Grid - Two Columns */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      
+                      {/* Left Column - Project Details */}
+                      <div className="space-y-6">
                     
                     {/* Situation */}
                     {hoveredProject.situation && (
                       <div>
-                          <h3 className={`text-lg font-semibold mb-3 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            <h3 className={`text-sm font-semibold mb-2 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>Situation</h3>
-                          <p className={`leading-relaxed ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                            <p className={`text-sm leading-relaxed ${
+                              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                           }`}>
                           {hoveredProject.situation}
                         </p>
@@ -381,11 +431,11 @@ export default function Home() {
                     {/* Task */}
                     {hoveredProject.task && (
                       <div>
-                          <h3 className={`text-lg font-semibold mb-3 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            <h3 className={`text-sm font-semibold mb-2 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>Task</h3>
-                          <p className={`leading-relaxed ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                            <p className={`text-sm leading-relaxed ${
+                              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                           }`}>
                           {hoveredProject.task}
                         </p>
@@ -395,11 +445,11 @@ export default function Home() {
                     {/* Result */}
                     {hoveredProject.result && (
                       <div>
-                          <h3 className={`text-lg font-semibold mb-3 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            <h3 className={`text-sm font-semibold mb-2 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>Result</h3>
-                          <p className={`leading-relaxed ${
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                            <p className={`text-sm leading-relaxed ${
+                              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                           }`}>
                           {hoveredProject.result}
                         </p>
@@ -408,104 +458,111 @@ export default function Home() {
 
                     {/* My Contributions */}
                     {hoveredProject.contributions && hoveredProject.contributions.length > 0 && (
-                        <div className={`rounded-2xl p-6 ${
-                          theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
-                        }`}>
-                          <h3 className={`text-lg font-semibold mb-4 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                          <div>
+                            <h3 className={`text-sm font-semibold mb-3 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>My Contribution</h3>
-                        <ul className="space-y-2">
-                          {hoveredProject.contributions.map((contribution: string, idx: number) => (
-                            <li key={idx} className="flex items-start">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>{contribution}</span>
+                            <ul className={`space-y-2 ${
+                              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                            }`}>
+                              {hoveredProject.contributions.map((contribution, index) => (
+                                <li key={index} className="text-sm leading-relaxed flex items-start">
+                                  <span className="text-gray-500 mr-2 mt-1">•</span>
+                                  <span>{contribution.contribution}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     )}
+
                   </div>
 
-                  {/* Right Column - Metrics and Tags */}
+                      {/* Right Column - Stats */}
                   <div className="space-y-6">
                     
-                    {/* Key Metrics */}
-                    {hoveredProject.metrics && hoveredProject.metrics.length > 0 && (
-                        <div className={`rounded-2xl p-6 border ${
+                        {/* Key Results Card */}
+                        {hoveredProject.keyResults && hoveredProject.keyResults.length > 0 && (
+                          <div className={`p-4 rounded-lg shadow-sm ${
                           theme === 'dark'
-                            ? 'bg-gray-700/50 border-gray-600'
-                            : 'bg-white border-gray-200'
+                              ? 'bg-gray-800/50 border border-gray-700' 
+                              : 'bg-gray-50 border border-gray-200'
                         }`}>
-                          <h3 className={`text-lg font-semibold mb-4 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            <h3 className={`text-sm font-semibold mb-3 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>Key Results</h3>
-                        <div className="space-y-4">
-                          {hoveredProject.metrics.map((metric: { value: string; label: string; description?: string }, idx: number) => (
-                              <div key={idx} className={`border-b pb-4 last:border-b-0 last:pb-0 ${
-                                theme === 'dark' ? 'border-gray-600' : 'border-gray-100'
-                              }`}>
-                                <div className={`text-2xl font-bold mb-1 ${
-                                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                                }`}>{metric.value}</div>
-                                <div className={`text-sm font-medium mb-1 ${
+                            <div className="space-y-3">
+                              {hoveredProject.keyResults.map((keyResult, index) => (
+                                <div key={index}>
+                                  <div className={`text-lg font-bold mb-1 ${
+                                    theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                                  }`}>
+                                    {keyResult.value}
+                                  </div>
+                                  <div className={`text-xs font-medium mb-1 ${
                                   theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                                }`}>{metric.label}</div>
-                              {metric.description && (
+                                  }`}>
+                                    {keyResult.label}
+                                  </div>
                                   <div className={`text-xs ${
                                     theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                                  }`}>{metric.description}</div>
-                              )}
+                                  }`}>
+                                    {keyResult.description}
+                                  </div>
                             </div>
                           ))}
                         </div>
                       </div>
                     )}
 
-                    {/* Tags */}
+                        {/* Skills & Technologies Card */}
                     {hoveredProject.tags && hoveredProject.tags.length > 0 && (
-                        <div className={`rounded-2xl p-6 border ${
+                          <div className={`p-4 rounded-lg shadow-sm ${
                           theme === 'dark'
-                            ? 'bg-gray-700/50 border-gray-600'
-                            : 'bg-white border-gray-200'
+                              ? 'bg-gray-800/50 border border-gray-700' 
+                              : 'bg-gray-50 border border-gray-200'
                         }`}>
-                          <h3 className={`text-lg font-semibold mb-4 ${
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            <h3 className={`text-sm font-semibold mb-3 ${
+                              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                           }`}>Skills & Technologies</h3>
                         <div className="flex flex-wrap gap-2">
-                          {hoveredProject.tags.map((tag: string, idx: number) => (
-                            <span
-                              key={idx}
-                                className={`px-3 py-2 text-sm rounded-lg font-medium border ${
+                              {hoveredProject.tags.slice(0, 6).map((tag, index) => (
+                                <span key={index} className={`text-xs px-2 py-1 rounded-full ${
                                   theme === 'dark'
-                                    ? 'bg-blue-900/30 text-blue-300 border-blue-700'
-                                    : 'bg-blue-50 text-blue-700 border-blue-200'
-                                }`}
-                            >
+                                    ? 'bg-gray-700 text-gray-200' 
+                                    : 'bg-gray-200 text-gray-700'
+                                }`}>
                               {tag}
                             </span>
                           ))}
+                              {hoveredProject.tags.length > 6 && (
+                                <span className={`text-xs px-2 py-1 rounded-full ${
+                                  theme === 'dark' 
+                                    ? 'bg-gray-700 text-gray-200' 
+                                    : 'bg-gray-200 text-gray-700'
+                                }`}>
+                                  +{hoveredProject.tags.length - 6}
+                                </span>
+                              )}
                         </div>
                       </div>
                     )}
+
+                    {/* URL CTAs */}
+                    <UrlCTA 
+                      companyUrl={hoveredProject.companyUrl}
+                      projectUrl={hoveredProject.projectUrl}
+                      reportUrl={hoveredProject.reportUrl}
+                      demoUrl={hoveredProject.demoUrl}
+                      companyLabel={hoveredProject.companyLabel}
+                      projectLabel={hoveredProject.projectLabel}
+                      reportLabel={hoveredProject.reportLabel}
+                      demoLabel={hoveredProject.demoLabel}
+                      theme={theme}
+                    />
                   </div>
                 </div>
-
-                {/* Dashboard Link */}
-                {hoveredProject.dashboardUrl && (
-                  <div className="mt-8 pt-6 border-t border-gray-200">
-                    <a
-                      href={hoveredProject.dashboardUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                    >
-                      View Dashboard
-                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
                   </div>
-                )}
+                </div>
               </motion.div>
             ) : (
               /* Default Name/Title/CV Section */
@@ -551,6 +608,17 @@ export default function Home() {
                   }`}>
                   Last update: Oct &apos;25
                 </div>
+
+                {/* Vibed while making this site */}
+                <div className={`text-xs pt-2 flex items-center gap-2 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                }`}>
+                  <span>Vibed while making this site.</span>
+                  <span className="flex items-center gap-1">
+                    <span role="img" aria-label="coffee">☕</span>
+                    <span role="img" aria-label="headphones">🎧</span>
+                  </span>
+                </div>
               </div>
             )}
                 </div>
@@ -568,8 +636,67 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Layout - Swipeable Cards */}
+        {/* Mobile Layout - Main Content and Swipeable Cards */}
         <div className="lg:hidden py-8 px-4 relative z-10">
+          {/* Mobile Main Content - Always visible */}
+          <div className="max-w-md mx-auto mb-8">
+            <div className="text-center space-y-4">
+              <div>
+                <h1 className={`text-3xl font-bold mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Hi, <motion.span 
+                    role="img" 
+                    aria-label="waving hand"
+                    className="inline-block origin-[70%_70%]"
+                    animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                    transition={{ 
+                      duration: 2.5, 
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatDelay: 1
+                    }}
+                  >👋🏼</motion.span> I am Mukit
+                </h1>
+                <p className={`text-base leading-relaxed mb-3 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  Entrepreneur & Philomath, learning by doing.
+                </p>
+                <p className={`text-base leading-relaxed ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
+                </p>
+              </div>
+
+              {/* CTA Buttons */}
+              <CTASection 
+                theme={theme} 
+                onTogglePortfolio={togglePortfolio} 
+              />
+
+              {/* Last Update */}
+              <div className={`text-xs pt-6 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>
+                Last update: Oct &apos;25
+              </div>
+
+              {/* Vibed while making this site */}
+              <div className={`text-xs pt-2 flex items-center justify-center gap-2 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>
+                <span>Vibed while making this site.</span>
+                <span className="flex items-center gap-1">
+                  <span role="img" aria-label="coffee">☕</span>
+                  <span role="img" aria-label="headphones">🎧</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Project Cards - Only show when portfolio is toggled */}
           {showPortfolio && (
           <motion.div 
             className="space-y-2 max-w-md mx-auto"
@@ -614,8 +741,8 @@ export default function Home() {
                   }}
                 >
                   {/* Year on first line */}
-                  <span className={`relative z-10 text-xs font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-200' : 'text-gray-500'
+                  <span className={`relative z-10 text-[10px] font-medium mb-1 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
                   }`}>
                     {project.year}
                   </span>
@@ -758,8 +885,8 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* Project Image with lazy loading */}
-                  {hoveredProject.imageUrl && (
+                  {/* Project Image with lazy loading - Only show if image is valid */}
+                  {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
                     <div className="w-full aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6">
                       <Image
                         src={hoveredProject.imageUrl}
@@ -775,16 +902,59 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Content Sections */}
-                  <div className="space-y-6">
+                  {/* Content Sections - Mobile Minimal */}
+                  <div className="space-y-4">
+                    
+                    {/* Project Header */}
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-2">
+                        {hoveredProject.category && (
+                          <div className={`px-2 py-1 rounded-full text-[10px] font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.category}
+                          </div>
+                        )}
+                        {hoveredProject.phase && (
+                          <div className={`px-2 py-1 rounded-full text-[10px] font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.phase}
+                          </div>
+                        )}
+                        {hoveredProject.projectType && (
+                          <div className={`px-2 py-1 rounded-full text-[10px] font-medium ${
+                            theme === 'dark' 
+                              ? 'bg-gray-700 text-gray-200' 
+                              : 'bg-gray-200 text-gray-700'
+                          }`}>
+                            {hoveredProject.projectType}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Project Description */}
+                      {hoveredProject.description && (
+                        <div className={`text-sm leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          {hoveredProject.description}
+                        </div>
+                      )}
+                    </div>
+
                     {/* Situation */}
                     {hoveredProject.situation && (
                       <div>
-                        <h3 className={`text-lg font-semibold mb-2 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        <h3 className={`text-sm font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                         }`}>Situation</h3>
-                        <p className={`leading-relaxed ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        <p className={`text-sm leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           {hoveredProject.situation}
                         </p>
@@ -794,11 +964,11 @@ export default function Home() {
                     {/* Task */}
                     {hoveredProject.task && (
                       <div>
-                        <h3 className={`text-lg font-semibold mb-2 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        <h3 className={`text-sm font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                         }`}>Task</h3>
-                        <p className={`leading-relaxed ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        <p className={`text-sm leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           {hoveredProject.task}
                         </p>
@@ -808,111 +978,121 @@ export default function Home() {
                     {/* Result */}
                     {hoveredProject.result && (
                       <div>
-                        <h3 className={`text-lg font-semibold mb-2 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        <h3 className={`text-sm font-semibold mb-2 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                         }`}>Result</h3>
-                        <p className={`leading-relaxed ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        <p className={`text-sm leading-relaxed ${
+                          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           {hoveredProject.result}
                         </p>
                       </div>
                     )}
 
-                    {/* Key Metrics */}
-                    {hoveredProject.metrics && hoveredProject.metrics.length > 0 && (
-                      <div className={`rounded-2xl p-6 border ${
+                    {/* My Contributions */}
+                    {hoveredProject.contributions && hoveredProject.contributions.length > 0 && (
+                      <div>
+                        <h3 className={`text-sm font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                        }`}>My Contribution</h3>
+                        <ul className={`space-y-2 ${
+                          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                        }`}>
+                          {hoveredProject.contributions.slice(0, 3).map((contribution, index) => (
+                            <li key={index} className="text-sm leading-relaxed flex items-start">
+                              <span className="text-gray-500 mr-2 mt-1">•</span>
+                              <span>{contribution.contribution}</span>
+                            </li>
+                          ))}
+                          {hoveredProject.contributions.length > 3 && (
+                            <li className="text-sm text-gray-500">
+                              +{hoveredProject.contributions.length - 3} more contributions
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Key Results - Mobile Card */}
+                    {hoveredProject.keyResults && hoveredProject.keyResults.length > 0 && (
+                      <div className={`p-4 rounded-lg shadow-sm ${
                         theme === 'dark'
-                          ? 'bg-gray-700/50 border-gray-600'
-                          : 'bg-white border-gray-200'
+                          ? 'bg-gray-800/50 border border-gray-700' 
+                          : 'bg-gray-50 border border-gray-200'
                       }`}>
-                        <h3 className={`text-lg font-semibold mb-4 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        <h3 className={`text-sm font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                         }`}>Key Results</h3>
-                        <div className="space-y-4">
-                          {hoveredProject.metrics.map((metric: { value: string; label: string; description?: string }, idx: number) => (
-                            <div key={idx} className={`border-b pb-4 last:border-b-0 last:pb-0 ${
-                              theme === 'dark' ? 'border-gray-600' : 'border-gray-100'
-                            }`}>
-                              <div className={`text-2xl font-bold mb-1 ${
-                                theme === 'dark' ? 'text-white' : 'text-gray-900'
-                              }`}>{metric.value}</div>
-                              <div className={`text-sm font-medium mb-1 ${
+                        <div className="space-y-3">
+                          {hoveredProject.keyResults.map((keyResult, index) => (
+                            <div key={index}>
+                              <div className={`text-lg font-bold mb-1 ${
+                                theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                              }`}>
+                                {keyResult.value}
+                              </div>
+                              <div className={`text-xs font-medium mb-1 ${
                                 theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                              }`}>{metric.label}</div>
-                              {metric.description && (
+                              }`}>
+                                {keyResult.label}
+                              </div>
                                 <div className={`text-xs ${
                                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                                }`}>{metric.description}</div>
-                              )}
+                              }`}>
+                                {keyResult.description}
+                              </div>
                             </div>
                           ))}
                         </div>
                       </div>
                     )}
 
-                    {/* My Contributions */}
-                    {hoveredProject.contributions && hoveredProject.contributions.length > 0 && (
-                      <div className={`rounded-2xl p-6 ${
-                        theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
-                      }`}>
-                        <h3 className={`text-lg font-semibold mb-4 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
-                        }`}>My Contribution</h3>
-                        <ul className="space-y-2">
-                          {hoveredProject.contributions.map((contribution: string, idx: number) => (
-                            <li key={idx} className="flex items-start">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                              <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}>{contribution}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {/* Tags */}
+                    {/* Skills & Technologies - Mobile Card */}
                     {hoveredProject.tags && hoveredProject.tags.length > 0 && (
-                      <div className={`rounded-2xl p-6 border ${
+                      <div className={`p-4 rounded-lg shadow-sm ${
                         theme === 'dark'
-                          ? 'bg-gray-700/50 border-gray-600'
-                          : 'bg-white border-gray-200'
+                          ? 'bg-gray-800/50 border border-gray-700' 
+                          : 'bg-gray-50 border border-gray-200'
                       }`}>
-                        <h3 className={`text-lg font-semibold mb-4 ${
-                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        <h3 className={`text-sm font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
                         }`}>Skills & Technologies</h3>
                         <div className="flex flex-wrap gap-2">
-                          {hoveredProject.tags.map((tag: string, idx: number) => (
-                            <span
-                              key={idx}
-                              className={`px-3 py-2 text-sm rounded-lg font-medium border ${
+                          {hoveredProject.tags.slice(0, 6).map((tag, index) => (
+                            <span key={index} className={`text-xs px-2 py-1 rounded-full ${
                                 theme === 'dark'
-                                  ? 'bg-blue-900/30 text-blue-300 border-blue-700'
-                                  : 'bg-blue-50 text-blue-700 border-blue-200'
-                              }`}
-                            >
+                                ? 'bg-gray-700 text-gray-200' 
+                                : 'bg-gray-200 text-gray-700'
+                            }`}>
                               {tag}
                             </span>
                           ))}
+                          {hoveredProject.tags.length > 6 && (
+                            <span className={`text-xs px-2 py-1 rounded-full ${
+                              theme === 'dark' 
+                                ? 'bg-gray-700 text-gray-200' 
+                                : 'bg-gray-200 text-gray-700'
+                            }`}>
+                              +{hoveredProject.tags.length - 6}
+                            </span>
+                          )}
                         </div>
                       </div>
                     )}
 
-                    {/* Dashboard Link */}
-                    {hoveredProject.dashboardUrl && (
-                      <div className="pt-4">
-                        <a
-                          href={hoveredProject.dashboardUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium w-full justify-center"
-                        >
-                          View Dashboard
-                          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      </div>
-                    )}
+                    {/* URL CTAs - Mobile */}
+                    <UrlCTA 
+                      companyUrl={hoveredProject.companyUrl}
+                      projectUrl={hoveredProject.projectUrl}
+                      reportUrl={hoveredProject.reportUrl}
+                      demoUrl={hoveredProject.demoUrl}
+                      companyLabel={hoveredProject.companyLabel}
+                      projectLabel={hoveredProject.projectLabel}
+                      reportLabel={hoveredProject.reportLabel}
+                      demoLabel={hoveredProject.demoLabel}
+                      theme={theme}
+                    />
+
                   </div>
                 </div>
               </motion.div>

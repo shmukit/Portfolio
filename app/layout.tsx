@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
     template: '%s | Mukit - Product Manager',
   },
-  description: 'Portfolio of Shazzad Hossain Mukit – a data-driven Product Manager passionate about learning by doing, building impactful products, and driving growth through analytics, design, and AI. Product work at 10 Minute School (10MS) including World Bank/IFC impact assessment, conversion optimization, and EdTech market research.',
+  description: 'Shazzad Hossain Mukit, Portfolio. Product Management Ethos: Data (analysis), Decision (strategy) & (service) Design.',
   keywords: [
     // Professional Identity
     'Product Manager Portfolio',
@@ -100,23 +100,13 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
     shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
-    other: [
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '192x192',
-        url: '/icon-192.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '512x512',
-        url: '/icon-512.png',
-      },
-    ],
   },
   manifest: '/manifest.json',
   openGraph: {
@@ -125,7 +115,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: 'Shazzad Hossain Mukit - Product Manager Portfolio',
     title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
-    description: 'Portfolio of Shazzad Hossain Mukit – a data-driven Product Manager passionate about learning by doing, building impactful products, and driving growth through analytics, design, and AI.',
+    description: 'Shazzad Hossain Mukit, Portfolio. Product Management Ethos: Data (analysis), Decision (strategy) & (service) Design.',
     images: [
       {
         url: `${siteUrl}/og-image.png`,
