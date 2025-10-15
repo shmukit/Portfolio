@@ -276,7 +276,7 @@ export default function Home() {
             <div className={`flex-1 relative ${showPortfolio ? '' : 'flex justify-center'}`}>
 
               {/* Fixed Center Content Area */}
-                <div className={`${showPortfolio ? 'fixed left-[352px] right-0' : 'w-full'} top-0 h-screen flex items-center justify-center pointer-events-none z-20`}>
+                <div className={`${showPortfolio ? 'fixed left-[352px] right-0' : 'w-full'} top-0 h-screen flex items-center justify-center pointer-events-none z-20`} style={{ willChange: 'transform' }}>
                 <div className="w-full max-w-5xl px-6 lg:px-12 pointer-events-auto">
             {hoveredProject ? (
               /* Project Detail Modal Content */
@@ -629,7 +629,7 @@ export default function Home() {
                 {/* Content that pushes the page height to enable scrolling */}
                 <div className="pt-screen pb-20">
                   {/* Empty space to enable scrolling without showing generic content */}
-                  <div className="h-screen"></div>
+                  <div className="h-screen" style={{ willChange: 'auto' }}></div>
                 </div>
               </div>
             </div>
@@ -649,13 +649,14 @@ export default function Home() {
                     role="img" 
                     aria-label="waving hand"
                     className="inline-block origin-[70%_70%]"
-                    animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                    animate={shouldReduceMotion ? {} : { rotate: [0, 14, -8, 14, -4, 10, 0] }}
                     transition={{ 
-                      duration: 2.5, 
+                      duration: shouldReduceMotion ? 0 : 2.5, 
                       ease: "easeInOut",
-                      repeat: Infinity,
-                      repeatDelay: 1
+                      repeat: shouldReduceMotion ? 0 : Infinity,
+                      repeatDelay: shouldReduceMotion ? 0 : 1
                     }}
+                    style={{ willChange: shouldReduceMotion ? 'auto' : 'transform' }}
                   >👋🏼</motion.span> I am Mukit
                 </h1>
                 <p className={`text-base leading-relaxed mb-3 ${
@@ -710,6 +711,8 @@ export default function Home() {
                 className="relative"
                 drag="x"
                 dragConstraints={{ left: -100, right: 100 }}
+                dragElastic={0.1}
+                dragMomentum={false}
                 onDragEnd={(e, info) => {
                   if (info.offset.x > 50) {
                     handleSwipeRight();
@@ -719,6 +722,7 @@ export default function Home() {
                 }}
                 whileDrag={{ scale: 0.98 }}
                 variants={swipeCard}
+                style={{ willChange: shouldReduceMotion ? 'auto' : 'transform' }}
               >
                 <motion.button
                   className={`w-full text-left px-4 py-2 rounded-2xl flex flex-col relative overflow-hidden border backdrop-blur-md ${
