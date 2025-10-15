@@ -1,0 +1,123 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+interface AnimatedBackgroundProps {
+  theme: 'light' | 'dark';
+}
+
+export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+      {/* Base gradient layer */}
+      <div className={`absolute inset-0 transition-colors duration-300 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-50'
+      }`}></div>
+      
+      {/* Optimized animated gradient blobs - cyan */}
+      <motion.div
+        className="absolute"
+        style={{
+          width: '120%',
+          height: '120%',
+          left: '-10%',
+          top: '-10%',
+          background: theme === 'dark'
+            ? "radial-gradient(ellipse 1200px 900px at 20% 30%, rgba(6, 182, 212, 0.35) 0%, rgba(6, 182, 212, 0.22) 25%, rgba(6, 182, 212, 0.14) 45%, rgba(6, 182, 212, 0.08) 65%, transparent 90%)"
+            : "radial-gradient(ellipse 1200px 900px at 20% 30%, rgba(6, 182, 212, 0.20) 0%, rgba(6, 182, 212, 0.12) 25%, rgba(6, 182, 212, 0.06) 45%, rgba(6, 182, 212, 0.03) 65%, transparent 90%)",
+          mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+          filter: 'blur(1px)'
+        }}
+        animate={shouldReduceMotion ? {} : {
+          x: [0, 20, -15, 18, 0],
+          y: [0, 15, -20, 25, 0],
+          scale: [1, 1.02, 0.98, 1.04, 1]
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      {/* Optimized animated gradient blobs - blue */}
+      <motion.div
+        className="absolute"
+        style={{
+          width: '120%',
+          height: '120%',
+          left: '-10%',
+          top: '-10%',
+          background: theme === 'dark'
+            ? "radial-gradient(ellipse 1000px 1100px at 80% 70%, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0.22) 25%, rgba(59, 130, 246, 0.14) 45%, rgba(59, 130, 246, 0.08) 65%, transparent 90%)"
+            : "radial-gradient(ellipse 1000px 1100px at 80% 70%, rgba(59, 130, 246, 0.20) 0%, rgba(59, 130, 246, 0.12) 25%, rgba(59, 130, 246, 0.06) 45%, rgba(59, 130, 246, 0.03) 65%, transparent 90%)",
+          mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+          filter: 'blur(1px)'
+        }}
+        animate={shouldReduceMotion ? {} : {
+          x: [0, -18, 25, -12, 0],
+          y: [0, -22, 18, -28, 0],
+          scale: [1, 0.98, 1.02, 0.96, 1]
+        }}
+        transition={{
+          duration: 35,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      {/* Optimized animated gradient blobs - purple */}
+      <motion.div
+        className="absolute"
+        style={{
+          width: '120%',
+          height: '120%',
+          left: '-10%',
+          top: '-10%',
+          background: theme === 'dark'
+            ? "radial-gradient(ellipse 900px 1000px at 60% 40%, rgba(147, 51, 234, 0.48) 0%, rgba(147, 51, 234, 0.32) 25%, rgba(147, 51, 234, 0.20) 45%, rgba(147, 51, 234, 0.12) 65%, transparent 90%)"
+            : "radial-gradient(ellipse 900px 1000px at 60% 40%, rgba(147, 51, 234, 0.18) 0%, rgba(147, 51, 234, 0.10) 25%, rgba(147, 51, 234, 0.05) 45%, rgba(147, 51, 234, 0.03) 65%, transparent 90%)",
+          mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+          filter: 'blur(1px)'
+        }}
+        animate={shouldReduceMotion ? {} : {
+          x: [0, 15, -22, 20, 0],
+          y: [0, -18, 15, -25, 0],
+          scale: [1, 1.02, 0.98, 1.04, 1]
+        }}
+        transition={{
+          duration: 32,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      {/* Optimized animated gradient blobs - pink */}
+      <motion.div
+        className="absolute"
+        style={{
+          width: '120%',
+          height: '120%',
+          left: '-10%',
+          top: '-10%',
+          background: theme === 'dark'
+            ? "radial-gradient(ellipse 1100px 800px at 40% 80%, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.30) 25%, rgba(236, 72, 153, 0.19) 45%, rgba(236, 72, 153, 0.11) 65%, transparent 90%)"
+            : "radial-gradient(ellipse 1100px 800px at 40% 80%, rgba(236, 72, 153, 0.18) 0%, rgba(236, 72, 153, 0.10) 25%, rgba(236, 72, 153, 0.05) 45%, rgba(236, 72, 153, 0.03) 65%, transparent 90%)",
+          mixBlendMode: theme === 'dark' ? 'normal' : 'multiply',
+          filter: 'blur(1px)'
+        }}
+        animate={shouldReduceMotion ? {} : {
+          x: [0, 16, -20, 22, 0],
+          y: [0, -15, 12, -22, 0],
+          scale: [1, 1.02, 0.98, 1.04, 1]
+        }}
+        transition={{
+          duration: 33,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+    </div>
+  );
+}
