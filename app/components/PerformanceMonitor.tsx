@@ -14,10 +14,10 @@ export default function PerformanceMonitor() {
           console.log('LCP:', entry.startTime);
         }
         if (entry.entryType === 'layout-shift') {
-          console.log('CLS:', (entry as any).value);
+          console.log('CLS:', (entry as PerformanceEntry & { value: number }).value);
         }
         if (entry.entryType === 'first-input') {
-          console.log('FID:', (entry as any).processingStart - entry.startTime);
+          console.log('FID:', (entry as PerformanceEntry & { processingStart: number }).processingStart - entry.startTime);
         }
       }
     });
