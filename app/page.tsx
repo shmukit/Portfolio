@@ -566,7 +566,7 @@ export default function Home() {
               </motion.div>
             ) : (
               /* Default Name/Title/CV Section */
-                <div className="text-left space-y-4 lg:space-y-5 max-w-2xl">
+                <div className="space-y-4 lg:space-y-5 max-w-2xl">
                 <div>
                     <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 lg:mb-8 ${
                       theme === 'dark' ? 'text-white' : 'text-gray-900'
@@ -603,22 +603,14 @@ export default function Home() {
                 />
 
                 {/* Last Update */}
-                  <div className={`text-xs pt-6 ${
-                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                  Last update: Oct &apos;25
-                </div>
+                <div className={`text-xs pt-6 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                }`}>Last update: Oct &apos;25</div>
 
                 {/* Vibed while making this site */}
-                <div className={`text-xs pt-2 flex items-center gap-2 ${
+                <div className={`text-xs pt-2 ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  <span>Vibed while making this site.</span>
-                  <span className="flex items-center gap-1">
-                    <span role="img" aria-label="coffee">☕</span>
-                    <span role="img" aria-label="headphones">🎧</span>
-                  </span>
-                </div>
+                }`}>Vibed while making this site. <span role="img" aria-label="coffee">☕</span><span role="img" aria-label="headphones">🎧</span></div>
               </div>
             )}
                 </div>
@@ -636,67 +628,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Layout - Main Content and Swipeable Cards */}
+        {/* Mobile Layout - Project Cards Only */}
         <div className="lg:hidden py-8 px-4 relative z-10">
-          {/* Mobile Main Content - Always visible */}
-          <div className="max-w-md mx-auto mb-8">
-            <div className="text-center space-y-4">
-              <div>
-                <h1 className={`text-3xl font-bold mb-4 ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>
-                  Hi, <motion.span 
-                    role="img" 
-                    aria-label="waving hand"
-                    className="inline-block origin-[70%_70%]"
-                    animate={shouldReduceMotion ? {} : { rotate: [0, 14, -8, 14, -4, 10, 0] }}
-                    transition={{ 
-                      duration: shouldReduceMotion ? 0 : 2.5, 
-                      ease: "easeInOut",
-                      repeat: shouldReduceMotion ? 0 : Infinity,
-                      repeatDelay: shouldReduceMotion ? 0 : 1
-                    }}
-                    style={{ willChange: shouldReduceMotion ? 'auto' : 'transform' }}
-                  >👋🏼</motion.span> I am Mukit
-                </h1>
-                <p className={`text-base leading-relaxed mb-3 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                }`}>
-                  Entrepreneur & Philomath, learning by doing.
-                </p>
-                <p className={`text-base leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                }`}>
-                  Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
-                </p>
-              </div>
-
-              {/* CTA Buttons */}
-              <CTASection 
-                theme={theme} 
-                onTogglePortfolio={togglePortfolio} 
-              />
-
-              {/* Last Update */}
-              <div className={`text-xs pt-6 ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-              }`}>
-                Last update: Oct &apos;25
-              </div>
-
-              {/* Vibed while making this site */}
-              <div className={`text-xs pt-2 flex items-center justify-center gap-2 ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-              }`}>
-                <span>Vibed while making this site.</span>
-                <span className="flex items-center gap-1">
-                  <span role="img" aria-label="coffee">☕</span>
-                  <span role="img" aria-label="headphones">🎧</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
           {/* Mobile Project Cards - Only show when portfolio is toggled */}
           {showPortfolio && (
           <motion.div 
@@ -857,12 +790,12 @@ export default function Home() {
                     {/* Phase and Project Type Badges */}
                     <div className="flex gap-2 mb-4 flex-wrap">
                       {hoveredProject.phase && (
-                        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-[10px] font-semibold">
                           {hoveredProject.phase}
                         </div>
                       )}
                       {hoveredProject.projectType && (
-                        <div className={`px-4 py-2 rounded-full text-sm font-medium border ${
+                        <div className={`px-3 py-1 rounded-full text-[10px] font-medium border ${
                           theme === 'dark'
                             ? 'bg-blue-900/30 text-blue-300 border-blue-700'
                             : 'bg-blue-50 text-blue-700 border-blue-200'
@@ -870,7 +803,7 @@ export default function Home() {
                           {hoveredProject.projectType}
                         </div>
                       )}
-                      <div className={`px-4 py-2 rounded-full text-sm font-medium ${
+                      <div className={`px-3 py-1 rounded-full text-[10px] font-medium ${
                         theme === 'dark'
                           ? 'bg-gray-700 text-gray-300'
                           : 'bg-gray-100 text-gray-700'

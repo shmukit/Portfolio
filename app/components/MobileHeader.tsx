@@ -20,6 +20,26 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
         animate={{ opacity: 1, y: 0 }}
         className="text-left"
       >
+        <h1 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+          Hi, <motion.span 
+            role="img" 
+            aria-label="waving hand"
+            className="inline-block origin-[70%_70%]"
+            animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+            transition={{ 
+              duration: 2.5, 
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatDelay: 1
+            }}
+          >👋🏼</motion.span> I am Mukit
+        </h1>
+        <p className={`text-sm leading-relaxed mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+          Entrepreneur & Philomath, learning by doing.
+        </p>
+        <p className={`text-sm leading-relaxed mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+          Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
+        </p>
         
         {/* Mobile CTA Buttons - Icons Only */}
         <div className="flex flex-wrap gap-6 lg:gap-8 pt-2">
@@ -77,6 +97,25 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
               theme={theme}
             />
           </Suspense>
+        </div>
+
+        {/* Last Update and Vibed lines - Always visible */}
+        <div className="pt-6">
+          {/* Last Update */}
+          <div className={`text-xs ${
+            theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+          }`}>
+            Last update: Oct &apos;25
+          </div>
+
+          {/* Vibed while making this site */}
+          <div className={`text-xs pt-2 text-center ${
+            theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+          }`}>
+            <span>Vibed while making this site. </span>
+            <span role="img" aria-label="coffee">☕</span>
+            <span role="img" aria-label="headphones">🎧</span>
+          </div>
         </div>
       </motion.div>
     </div>
