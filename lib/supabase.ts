@@ -3,8 +3,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 // Only initialize Supabase if environment variables are available
 let supabase: SupabaseClient | null = null;
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.mukit_NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.mukit_NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (supabaseUrl && supabaseAnonKey && supabaseUrl !== 'https://your-project.supabase.co') {
   supabase = createClient(supabaseUrl, supabaseAnonKey, {
