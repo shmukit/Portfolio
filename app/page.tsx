@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
 import { Project } from '../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import { useState, useCallback } from 'react';
 import { 
   pillTap, 
   swipeCard,
@@ -19,8 +19,6 @@ import AnimatedBackground from './components/AnimatedBackground';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
 
-// Lazy load heavy components
-const AnimatedCTA = lazy(() => import('./components/AnimatedCTA'));
 
 export default function Home() {
   const { projects, loading, error } = useProjects();
@@ -912,6 +910,7 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
+
       </main>
     </ErrorBoundary>
   );

@@ -10,9 +10,8 @@ export function useTheme() {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     if (savedTheme) {
       setTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
     }
+    // Always default to light theme if no saved preference
   }, []);
 
   // Toggle theme
