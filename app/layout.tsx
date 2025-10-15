@@ -129,7 +129,7 @@ export default function RootLayout({
       <head>
         <StructuredData />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning={true}>
         {children}
       </body>
     </html>
