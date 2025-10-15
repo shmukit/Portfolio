@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['framer-motion'],
   },
   compiler: {
