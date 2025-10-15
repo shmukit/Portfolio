@@ -8,6 +8,7 @@ const iconsMap: Record<string, string[]> = {
   email: ["✉️", "💌", "📧"],
   linkedin: ["⭐", "✨", "🌟", "💫"],
   github: ["0", "1", "0", "1", "0"],
+  portfolio: ["💼", "🎯", "🚀", "⚡"],
   tools: ["🛠️", "✏️", "📏", "🔧"],
 };
 
@@ -16,9 +17,10 @@ interface AnimatedCTAProps {
   label: string;
   href: string;
   theme?: 'light' | 'dark';
+  onClick?: () => void;
 }
 
-export default function AnimatedCTA({ type, label, href, theme = 'light' }: AnimatedCTAProps) {
+export default function AnimatedCTA({ type, label, href, theme = 'light', onClick }: AnimatedCTAProps) {
   const [hovered, setHovered] = useState(false);
   const items = iconsMap[type] || [];
 
@@ -30,6 +32,12 @@ export default function AnimatedCTA({ type, label, href, theme = 'light' }: Anim
         rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onClick={(e) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
         className={`text-sm font-medium transition-all duration-300 relative z-10 ${
           theme === 'dark'
             ? 'text-gray-300 hover:text-gray-200'

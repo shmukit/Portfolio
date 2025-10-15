@@ -23,6 +23,7 @@ export default function Home() {
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [glowColors, setGlowColors] = useState<Record<string, string>>({});
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [showPortfolio, setShowPortfolio] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
   // Initialize theme from localStorage
@@ -40,6 +41,11 @@ export default function Home() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+  };
+
+  // Toggle portfolio visibility
+  const togglePortfolio = () => {
+    setShowPortfolio(!showPortfolio);
   };
 
 
@@ -111,6 +117,35 @@ export default function Home() {
       const prevProject = projects[currentProjectIndex - 1];
       setCurrentProjectIndex(currentProjectIndex - 1);
       handleProjectSelect(prevProject);
+    }
+  };
+
+  // Handle mobile modal swipe navigation
+  const handleModalSwipeLeft = () => {
+    if (currentProjectIndex < projects.length - 1) {
+      const nextProject = projects[currentProjectIndex + 1];
+      setCurrentProjectIndex(currentProjectIndex + 1);
+      setHoveredProject(nextProject);
+      if (!glowColors[nextProject.id]) {
+        setGlowColors(prev => ({
+          ...prev,
+          [nextProject.id]: getRandomGradient()
+        }));
+      }
+    }
+  };
+
+  const handleModalSwipeRight = () => {
+    if (currentProjectIndex > 0) {
+      const prevProject = projects[currentProjectIndex - 1];
+      setCurrentProjectIndex(currentProjectIndex - 1);
+      setHoveredProject(prevProject);
+      if (!glowColors[prevProject.id]) {
+        setGlowColors(prev => ({
+          ...prev,
+          [prevProject.id]: getRandomGradient()
+        }));
+      }
     }
   };
 
@@ -312,7 +347,7 @@ export default function Home() {
         </motion.button>
 
         {/* Mobile: Static About Section at Top */}
-        <div className="lg:hidden bg-transparent p-6 relative z-10">
+        <div className={`lg:hidden bg-transparent p-6 relative z-10 ${!showPortfolio ? 'min-h-screen flex items-center justify-center' : ''}`}>
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -339,48 +374,58 @@ export default function Home() {
               Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
             </p>
             
-            {/* Mobile CTA Buttons */}
-            <div className="flex flex-wrap gap-4 lg:gap-8 pt-2">
-              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+            {/* Mobile CTA Buttons - Icons Only */}
+            <div className="flex flex-wrap gap-6 lg:gap-8 pt-2">
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
                 <AnimatedCTA 
                   type="cv" 
-                  label="CV" 
+                  label="📄" 
                   href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
                   theme={theme}
                 />
               </Suspense>
 
-              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
                 <AnimatedCTA 
                   type="email" 
-                  label="Email" 
+                  label="✉️" 
                   href="mailto:shazzadhossainmukit@gmail.com"
                   theme={theme}
                 />
               </Suspense>
 
-              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
                 <AnimatedCTA 
                   type="linkedin" 
-                  label="LinkedIn" 
+                  label="💼" 
                   href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
                   theme={theme}
                 />
               </Suspense>
 
-              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
                 <AnimatedCTA 
                   type="github" 
-                  label="GitHub" 
+                  label="⚡" 
                   href="https://github.com/shmukit"
                   theme={theme}
                 />
               </Suspense>
 
-              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
+                <AnimatedCTA 
+                  type="portfolio" 
+                  label="🎯" 
+                  href="#"
+                  theme={theme}
+                  onClick={togglePortfolio}
+                />
+              </Suspense>
+
+              <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
                 <AnimatedCTA 
                   type="tools" 
-                  label="Tools" 
+                  label="🛠️" 
                   href="#tools"
                   theme={theme}
                 />
@@ -389,12 +434,14 @@ export default function Home() {
           </motion.div>
         </div>
 
+
         {/* Desktop Layout - Scrollable Page with Fixed Center */}
         <div className="hidden lg:block relative z-10">
           {/* Main scrollable container */}
           <div className="flex">
             {/* Left Project Pane - Scrolls with page */}
-            <div className="w-80 z-30">
+            {showPortfolio && (
+              <div className="w-80 z-30">
               <div className="pl-24 pr-4 py-8">
                 {/* Project pills */}
                 <div className="space-y-3">
@@ -444,12 +491,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            )}
 
             {/* Right Content Area */}
-            <div className="flex-1 relative">
+            <div className={`flex-1 relative ${showPortfolio ? '' : 'flex justify-center'}`}>
 
               {/* Fixed Center Content Area */}
-                <div className="fixed left-[352px] right-0 top-0 h-screen flex items-center justify-center pointer-events-none z-20">
+                <div className={`${showPortfolio ? 'fixed left-[352px] right-0' : 'w-full'} top-0 h-screen flex items-center justify-center pointer-events-none z-20`}>
                 <div className="w-full max-w-5xl px-6 lg:px-12 pointer-events-auto">
             {hoveredProject ? (
               /* Project Detail Modal Content */
@@ -754,6 +802,16 @@ export default function Home() {
 
                   <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
                     <AnimatedCTA 
+                      type="portfolio" 
+                      label="Portfolio" 
+                      href="#"
+                      theme={theme}
+                      onClick={togglePortfolio}
+                    />
+                  </Suspense>
+
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
                       type="tools" 
                       label="Tools" 
                       href="#tools"
@@ -787,13 +845,14 @@ export default function Home() {
 
         {/* Mobile Layout - Swipeable Cards */}
         <div className="lg:hidden py-8 px-4 relative z-10">
-          <motion.div 
-            className="space-y-2 max-w-md mx-auto"
-            variants={swipeContainer}
-            initial="initial"
-            animate="animate"
-          >
-            {projects.map((project) => (
+          {showPortfolio && (
+            <motion.div 
+              className="space-y-2 max-w-md mx-auto"
+              variants={swipeContainer}
+              initial="initial"
+              animate="animate"
+            >
+              {projects.map((project) => (
               <motion.div
                 key={project.id}
                 className="relative"
@@ -844,7 +903,8 @@ export default function Home() {
                 </motion.button>
               </motion.div>
             ))}
-          </motion.div>
+            </motion.div>
+          )}
         </div>
 
         {/* Mobile Modal Overlay - Card View */}
@@ -855,10 +915,19 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.48, ease: "easeOut" }}
               onClick={(e) => {
                 if (e.target === e.currentTarget) {
                   handleProjectClose();
+                }
+              }}
+              drag="x"
+              dragConstraints={{ left: -100, right: 100 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.x > 50) {
+                  handleModalSwipeRight();
+                } else if (info.offset.x < -50) {
+                  handleModalSwipeLeft();
                 }
               }}
             >
@@ -873,6 +942,56 @@ export default function Home() {
                 </svg>
               </button>
 
+              {/* Navigation Buttons */}
+              <div className="absolute top-1/2 left-4 right-4 flex justify-between z-20 pointer-events-none">
+                {/* Previous Button */}
+                {currentProjectIndex > 0 && (
+                  <motion.button
+                    onClick={handleModalSwipeRight}
+                    className="w-12 h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg pointer-events-auto hover:bg-black/80 transition-colors"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </motion.button>
+                )}
+
+                {/* Next Button */}
+                {currentProjectIndex < projects.length - 1 && (
+                  <motion.button
+                    onClick={handleModalSwipeLeft}
+                    className="w-12 h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg pointer-events-auto hover:bg-black/80 transition-colors"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.button>
+                )}
+              </div>
+
+              {/* Swipe Indicator */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+                <div className="flex space-x-2">
+                  {projects.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentProjectIndex 
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <p className="text-white/70 text-xs text-center mt-2">Swipe to navigate</p>
+              </div>
+
               <motion.div
                 className={`relative rounded-3xl shadow-2xl max-h-[85vh] w-full max-w-lg overflow-y-auto border ${
                   theme === 'dark'
@@ -882,8 +1001,9 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8, y: 50 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 50 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.24, ease: "easeOut" }}
                 onClick={(e) => e.stopPropagation()}
+                key={hoveredProject?.id}
               >
 
                 {/* Project Content */}
