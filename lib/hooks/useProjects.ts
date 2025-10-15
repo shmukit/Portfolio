@@ -13,8 +13,8 @@ export interface UseProjectsReturn {
 }
 
 export const useProjects = (): UseProjectsReturn => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>(SAMPLE_PROJECTS); // Start with sample data to prevent CLS
+  const [loading, setLoading] = useState(false); // Start as false since we have sample data
   const [error, setError] = useState<string | null>(null);
 
   const fetchProjects = async () => {

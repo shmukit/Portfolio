@@ -5,14 +5,16 @@ import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
 import { Project } from '../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { 
   pillTap, 
   swipeCard,
   swipeContainer,
   pillBreathe
 } from '../lib/utils/animations';
-import AnimatedCTA from './components/AnimatedCTA';
+
+// Lazy load heavy components
+const AnimatedCTA = lazy(() => import('./components/AnimatedCTA'));
 
 export default function Home() {
   const { projects, loading, error } = useProjects();
@@ -339,40 +341,50 @@ export default function Home() {
             
             {/* Mobile CTA Buttons */}
             <div className="flex flex-wrap gap-4 lg:gap-8 pt-2">
-              <AnimatedCTA 
-                type="cv" 
-                label="CV" 
-                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
-                theme={theme}
-              />
+              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                <AnimatedCTA 
+                  type="cv" 
+                  label="CV" 
+                  href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                  theme={theme}
+                />
+              </Suspense>
 
-              <AnimatedCTA 
-                type="email" 
-                label="Email" 
-                href="mailto:shazzadhossainmukit@gmail.com"
-                theme={theme}
-              />
+              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                <AnimatedCTA 
+                  type="email" 
+                  label="Email" 
+                  href="mailto:shazzadhossainmukit@gmail.com"
+                  theme={theme}
+                />
+              </Suspense>
 
-              <AnimatedCTA 
-                type="linkedin" 
-                label="LinkedIn" 
-                href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
-                theme={theme}
-              />
+              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                <AnimatedCTA 
+                  type="linkedin" 
+                  label="LinkedIn" 
+                  href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
+                  theme={theme}
+                />
+              </Suspense>
 
-              <AnimatedCTA 
-                type="github" 
-                label="GitHub" 
-                href="https://github.com/shmukit"
-                theme={theme}
-              />
+              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                <AnimatedCTA 
+                  type="github" 
+                  label="GitHub" 
+                  href="https://github.com/shmukit"
+                  theme={theme}
+                />
+              </Suspense>
 
-              <AnimatedCTA 
-                type="tools" 
-                label="Tools" 
-                href="#tools"
-                theme={theme}
-              />
+              <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                <AnimatedCTA 
+                  type="tools" 
+                  label="Tools" 
+                  href="#tools"
+                  theme={theme}
+                />
+              </Suspense>
             </div>
           </motion.div>
         </div>
@@ -516,6 +528,7 @@ export default function Home() {
                       loading="lazy"
                       placeholder="blur"
                       blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                 )}
@@ -703,40 +716,50 @@ export default function Home() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap gap-6 lg:gap-8 pt-4">
-                  <AnimatedCTA 
-                    type="cv" 
-                    label="CV" 
-                    href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
-                    theme={theme}
-                  />
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
+                      type="cv" 
+                      label="CV" 
+                      href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                      theme={theme}
+                    />
+                  </Suspense>
 
-                  <AnimatedCTA 
-                    type="email" 
-                    label="Email" 
-                    href="mailto:shazzadhossainmukit@gmail.com"
-                    theme={theme}
-                  />
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
+                      type="email" 
+                      label="Email" 
+                      href="mailto:shazzadhossainmukit@gmail.com"
+                      theme={theme}
+                    />
+                  </Suspense>
 
-                  <AnimatedCTA 
-                    type="linkedin" 
-                    label="LinkedIn" 
-                    href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
-                    theme={theme}
-                  />
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
+                      type="linkedin" 
+                      label="LinkedIn" 
+                      href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
+                      theme={theme}
+                    />
+                  </Suspense>
 
-                  <AnimatedCTA 
-                    type="github" 
-                    label="GitHub" 
-                    href="https://github.com/shmukit"
-                    theme={theme}
-                  />
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
+                      type="github" 
+                      label="GitHub" 
+                      href="https://github.com/shmukit"
+                      theme={theme}
+                    />
+                  </Suspense>
 
-                  <AnimatedCTA 
-                    type="tools" 
-                    label="Tools" 
-                    href="#tools"
-                    theme={theme}
-                  />
+                  <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+                    <AnimatedCTA 
+                      type="tools" 
+                      label="Tools" 
+                      href="#tools"
+                      theme={theme}
+                    />
+                  </Suspense>
                 </div>
 
                 {/* Last Update */}
@@ -914,6 +937,7 @@ export default function Home() {
                         loading="lazy"
                         placeholder="blur"
                         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                   )}

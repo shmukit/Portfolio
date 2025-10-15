@@ -1,6 +1,26 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, Inter_Tight, Manrope } from 'next/font/google';
 import './globals.css';
 import StructuredData from './components/StructuredData';
+
+// Optimize font loading
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter-tight',
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-manrope',
+});
 
 const siteUrl = 'https://www.mukit.xyz';
 
@@ -125,11 +145,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${interTight.variable} ${manrope.variable}`}>
       <head>
         <StructuredData />
       </head>
-      <body className="antialiased" suppressHydrationWarning={true}>
+      <body className="antialiased font-manrope" suppressHydrationWarning={true}>
         {children}
       </body>
     </html>
