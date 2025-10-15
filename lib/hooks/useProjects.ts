@@ -4,6 +4,39 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../supabase';
 import { Project } from '../../types/project';
 
+interface DatabaseProject {
+  id: string;
+  title: string;
+  year: number;
+  role: string;
+  company: string;
+  description?: string;
+  lessons?: string;
+  image_url?: string;
+  order_index?: number;
+  category?: string;
+  is_unlocked?: boolean;
+  created_at?: string;
+  updated_at?: string;
+  project_type?: string;
+  company_url?: string;
+  project_url?: string;
+  report_url?: string;
+  demo_url?: string;
+  company_label?: string;
+  project_label?: string;
+  report_label?: string;
+  demo_label?: string;
+  company_urls?: unknown;
+  project_urls?: unknown;
+  report_urls?: unknown;
+  demo_urls?: unknown;
+  contributions?: unknown;
+  key_results?: unknown;
+  tags?: unknown;
+  metrics?: unknown;
+}
+
 export interface UseProjectsReturn {
   projects: Project[];
   loading: boolean;
@@ -51,7 +84,7 @@ export const useProjects = (): UseProjectsReturn => {
 
           if (data && data.length > 0) {
             // Transform database fields to match TypeScript interface
-            const transformedProjects = data.map((project: any) => ({
+            const transformedProjects = data.map((project: DatabaseProject) => ({
               ...project,
               // Basic field transformations
               imageUrl: project.image_url,

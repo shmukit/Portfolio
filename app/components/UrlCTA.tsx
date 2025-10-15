@@ -55,7 +55,7 @@ export default function UrlCTA({
 
   if (links.length === 0) return null;
 
-  const getColorClasses = (color: string) => {
+  const getColorClasses = () => {
     const baseClasses = "flex items-center gap-1.5 px-2 py-1.5 rounded text-xs font-normal transition-all duration-200 hover:scale-105";
     
     if (theme === 'dark') {
@@ -81,7 +81,7 @@ export default function UrlCTA({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={getColorClasses(link.color)}
+              className={getColorClasses()}
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.95 }}
             >

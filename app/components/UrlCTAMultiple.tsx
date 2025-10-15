@@ -48,7 +48,7 @@ export default function UrlCTAMultiple({
 
   if (linkGroups.length === 0) return null;
 
-  const getColorClasses = (color: string) => {
+  const getColorClasses = () => {
     const baseClasses = "flex items-center gap-1.5 px-2 py-1.5 rounded text-xs font-normal transition-all duration-200 hover:scale-105";
     
     if (theme === 'dark') {
@@ -76,13 +76,13 @@ export default function UrlCTAMultiple({
               {group.label}
             </h4>
             <div className="flex flex-wrap gap-2">
-              {group.urls.map((urlItem, index) => (
+              {group.urls?.map((urlItem, index) => (
                 <motion.a
                   key={index}
                   href={urlItem.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={getColorClasses(group.color)}
+                  className={getColorClasses()}
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
                 >
