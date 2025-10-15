@@ -56,8 +56,8 @@ export const useProjects = (): UseProjectsReturn => {
       console.log('🔄 Fetching projects...');
 
       // Check if Supabase is properly configured
-      const supabaseUrl = process.env.mukit_NEXT_PUBLIC_SUPABASE_URL;
-      const supabaseKey = process.env.mukit_NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
       console.log('🔧 Supabase config:', { 
         url: supabaseUrl, 
