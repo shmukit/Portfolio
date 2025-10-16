@@ -34,10 +34,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
+    default: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data, Design & Decision.',
     template: '%s | Mukit - Product Manager',
   },
-  description: 'Shazzad Hossain Mukit is a Data-driven Product Manager at 10 Minute School, specializing in product strategy, conversion optimization, and AI-powered learning solutions. Portfolio showcasing growth product management, user research, and data analytics expertise with a "learning by doing" philosophy.',
+  description: 'Shazzad Hossain Mukit is a data-driven Product Manager, his product ethos are: Data (analysis), Decision (strategy) and Design (service). Portfolio showcasing growth product management, product strategy, conversion optimization, distribution strategy, user research, and data analytics expertise with a "learning by doing" philosophy.',
   keywords: [
     // Professional Identity
     'Shazzad Hossain Mukit',
@@ -58,17 +58,17 @@ export const metadata: Metadata = {
     'Conversion Optimization',
     'Dashboard Audit',
     'Feature Experimentation',
-    'A/B Testing',
+    'Market Research',
     'User Research',
     'Product Development',
     'Product Roadmap',
     'Product Metrics',
     'Product KPIs',
-    'Product Performance',
+    'Rapid Prototyping',
     
     // AI & Technology
     'AI Product Management',
-    'Machine Learning Products',
+    'Vibe Coding',
     'AI for Education',
     'EdTech AI Solutions',
     'Data Analytics',
@@ -106,9 +106,9 @@ export const metadata: Metadata = {
     
     // Tools & Technology
     'Supabase',
-    'Next.js',
-    'React',
-    'TypeScript',
+    'Cursor',
+    'Figma Make',
+    'Product Specs',
     'Product Case Studies',
     'Product Documentation',
     'Product Management Tools',
@@ -133,7 +133,7 @@ export const metadata: Metadata = {
     'Product Management Best Practices',
     'Product Management Methodology',
     'Agile Product Management',
-    'Scrum Product Owner',
+    'Scrum Master',
     
     // Industry Keywords
     'Tech Industry',
@@ -174,14 +174,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName: 'Shazzad Hossain Mukit - Product Manager Portfolio',
-    title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
-    description: 'Shazzad Hossain Mukit is a Data-driven Product Manager at 10 Minute School, specializing in product strategy, conversion optimization, and AI-powered learning solutions. Portfolio showcasing growth product management, user research, and data analytics expertise with a "learning by doing" philosophy.',
+    title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Product Ethos: Data, Decision & Design.',
+    description: 'Shazzad Hossain Mukit is a data-driven Product Manager, his product ethos are: Data (analysis), Decision (strategy) and Design (service). Portfolio showcasing growth product management, product strategy, conversion optimization, distribution strategy, user research, and data analytics expertise with a "learning by doing" philosophy.',
     images: [
       {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Shazzad Hossain Mukit - Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
+        alt: 'Shazzad Hossain Mukit - Product Manager Portfolio | Data, Decision & Design.',
       },
     ],
   },

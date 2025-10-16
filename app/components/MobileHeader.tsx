@@ -77,7 +77,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
 
         {/* Enhanced product ethos with better visual treatment - Mobile optimized */}
         <motion.div 
-          className={`mb-4 p-3 rounded-lg border backdrop-blur-sm ${
+          className={`mb-3 p-2 rounded-lg border backdrop-blur-sm ${
             theme === 'dark' 
               ? 'bg-gray-800/50 border-gray-700/50' 
               : 'bg-white/50 border-gray-200/50'
@@ -91,7 +91,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           }`}>
             Product Ethos
           </h3>
-          <p className={`text-xs leading-relaxed ${
+          <p className={`text-xs leading-tight whitespace-nowrap ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           }`}>
             <span className={`font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>Data</span> (analysis) • <span className={`font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent`}>Decision</span> (strategy) • <span className={`font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent`}>Design</span> (service)
