@@ -31,7 +31,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           <span className={`text-base font-medium ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
           }`}>
-            Hello there! I'm
+            Hello there! I&apos;m
           </span>
         </motion.div>
 
