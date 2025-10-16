@@ -605,12 +605,17 @@ export default function Home() {
                 {/* Last Update */}
                 <div className={`text-xs pt-6 ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                }`}>Last update: Oct &apos;25</div>
+                }`}>
+                  Last update: Oct &apos;25
+                </div>
 
                 {/* Vibed while making this site */}
                 <div className={`text-xs pt-2 ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                }`}>Vibed while making this site. <span role="img" aria-label="coffee">☕</span><span role="img" aria-label="headphones">🎧</span></div>
+                }`}>
+                  Vibed while making this site. <span role="img" aria-label="coffee">☕</span><span role="img" aria-label="headphones">🎧</span>
+                </div>
+
               </div>
             )}
                 </div>

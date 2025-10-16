@@ -109,7 +109,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           </div>
 
           {/* Vibed while making this site */}
-          <div className={`text-xs pt-2 text-center ${
+          <div className={`text-xs pt-2 text-left ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
           }`}>
             <span>Vibed while making this site. </span>
