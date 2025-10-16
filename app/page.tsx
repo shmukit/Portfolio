@@ -79,10 +79,14 @@ const ProjectPill = memo(({
         : 'none'
     }}
   >
-    <span className="relative z-10 text-xs font-medium mb-1 text-gray-500 dark:text-gray-200">
+    <span className={`relative z-10 text-xs font-medium mb-1 ${
+      theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+    }`}>
       {project.year}
     </span>
-    <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
+    <span className={`relative z-10 text-sm font-medium ${
+      theme === 'dark' ? 'text-white' : 'text-gray-900'
+    }`}>
       {project.title}
     </span>
   </motion.button>
@@ -514,11 +518,15 @@ export default function Home() {
                       }}
                     >
                       {/* Year on first line */}
-                      <span className="relative z-10 text-xs font-medium mb-1 text-gray-500 dark:text-gray-200">
+                      <span className={`relative z-10 text-xs font-medium mb-1 ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+                      }`}>
                         {project.year}
                       </span>
                       {/* Project title on second line */}
-                      <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
+                      <span className={`relative z-10 text-sm font-medium ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>
                         {project.title}
                       </span>
                     </motion.button>
@@ -653,7 +661,7 @@ export default function Home() {
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                       <span className={`text-lg lg:text-xl font-medium ${
-                        theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                        theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                       }`}>
                         Hello there! I&apos;m
                       </span>
@@ -711,7 +719,7 @@ export default function Home() {
                       transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
                     >
                       <h3 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
-                        theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                        theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                       }`}>
                         Product Ethos
                       </h3>
@@ -733,7 +741,7 @@ export default function Home() {
                 {/* Enhanced Footer Section */}
                 <motion.div 
                   className={`mt-12 pt-8 border-t ${
-                    theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+                    theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -741,13 +749,13 @@ export default function Home() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className={`text-sm ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                 }`}>
                       Last updated: <span className="font-medium">October 2025</span>
-                </div>
+                    </div>
 
                     <div className={`text-sm flex items-center gap-2 ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                 }`}>
                       <span>Vibed while making this site</span>
                       <motion.span 
@@ -839,11 +847,15 @@ export default function Home() {
                   }}
                 >
                   {/* Year on first line */}
-                  <span className="relative z-10 text-[10px] font-medium mb-1 text-gray-500 dark:text-gray-300">
+                  <span className={`relative z-10 text-[10px] font-medium mb-1 ${
+                    theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+                  }`}>
                     {project.year}
                   </span>
                   {/* Project title on second line */}
-                  <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
+                  <span className={`relative z-10 text-sm font-medium ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {project.title}
                   </span>
                 </motion.button>
