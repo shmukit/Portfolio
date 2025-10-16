@@ -37,17 +37,19 @@ export const metadata: Metadata = {
     default: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
     template: '%s | Mukit - Product Manager',
   },
-  description: 'Shazzad Hossain Mukit, Portfolio. Product Management Ethos: Data (analysis), Decision (strategy) & (service) Design.',
+  description: 'Shazzad Hossain Mukit is a Data-driven Product Manager at 10 Minute School, specializing in product strategy, conversion optimization, and AI-powered learning solutions. Portfolio showcasing growth product management, user research, and data analytics expertise with a "learning by doing" philosophy.',
   keywords: [
     // Professional Identity
+    'Shazzad Hossain Mukit',
+    'Mukit',
     'Product Manager Portfolio',
     'AI Product Manager',
     'Growth Product Manager',
     'Product Leader Portfolio',
-    'Shazzad Hossain Mukit',
-    'Mukit',
+    'Senior Product Manager',
+    'Product Strategy Lead',
     
-    // Core PM Skills
+    // Core PM Skills & Expertise
     'Data-driven Product Management',
     'Product Strategy',
     'Growth Product Management',
@@ -58,6 +60,21 @@ export const metadata: Metadata = {
     'Feature Experimentation',
     'A/B Testing',
     'User Research',
+    'Product Development',
+    'Product Roadmap',
+    'Product Metrics',
+    'Product KPIs',
+    'Product Performance',
+    
+    // AI & Technology
+    'AI Product Management',
+    'Machine Learning Products',
+    'AI for Education',
+    'EdTech AI Solutions',
+    'Data Analytics',
+    'Business Intelligence',
+    'Product Intelligence',
+    'AI-powered Learning',
     
     // Mindset & Philosophy
     'Learning by Doing',
@@ -65,25 +82,68 @@ export const metadata: Metadata = {
     'Problem Solving',
     'Continuous Learning',
     'System Thinking',
+    'Data-driven Decision Making',
+    'User-centered Design',
+    'Evidence-based Product Management',
     
     // Domain & Industry
     'EdTech Product Manager',
+    'Education Technology',
+    'Digital Learning',
+    'Online Education',
+    'Learning Management System',
+    'Educational Platform',
+    'Student Engagement',
+    'Learning Analytics',
+    
+    // Company & Location
     '10 Minute School',
     '10MS',
     'Bangladesh Tech',
-    'Digital Learning',
-    'AI for Education',
+    'Bangladesh Product Manager',
+    'South Asia Tech',
+    'Emerging Markets Tech',
     
     // Tools & Technology
     'Supabase',
     'Next.js',
+    'React',
+    'TypeScript',
     'Product Case Studies',
+    'Product Documentation',
+    'Product Management Tools',
+    'Analytics Tools',
+    'User Research Tools',
     
-    // Specific Achievements
+    // Specific Achievements & Recognition
     'World Bank IFC',
     'Market Research',
     'Free to Paid Conversion',
     'Product Portfolio',
+    'Product Innovation',
+    'Product Impact',
+    'Product Success Stories',
+    'Product Case Studies',
+    
+    // Professional Development
+    'Product Management Career',
+    'Product Manager Resume',
+    'Product Management Skills',
+    'Product Management Experience',
+    'Product Management Best Practices',
+    'Product Management Methodology',
+    'Agile Product Management',
+    'Scrum Product Owner',
+    
+    // Industry Keywords
+    'Tech Industry',
+    'Startup Experience',
+    'Scale-up Experience',
+    'Product-led Growth',
+    'Growth Hacking',
+    'User Acquisition',
+    'Retention Strategies',
+    'Product Monetization'
   ],
   authors: [{ name: 'Shazzad Hossain Mukit', url: siteUrl }],
   creator: 'Mukit',
@@ -115,7 +175,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: 'Shazzad Hossain Mukit - Product Manager Portfolio',
     title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Data-Driven, AI & Learning by Doing',
-    description: 'Shazzad Hossain Mukit, Portfolio. Product Management Ethos: Data (analysis), Decision (strategy) & (service) Design.',
+    description: 'Shazzad Hossain Mukit is a Data-driven Product Manager at 10 Minute School, specializing in product strategy, conversion optimization, and AI-powered learning solutions. Portfolio showcasing growth product management, user research, and data analytics expertise with a "learning by doing" philosophy.',
     images: [
       {
         url: `${siteUrl}/og-image.png`,

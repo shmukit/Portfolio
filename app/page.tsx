@@ -9,27 +9,18 @@ import { useState, useCallback, useMemo, memo } from 'react';
 import { 
   pillTap, 
   swipeCard,
-  swipeContainer,
   pillBreathe,
   modalOverlay,
   modalContent,
   mobileModalSlide,
   mobileCardDrag,
-  mobileCardHover,
-  contentReveal,
   staggeredReveal,
   revealItem,
-  loadingSpinner,
-  bouncingDots,
-  skeletonPulse,
   buttonHover,
   buttonTap,
   iconHover,
-  iconTap,
   closeButtonHover,
-  closeButtonTap,
-  themeToggleHover,
-  linkHover
+  closeButtonTap
 } from '../lib/utils/animations';
 import { useTheme } from '../lib/hooks/useTheme';
 import { usePortfolio } from '../lib/hooks/usePortfolio';
@@ -38,6 +29,8 @@ import AnimatedBackground from './components/AnimatedBackground';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
 import UrlCTA from './components/UrlCTA';
+import MukitLoader from './components/MukitLoader';
+import ProjectStructuredData from './components/ProjectStructuredData';
 import { isValidImageUrl } from '../lib/utils/imageValidation';
 
 // Memoized Project Pill Component for better performance
@@ -427,49 +420,11 @@ export default function Home() {
     setTouchEnd(null);
   };
 
-  // Enhanced loading state with better animations
+  // Enhanced loading state with custom Mukit loader
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-        <motion.div 
-          className="flex flex-col items-center space-y-6"
-          variants={contentReveal}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Enhanced spinner */}
-          <motion.div 
-            className="relative"
-            variants={loadingSpinner}
-            animate="animate"
-          >
-            <div className="w-16 h-16 border-4 border-gray-200 rounded-full"></div>
-            <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-accent rounded-full"></div>
-          </motion.div>
-          
-          {/* Bouncing dots */}
-          <div className="flex space-x-2">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 bg-accent rounded-full"
-                variants={bouncingDots}
-                animate="animate"
-                transition={{ delay: i * 0.1 }}
-              />
-            ))}
-        </div>
-          
-          <motion.p 
-            className="text-gray-600 text-lg font-medium"
-            variants={contentReveal}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.3 }}
-          >
-            Loading projects...
-          </motion.p>
-        </motion.div>
+        <MukitLoader size="lg" />
       </div>
     );
   }
@@ -499,6 +454,9 @@ export default function Home() {
 
   return (
     <ErrorBoundary>
+      {/* Project-specific structured data for SEO & GenAI */}
+      <ProjectStructuredData projects={projects} />
+      
       <main className="min-h-screen relative" role="main">
         {/* Animated Background */}
         <AnimatedBackground theme={theme} />
@@ -687,16 +645,44 @@ export default function Home() {
                 <ProjectContent project={hoveredProject} theme={theme} />
               </motion.div>
             ) : (
-              /* Default Name/Title/CV Section */
-                <div className="space-y-4 lg:space-y-5 max-w-2xl">
-                <div>
-                    <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 lg:mb-8 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                    Hi, <motion.span 
+              /* Enhanced Hero Section */
+                <div className="space-y-8 lg:space-y-10 max-w-4xl">
+                <div className="relative">
+                  {/* Decorative background elements */}
+                  <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl"></div>
+                  <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-br from-cyan-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+                  
+                  <div className="relative z-10">
+                    {/* Enhanced greeting with better typography */}
+                    <motion.div 
+                      className="mb-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                    >
+                      <span className={`text-lg lg:text-xl font-medium ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                      }`}>
+                        Hello there! I&apos;m
+                      </span>
+                    </motion.div>
+
+                    {/* Enhanced main heading with gradient text */}
+                    <motion.h1 
+                      className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    >
+                      <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                        Mukit
+                      </span>
+                      <motion.span 
                       role="img" 
                       aria-label="waving hand"
-                      className="inline-block origin-[70%_70%]"
+                        className="inline-block origin-[70%_70%] ml-3"
                       animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
                       transition={{ 
                         duration: 2.5, 
@@ -704,18 +690,46 @@ export default function Home() {
                         repeat: Infinity,
                         repeatDelay: 1
                       }}
-                    >👋🏼</motion.span> I am Mukit
-                  </h1>
-                    <p className={`text-base lg:text-lg leading-relaxed mb-3 ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                    }`}>
-                    Entrepreneur & Philomath, learning by doing.
-                  </p>
-                    <p className={`text-base lg:text-lg leading-relaxed ${
-                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                    }`}>
-                    Product Ethos: <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Data</span> (analysis), <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Decision</span> (strategy) & (service) <span className={`font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-500'}`}>Design</span>.
-                  </p>
+                      >👋</motion.span>
+                    </motion.h1>
+
+                    {/* Enhanced subtitle with better styling */}
+                    <motion.div 
+                      className="space-y-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                    >
+                      <p className={`text-xl lg:text-2xl leading-relaxed font-medium ${
+                        theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+                      }`}>
+                        Builder & Philomath, learning by doing
+                      </p>
+                    </motion.div>
+
+                    {/* Enhanced product ethos with better visual treatment */}
+                    <motion.div 
+                      className={`mt-8 p-6 rounded-2xl border backdrop-blur-sm ${
+                        theme === 'dark' 
+                          ? 'bg-gray-800/50 border-gray-700/50' 
+                          : 'bg-white/50 border-gray-200/50'
+                      }`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+                    >
+                      <h3 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
+                        theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                      }`}>
+                        Product Ethos
+                      </h3>
+                      <p className={`text-lg leading-relaxed ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                        <span className={`font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>Data</span> (analysis) • <span className={`font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent`}>Decision</span> (strategy) • <span className={`font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent`}>Design</span> (service)
+                      </p>
+                    </motion.div>
+                  </div>
                 </div>
 
                 {/* CTA Buttons */}
@@ -724,19 +738,41 @@ export default function Home() {
                   onTogglePortfolio={togglePortfolio} 
                 />
 
-                {/* Last Update */}
-                <div className={`text-xs pt-6 ${
+                {/* Enhanced Footer Section */}
+                <motion.div 
+                  className={`mt-12 pt-8 border-t ${
+                    theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 1.0 }}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className={`text-sm ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
                 }`}>
-                  Last update: Oct &apos;25
+                      Last updated: <span className="font-medium">October 2025</span>
                 </div>
 
-                {/* Vibed while making this site */}
-                <div className={`text-xs pt-2 ${
+                    <div className={`text-sm flex items-center gap-2 ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
                 }`}>
-                  Vibed while making this site. <span role="img" aria-label="coffee">☕</span><span role="img" aria-label="headphones">🎧</span>
+                      <span>Vibed while making this site</span>
+                      <motion.span 
+                        role="img" 
+                        aria-label="coffee"
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                      >☕</motion.span>
+                      <motion.span 
+                        role="img" 
+                        aria-label="headphones"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+                      >🎧</motion.span>
                 </div>
+                  </div>
+                </motion.div>
 
               </div>
             )}

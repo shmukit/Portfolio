@@ -38,13 +38,19 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
             onClick();
           }
         }}
-        className={`text-sm font-medium transition-all duration-300 relative z-10 ${
+        className={`group relative text-sm font-medium transition-all duration-300 inline-flex items-center ${
           theme === 'dark'
-            ? 'text-gray-300 hover:text-gray-200'
-            : 'text-gray-600 hover:text-gray-700'
+            ? 'text-gray-200 hover:text-white'
+            : 'text-gray-700 hover:text-gray-900'
         }`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ 
+          scale: 1.02,
+          y: -2
+        }}
+        whileTap={{ scale: 0.98 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {label}
       </motion.a>
@@ -67,10 +73,9 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
                 ease: "easeOut",
                 delay: i * 0.05
               }}
-              className="absolute left-1/2 top-0 text-base pointer-events-none select-none"
+              className="absolute left-1/2 top-0 text-base pointer-events-none select-none z-50"
               style={{
                 transform: `translateX(-50%)`,
-                zIndex: -1,
               }}
             >
               {icon}

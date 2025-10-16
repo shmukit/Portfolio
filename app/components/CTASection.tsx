@@ -38,11 +38,21 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
 
   return (
     <motion.div 
-      className="flex flex-wrap gap-6 lg:gap-8 pt-4"
-      initial={{ opacity: 0, y: 20 }}
+      className="flex flex-wrap gap-2 lg:gap-3 pt-8"
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
     >
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
+        <AnimatedCTA 
+          type="portfolio" 
+          label="Portfolio" 
+          href="#"
+          theme={theme}
+          onClick={onTogglePortfolio}
+        />
+      </Suspense>
+
       <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="cv" 
@@ -76,16 +86,6 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           label="GitHub" 
           href="https://github.com/shmukit"
           theme={theme}
-        />
-      </Suspense>
-
-      <Suspense fallback={<SkeletonButton theme={theme} />}>
-        <AnimatedCTA 
-          type="portfolio" 
-          label="Portfolio" 
-          href="#"
-          theme={theme}
-          onClick={onTogglePortfolio}
         />
       </Suspense>
 

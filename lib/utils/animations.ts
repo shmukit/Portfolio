@@ -131,7 +131,6 @@ export const closeButtonTap = {
 // Theme toggle micro-interactions
 export const themeToggleHover = {
   scale: 1.1,
-  rotate: 15,
   transition: {
     type: "spring" as const,
     stiffness: 400,

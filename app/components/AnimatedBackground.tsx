@@ -11,12 +11,35 @@ export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-      {/* Base gradient layer */}
+      {/* Enhanced base gradient layer */}
       <div className={`absolute inset-0 transition-colors duration-300 ${
         theme === 'dark'
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'
-          : 'bg-gradient-to-br from-gray-50 via-white to-gray-50'
+          ? 'bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900'
+          : 'bg-gradient-to-br from-slate-50 via-white to-blue-50/30'
       }`}></div>
+      
+      {/* Subtle noise texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          mixBlendMode: theme === 'dark' ? 'overlay' : 'multiply'
+        }}
+      />
+      
+      {/* Grid pattern overlay */}
+      <div 
+        className={`absolute inset-0 opacity-[0.03] ${
+          theme === 'dark' ? 'opacity-[0.05]' : 'opacity-[0.02]'
+        }`}
+        style={{
+          backgroundImage: `
+            linear-gradient(${theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} 1px, transparent 1px),
+            linear-gradient(90deg, ${theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }}
+      />
       
       {/* Optimized animated gradient blobs - cyan */}
       <motion.div
