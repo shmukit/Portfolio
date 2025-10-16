@@ -165,7 +165,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             >
               <AnimatedCTA 
                 type="linkedin" 
-                label="💼" 
+                label="in" 
                 href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
                 theme={theme}
               />
@@ -186,7 +186,8 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             </motion.div>
           </Suspense>
 
-          <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+          {/* Tools CTA hidden as requested */}
+          {/* <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
@@ -198,7 +199,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                 theme={theme}
               />
             </motion.div>
-          </Suspense>
+          </Suspense> */}
         </motion.div>
 
         {/* Enhanced Footer Section */}

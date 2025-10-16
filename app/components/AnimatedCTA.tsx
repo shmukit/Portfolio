@@ -38,11 +38,7 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
             onClick();
           }
         }}
-        className={`group relative text-sm font-medium transition-all duration-300 inline-flex items-center ${
-          theme === 'dark'
-            ? 'text-gray-200 hover:text-white'
-            : 'text-gray-700 hover:text-gray-900'
-        }`}
+        className="group relative text-sm font-medium transition-all duration-300 inline-flex items-center text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
         whileHover={{ 
           scale: 1.02,
           y: -2

@@ -89,14 +89,15 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<SkeletonButton theme={theme} />}>
+      {/* Tools CTA hidden as requested */}
+      {/* <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="tools" 
           label="Tools" 
           href="#tools"
           theme={theme}
         />
-      </Suspense>
+      </Suspense> */}
     </motion.div>
   );
 }

@@ -79,14 +79,10 @@ const ProjectPill = memo(({
         : 'none'
     }}
   >
-    <span className={`relative z-10 text-xs font-medium mb-1 ${
-      theme === 'dark' ? 'text-gray-200' : 'text-gray-500'
-    }`}>
+    <span className="relative z-10 text-xs font-medium mb-1 text-gray-500 dark:text-gray-200">
       {project.year}
     </span>
-    <span className={`relative z-10 text-sm font-medium ${
-      theme === 'dark' ? 'text-white' : 'text-gray-900'
-    }`}>
+    <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
       {project.title}
     </span>
   </motion.button>
@@ -518,15 +514,11 @@ export default function Home() {
                       }}
                     >
                       {/* Year on first line */}
-                      <span className={`relative z-10 text-xs font-medium mb-1 ${
-                        theme === 'dark' ? 'text-gray-200' : 'text-gray-500'
-                      }`}>
+                      <span className="relative z-10 text-xs font-medium mb-1 text-gray-500 dark:text-gray-200">
                         {project.year}
                       </span>
                       {/* Project title on second line */}
-                      <span className={`relative z-10 text-sm font-medium ${
-                        theme === 'dark' ? 'text-white' : 'text-gray-900'
-                      }`}>
+                      <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
                         {project.title}
                       </span>
                     </motion.button>
@@ -537,7 +529,7 @@ export default function Home() {
             )}
 
             {/* Right Content Area */}
-            <div className={`flex-1 relative ${showPortfolio ? '' : 'flex justify-center'}`}>
+            <div className={`flex-1 relative ${!showPortfolio && 'flex justify-center'}`}>
 
               {/* Fixed Center Content Area */}
                 <div className={`${showPortfolio ? 'fixed left-[352px] right-0' : 'w-full'} top-0 h-screen flex items-center justify-center pointer-events-none z-20`}>
@@ -847,15 +839,11 @@ export default function Home() {
                   }}
                 >
                   {/* Year on first line */}
-                  <span className={`relative z-10 text-[10px] font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-500'
-                  }`}>
+                  <span className="relative z-10 text-[10px] font-medium mb-1 text-gray-500 dark:text-gray-300">
                     {project.year}
                   </span>
                   {/* Project title on second line */}
-                  <span className={`relative z-10 text-sm font-medium ${
-                    theme === 'dark' ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <span className="relative z-10 text-sm font-medium text-gray-900 dark:text-white">
                     {project.title}
                   </span>
                 </motion.button>
