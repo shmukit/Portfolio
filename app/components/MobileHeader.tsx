@@ -44,7 +44,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         >
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+          <span className={`${
+            theme === 'dark' 
+              ? 'bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent' 
+              : 'bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent'
+          }`}>
             Mukit
           </span>
           <motion.span 
@@ -94,7 +98,13 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           <p className={`text-xs leading-tight whitespace-nowrap ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           }`}>
-            <span className={`font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}>Data</span> (analysis) • <span className={`font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent`}>Decision</span> (strategy) • <span className={`font-bold bg-gradient-to-r from-pink-600 to-cyan-600 bg-clip-text text-transparent`}>Design</span> (service)
+            <span className={`font-bold bg-gradient-to-r ${
+              theme === 'dark' ? 'from-blue-400 to-purple-400' : 'from-blue-600 to-purple-600'
+            } bg-clip-text text-transparent`}>Data</span> (analysis) • <span className={`font-bold bg-gradient-to-r ${
+              theme === 'dark' ? 'from-purple-400 to-pink-400' : 'from-purple-600 to-pink-600'
+            } bg-clip-text text-transparent`}>Decision</span> (strategy) • <span className={`font-bold bg-gradient-to-r ${
+              theme === 'dark' ? 'from-pink-400 to-cyan-400' : 'from-pink-600 to-cyan-600'
+            } bg-clip-text text-transparent`}>Design</span> (service)
           </p>
         </motion.div>
         
@@ -194,7 +204,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
         {/* Enhanced Footer Section */}
         <motion.div 
           className={`mt-8 pt-6 border-t ${
-            theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+            theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
           }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

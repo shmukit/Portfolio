@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     'Growth Product Management',
     'Product Analytics',
     'Conversion Rate Optimization',
-    'Conversion Optimization',
+    'Forward Deployed Engineer',
     'Dashboard Audit',
     'Feature Experimentation',
     'Market Research',
@@ -65,6 +65,7 @@ export const metadata: Metadata = {
     'Product Metrics',
     'Product KPIs',
     'Rapid Prototyping',
+    'Product Gamification',
     
     // AI & Technology
     'AI Product Management',
@@ -73,7 +74,8 @@ export const metadata: Metadata = {
     'EdTech AI Solutions',
     'Data Analytics',
     'Business Intelligence',
-    'Product Intelligence',
+    'Evals & Observability',
+    'Workflow Automation',
     'AI-powered Learning',
     
     // Mindset & Philosophy
@@ -85,6 +87,11 @@ export const metadata: Metadata = {
     'Data-driven Decision Making',
     'User-centered Design',
     'Evidence-based Product Management',
+    'Prototyping & MVP',
+    'Product-Led Growth',
+    'Product-Led Sales',
+    'Service Design',
+  
     
     // Domain & Industry
     'EdTech Product Manager',
