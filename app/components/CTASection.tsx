@@ -1,9 +1,28 @@
 "use client";
 
 import { Suspense, lazy } from "react";
+import { motion } from "framer-motion";
 
 // Lazy load heavy components
 const AnimatedCTA = lazy(() => import('./AnimatedCTA'));
+
+// Enhanced skeleton component
+const SkeletonButton = ({ theme }: { theme: 'light' | 'dark' }) => (
+  <motion.div 
+    className={`w-20 h-10 rounded-lg ${
+      theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'
+    }`}
+    animate={{
+      opacity: [0.4, 0.8, 0.4],
+      scale: [1, 1.02, 1]
+    }}
+    transition={{
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+  />
+);
 
 interface CTASectionProps {
   theme: 'light' | 'dark';
@@ -18,8 +37,13 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
   }
 
   return (
-    <div className="flex flex-wrap gap-6 lg:gap-8 pt-4">
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+    <motion.div 
+      className="flex flex-wrap gap-6 lg:gap-8 pt-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="cv" 
           label="CV" 
@@ -28,7 +52,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="email" 
           label="Email" 
@@ -37,7 +61,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="linkedin" 
           label="LinkedIn" 
@@ -46,7 +70,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="github" 
           label="GitHub" 
@@ -55,7 +79,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="portfolio" 
           label="Portfolio" 
@@ -65,7 +89,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
         />
       </Suspense>
 
-      <Suspense fallback={<div className="w-20 h-10 bg-gray-200 rounded animate-pulse" />}>
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
           type="tools" 
           label="Tools" 
@@ -73,6 +97,6 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           theme={theme}
         />
       </Suspense>
-    </div>
+    </motion.div>
   );
 }

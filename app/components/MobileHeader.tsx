@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Suspense, lazy } from "react";
+import { iconHover, iconTap } from '../../lib/utils/animations';
 
 // Lazy load heavy components
 const AnimatedCTA = lazy(() => import('./AnimatedCTA'));
@@ -42,62 +43,97 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
         </p>
         
         {/* Mobile CTA Buttons - Icons Only */}
-        <div className="flex flex-wrap gap-6 lg:gap-8 pt-2">
+        <motion.div 
+          className="flex flex-wrap gap-6 lg:gap-8 pt-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="cv" 
-              label="📄" 
-              href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
-              theme={theme}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="cv" 
+                label="📄" 
+                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                theme={theme}
+              />
+            </motion.div>
           </Suspense>
 
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="email" 
-              label="✉️" 
-              href="mailto:shazzadhossainmukit@gmail.com"
-              theme={theme}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="email" 
+                label="✉️" 
+                href="mailto:shazzadhossainmukit@gmail.com"
+                theme={theme}
+              />
+            </motion.div>
           </Suspense>
 
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="linkedin" 
-              label="💼" 
-              href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
-              theme={theme}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="linkedin" 
+                label="💼" 
+                href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
+                theme={theme}
+              />
+            </motion.div>
           </Suspense>
 
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="github" 
-              label="⚡" 
-              href="https://github.com/shmukit"
-              theme={theme}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="github" 
+                label="⚡" 
+                href="https://github.com/shmukit"
+                theme={theme}
+              />
+            </motion.div>
           </Suspense>
 
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="portfolio" 
-              label="🎯" 
-              href="#"
-              theme={theme}
-              onClick={onTogglePortfolio}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="portfolio" 
+                label="🎯" 
+                href="#"
+                theme={theme}
+                onClick={onTogglePortfolio}
+              />
+            </motion.div>
           </Suspense>
 
           <Suspense fallback={<div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />}>
-            <AnimatedCTA 
-              type="tools" 
-              label="🛠️" 
-              href="#tools"
-              theme={theme}
-            />
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+            >
+              <AnimatedCTA 
+                type="tools" 
+                label="🛠️" 
+                href="#tools"
+                theme={theme}
+              />
+            </motion.div>
           </Suspense>
-        </div>
+        </motion.div>
 
         {/* Last Update and Vibed lines - Always visible */}
         <div className="pt-6">

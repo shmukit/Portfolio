@@ -54,16 +54,101 @@ export const backdropFade: Variants = {
   exit: { opacity: 0 }
 };
 
-// Hover animations
+// Enhanced hover animations with micro-interactions
 export const cardHover = {
-  scale: 1.02,
-  y: -2,
-  transition: { duration: 0.2, ease: [0.0, 0.0, 0.2, 1] as const }
+  scale: 1.03,
+  y: -4,
+  boxShadow: "0 8px 25px -8px rgba(0, 0, 0, 0.15)",
+  transition: { 
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 25
+  }
 };
 
 export const buttonHover = {
-  scale: 1.02,
-  transition: { duration: 0.15, ease: [0.0, 0.0, 0.2, 1] as const }
+  scale: 1.05,
+  y: -1,
+  transition: { 
+    type: "spring" as const,
+    stiffness: 500,
+    damping: 30
+  }
+};
+
+// Micro-interactions for buttons
+export const buttonTap = {
+  scale: 0.95,
+  transition: { duration: 0.1, ease: "easeOut" as const }
+};
+
+export const iconHover = {
+  scale: 1.2,
+  rotate: 5,
+  transition: { 
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 20
+  }
+};
+
+export const iconTap = {
+  scale: 0.9,
+  rotate: -5,
+  transition: { duration: 0.1 }
+};
+
+// Enhanced pill interactions
+export const pillHoverEnhanced = {
+  scale: 1.08,
+  x: 8,
+  backgroundColor: "rgba(255, 255, 255, 0.98)",
+  boxShadow: "0 12px 35px -8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.15)",
+  transition: {
+    type: "spring" as const,
+    stiffness: 500,
+    damping: 30
+  }
+};
+
+// Close button micro-interactions
+export const closeButtonHover = {
+  scale: 1.1,
+  rotate: 90,
+  backgroundColor: "rgba(239, 68, 68, 0.1)",
+  transition: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 25
+  }
+};
+
+export const closeButtonTap = {
+  scale: 0.9,
+  transition: { duration: 0.1 }
+};
+
+// Theme toggle micro-interactions
+export const themeToggleHover = {
+  scale: 1.1,
+  rotate: 15,
+  transition: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 20
+  }
+};
+
+// Link hover effects
+export const linkHover = {
+  scale: 1.05,
+  y: -2,
+  textShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  transition: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 25
+  }
 };
 
 // Page transition animations
@@ -81,12 +166,13 @@ export const pageTransition: Variants = {
   }
 };
 
-// Loading animations
+// Enhanced loading animations
 export const pulse: Variants = {
   animate: {
-    scale: [1, 1.05, 1],
+    scale: [1, 1.02, 1],
+    opacity: [0.6, 1, 0.6],
     transition: {
-      duration: 1.5,
+      duration: 1.8,
       repeat: Infinity,
       ease: "easeInOut"
     }
@@ -97,9 +183,103 @@ export const shimmer: Variants = {
   animate: {
     backgroundPosition: ["-200% 0", "200% 0"],
     transition: {
-      duration: 2,
+      duration: 1.5,
       repeat: Infinity,
       ease: "linear"
+    }
+  }
+};
+
+// Enhanced skeleton animations
+export const skeletonPulse: Variants = {
+  animate: {
+    opacity: [0.4, 0.8, 0.4],
+    transition: {
+      duration: 1.2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+export const skeletonWave: Variants = {
+  animate: {
+    backgroundPosition: ["200% 0", "-200% 0"],
+    transition: {
+      duration: 1.8,
+      repeat: Infinity,
+      ease: "linear"
+    }
+  }
+};
+
+// Content reveal animations
+export const contentReveal: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.98
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for smooth reveal
+    }
+  }
+};
+
+// Staggered content reveal
+export const staggeredReveal: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+export const revealItem: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    filter: "blur(5px)"
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+// Loading spinner with spring physics
+export const loadingSpinner: Variants = {
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 1,
+      repeat: Infinity,
+      ease: "linear"
+    }
+  }
+};
+
+// Bouncing dots loader
+export const bouncingDots: Variants = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 0.6,
+      repeat: Infinity,
+      ease: "easeInOut"
     }
   }
 };
@@ -153,11 +333,11 @@ export const breathe: Variants = {
   }
 };
 
-// Breathing animation for selected/hovered pills
+// Optimized breathing animation - reduced frequency and intensity
 export const pillBreathe = {
-  scale: [1, 1.02, 1],
+  scale: [1, 1.01, 1],
   transition: {
-    duration: 2.5,
+    duration: 3,
     repeat: Infinity,
     ease: "easeInOut" as const
   }
@@ -182,31 +362,32 @@ export const glow: Variants = {
   }
 };
 
-// Modal overlay animations
+// Optimized Modal overlay animations - removed expensive blur effects
 export const modalOverlay: Variants = {
   hidden: { 
     opacity: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: "easeIn"
     }
   },
   visible: { 
     opacity: 1,
     transition: {
-      duration: 0.4,
+      duration: 0.2,
       ease: "easeOut"
     }
   }
 };
 
+// Optimized modal content - simplified animations for better performance
 export const modalContent: Variants = {
   hidden: { 
     opacity: 0,
-    scale: 0.9,
-    y: 30,
+    scale: 0.98,
+    y: 20,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: "easeIn"
     }
   },
@@ -215,8 +396,45 @@ export const modalContent: Variants = {
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.25,
       ease: "easeOut"
+    }
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.98,
+    y: 10,
+    transition: { 
+      duration: 0.15,
+      ease: "easeIn"
+    }
+  }
+};
+
+// Mobile-specific modal animations
+export const mobileModalSlide: Variants = {
+  hidden: { 
+    y: "100%",
+    opacity: 0,
+    scale: 0.95
+  },
+  visible: { 
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30
+    }
+  },
+  exit: {
+    y: "100%",
+    opacity: 0,
+    scale: 0.95,
+    transition: { 
+      duration: 0.3, 
+      ease: "easeIn" 
     }
   }
 };
@@ -245,14 +463,43 @@ export const pillItem: Variants = {
   }
 };
 
-// Swipe animations for mobile cards
+// Enhanced swipe animations for mobile cards with better physics
 export const swipeCard: Variants = {
-  initial: { x: 0, opacity: 1 },
+  initial: { x: 0, opacity: 1, scale: 1 },
+  swipeLeft: { 
+    x: -100, 
+    scale: 0.95,
+    opacity: 0.7,
+    transition: { 
+      duration: 0.3, 
+      ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for natural feel
+    }
+  },
+  swipeRight: { 
+    x: 100, 
+    scale: 0.95,
+    opacity: 0.7,
+    transition: { 
+      duration: 0.3, 
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  },
+  snapBack: {
+    x: 0,
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 25
+    }
+  },
   exit: {
     x: -300,
     opacity: 0,
+    scale: 0.9,
     transition: {
-      duration: 0.3,
+      duration: 0.4,
       ease: "easeInOut"
     }
   }
@@ -263,7 +510,33 @@ export const swipeContainer: Variants = {
   animate: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.08, // Slightly faster stagger
+      delayChildren: 0.1
     }
+  }
+};
+
+// Enhanced mobile card drag feedback
+export const mobileCardDrag = {
+  drag: "x" as const,
+  dragConstraints: { left: -120, right: 120 }, // Wider drag range
+  dragElastic: 0.2, // More elastic feel
+  dragMomentum: false,
+  whileDrag: { 
+    scale: 0.98,
+    rotate: 2, // Slight rotation for natural feel
+    transition: { duration: 0.1, ease: "easeOut" as const }
+  }
+};
+
+// Mobile card hover states for better touch feedback
+export const mobileCardHover = {
+  scale: 1.02,
+  y: -4,
+  boxShadow: "0 8px 25px -8px rgba(0, 0, 0, 0.15)",
+  transition: {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 25
   }
 };

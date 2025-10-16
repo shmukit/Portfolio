@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { themeToggleHover } from '../../lib/utils/animations';
 
 interface ThemeToggleProps {
   theme: 'light' | 'dark';
@@ -17,8 +18,8 @@ export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
           : 'bg-gradient-to-r from-yellow-400 to-orange-500'
       }`}
       aria-label="Toggle theme"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={themeToggleHover}
+      whileTap={{ scale: 0.9 }}
     >
       <motion.div
         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-500 ${
