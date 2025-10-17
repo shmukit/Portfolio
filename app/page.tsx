@@ -720,7 +720,7 @@ export default function Home() {
         <AnimatePresence>
           {hoveredProject && (
             <motion.div
-              className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+              className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-1"
               variants={modalOverlay}
               initial="hidden"
               animate="visible"
@@ -797,7 +797,7 @@ export default function Home() {
               </div>
 
               <motion.div
-                className={`relative rounded-3xl shadow-2xl max-h-[85vh] w-full max-w-lg overflow-y-auto border ${
+                className={`relative rounded-3xl shadow-2xl max-h-[85vh] w-full max-w-[95vw] sm:max-w-lg overflow-y-auto border ${
                   theme === 'dark'
                     ? 'bg-gray-800 border-gray-700'
                     : 'bg-white border-gray-200'
@@ -811,7 +811,7 @@ export default function Home() {
               >
 
                 {/* Project Content */}
-                <div className="p-6 pt-2">
+                <div className="p-4 pt-2">
                   {/* Project Header */}
                   <div className="mb-6">
                     {/* Phase and Project Type Badges */}
@@ -860,34 +860,32 @@ export default function Home() {
 
                   {/* Project Image - Performance optimized for mobile view */}
                   {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
-                    <div className="mb-6 flex justify-center">
+                    <div className="mb-6 flex justify-center -mx-4">
                       {/* Detect if it's a mobile screenshot based on filename */}
                       {hoveredProject.imageUrl.includes('RCT_tara') || 
                        hoveredProject.imageUrl.includes('Rating System') || 
                        hoveredProject.imageUrl.includes('quizards') ? (
-                        // Mobile screenshots - much larger for better readability
-                        <div className="max-w-[400px] mx-auto">
+                        // Mobile screenshots - 320px optimal size
+                        <div className="w-[320px] max-w-full">
                           <PerformanceOptimizedImage
                             src={hoveredProject.imageUrl}
                             alt={hoveredProject.title}
-                            width={400}
-                            height={650}
-                            sizes="(max-width: 768px) 400px, 500px"
-                            quality={75}
+                            width={320}
+                            height={520}
+                            sizes="(max-width: 768px) 320px, 320px"
+                            quality={80}
                           />
                         </div>
                       ) : (
-                        // Desktop/web screenshots - larger container
-                        <div className="max-w-sm mx-auto">
-                          <PerformanceOptimizedImage
-                            src={hoveredProject.imageUrl}
-                            alt={hoveredProject.title}
-                            width={400}
-                            height={250}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            quality={75}
-                          />
-                        </div>
+                        // Desktop/web screenshots - fill available width
+                        <PerformanceOptimizedImage
+                          src={hoveredProject.imageUrl}
+                          alt={hoveredProject.title}
+                          width={450}
+                          height={280}
+                          sizes="(max-width: 768px) 90vw, 450px"
+                          quality={75}
+                        />
                       )}
                     </div>
                   )}
