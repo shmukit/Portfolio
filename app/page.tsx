@@ -472,14 +472,14 @@ export default function Home() {
                     {hoveredProject.imageUrl.includes('RCT_tara') || 
                      hoveredProject.imageUrl.includes('Rating System') || 
                      hoveredProject.imageUrl.includes('quizards') ? (
-                      // Mobile screenshots - much smaller container to fit without scrolling
-                      <div className="max-w-[280px] mx-auto">
+                      // Mobile screenshots - responsive sizing for better readability
+                      <div className="max-w-[320px] lg:max-w-[380px] mx-auto">
                         <PerformanceOptimizedImage
                           src={hoveredProject.imageUrl}
                           alt={hoveredProject.title}
-                          width={280}
-                          height={450}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          width={380}
+                          height={650}
+                          sizes="(max-width: 768px) 320px, (max-width: 1024px) 350px, 380px"
                           quality={75}
                         />
                       </div>
@@ -865,14 +865,14 @@ export default function Home() {
                       {hoveredProject.imageUrl.includes('RCT_tara') || 
                        hoveredProject.imageUrl.includes('Rating System') || 
                        hoveredProject.imageUrl.includes('quizards') ? (
-                        // Mobile screenshots - much smaller container to fit without scrolling
-                        <div className="max-w-[250px] mx-auto">
+                        // Mobile screenshots - responsive sizing for better readability
+                        <div className="max-w-[300px] sm:max-w-[350px] mx-auto">
                           <PerformanceOptimizedImage
                             src={hoveredProject.imageUrl}
                             alt={hoveredProject.title}
-                            width={250}
-                            height={400}
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            width={350}
+                            height={600}
+                            sizes="(max-width: 640px) 300px, (max-width: 768px) 350px, 400px"
                             quality={75}
                           />
                         </div>
