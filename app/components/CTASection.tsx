@@ -41,7 +41,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
       className="flex flex-wrap gap-2 lg:gap-3 pt-8"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+      transition={{ duration: 0.4, ease: "easeOut", delay: 0.4 }}
     >
       <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
 import { Project } from '../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useCallback, useMemo, memo } from 'react';
+import { useState, useCallback, useMemo, memo, useEffect } from 'react';
 import { 
   pillTap, 
   swipeCard,
@@ -279,10 +279,19 @@ export default function Home() {
   const [isPinned, setIsPinned] = useState(false); // Track if modal is pinned (clicked)
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [glowColors, setGlowColors] = useState<Record<string, string>>({});
+  const [hasAnimated, setHasAnimated] = useState(false); // Track if initial animation has played
   const { theme, toggleTheme } = useTheme();
   const { showPortfolio, togglePortfolio } = usePortfolio();
   const shouldReduceMotion = useReducedMotion();
 
+  // Set hasAnimated to true after initial load to prevent re-animations
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 1000); // Allow initial animations to complete
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Projects are already available from useProjects hook
   // Removed unused years and projectsByYear variables
@@ -656,9 +665,9 @@ export default function Home() {
                     {/* Enhanced greeting with better typography */}
                     <motion.div 
                       className="mb-4"
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                     >
                       <span className={`text-lg lg:text-xl font-medium ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
@@ -672,9 +681,9 @@ export default function Home() {
                       className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight ${
                         theme === 'dark' ? 'text-white' : 'text-gray-900'
                       }`}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={hasAnimated ? false : { opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.1 }}
                     >
                       <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
                         Mukit
@@ -683,6 +692,7 @@ export default function Home() {
                       role="img" 
                       aria-label="waving hand"
                         className="inline-block origin-[70%_70%] ml-3"
+                        style={{ filter: 'hue-rotate(-30deg) saturate(0.7) brightness(1.1) sepia(0.3)' }}
                       animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
                       transition={{ 
                         duration: 2.5, 
@@ -696,9 +706,9 @@ export default function Home() {
                     {/* Enhanced subtitle with better styling */}
                     <motion.div 
                       className="space-y-4"
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.2 }}
                     >
                       <p className={`text-xl lg:text-2xl leading-relaxed font-medium ${
                         theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
@@ -714,9 +724,9 @@ export default function Home() {
                           ? 'bg-gray-800/50 border-gray-700/50' 
                           : 'bg-white/50 border-gray-200/50'
                       }`}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.3 }}
                     >
                       <h3 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
@@ -745,7 +755,7 @@ export default function Home() {
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 1.0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.4 }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className={`text-sm ${

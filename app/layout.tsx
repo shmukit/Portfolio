@@ -183,14 +183,6 @@ export const metadata: Metadata = {
     siteName: 'Shazzad Hossain Mukit - Product Manager Portfolio',
     title: 'Shazzad Hossain Mukit – Product Manager Portfolio | Product Ethos: Data, Decision & Design.',
     description: 'Shazzad Hossain Mukit is a data-driven Product Manager, his product ethos are: Data (analysis), Decision (strategy) and Design (service). Portfolio showcasing growth product management, product strategy, conversion optimization, distribution strategy, user research, and data analytics expertise with a "learning by doing" philosophy.',
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: 'Shazzad Hossain Mukit - Product Manager Portfolio | Data, Decision & Design.',
-      },
-    ],
   },
   alternates: {
     canonical: siteUrl,

@@ -21,14 +21,32 @@ export default function MukitLoader({ className = '', size = 'md' }: MukitLoader
     lg: 'space-x-3'
   };
 
-  const colors = ['bg-blue-500', 'bg-cyan-500', 'bg-purple-500', 'bg-pink-500'];
+  const gradientColors = [
+    {
+      background: 'linear-gradient(135deg, #ec4899, #3b82f6, #8b5cf6)', // pink to blue to purple
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #3b82f6, #06b6d4, #8b5cf6)', // blue to cyan to purple
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #06b6d4, #ec4899, #3b82f6)', // cyan to pink to blue
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #8b5cf6, #ec4899, #06b6d4)', // purple to pink to cyan
+      backgroundSize: '200% 200%'
+    }
+  ];
 
   return (
     <div className={`flex items-center justify-center ${spacing[size]} ${className}`}>
-      {colors.map((color, index) => (
+      {gradientColors.map((color, index) => (
         <motion.div
           key={index}
-          className={`${dotSizes[size]} ${color} rounded-full`}
+          className={`${dotSizes[size]} rounded-full`}
+          style={color}
           animate={{
             y: [0, -8, 0],
             scale: [1, 1.1, 1],
@@ -47,14 +65,32 @@ export default function MukitLoader({ className = '', size = 'md' }: MukitLoader
 
 // Alternative minimal version for smaller spaces
 export function MukitLoaderMinimal({ className = '' }: { className?: string }) {
-  const colors = ['bg-blue-500', 'bg-cyan-500', 'bg-purple-500', 'bg-pink-500'];
+  const gradientColors = [
+    {
+      background: 'linear-gradient(135deg, #ec4899, #3b82f6, #8b5cf6)', // pink to blue to purple
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #3b82f6, #06b6d4, #8b5cf6)', // blue to cyan to purple
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #06b6d4, #ec4899, #3b82f6)', // cyan to pink to blue
+      backgroundSize: '200% 200%'
+    },
+    {
+      background: 'linear-gradient(135deg, #8b5cf6, #ec4899, #06b6d4)', // purple to pink to cyan
+      backgroundSize: '200% 200%'
+    }
+  ];
 
   return (
     <div className={`flex items-center space-x-1 ${className}`}>
-      {colors.map((color, index) => (
+      {gradientColors.map((color, index) => (
         <motion.div
           key={index}
-          className={`w-1.5 h-1.5 ${color} rounded-full`}
+          className={`w-1.5 h-1.5 rounded-full`}
+          style={color}
           animate={{
             y: [0, -6, 0],
             scale: [1, 1.1, 1],

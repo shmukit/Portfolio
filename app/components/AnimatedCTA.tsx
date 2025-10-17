@@ -38,7 +38,7 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
             onClick();
           }
         }}
-        className={`group relative text-sm font-medium transition-all duration-300 inline-flex items-center ${
+        className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
           theme === 'dark'
             ? 'text-gray-200 hover:text-white'
             : 'text-gray-700 hover:text-gray-900'
@@ -50,7 +50,7 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
         whileTap={{ scale: 0.98 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
       >
         {label}
       </motion.a>
