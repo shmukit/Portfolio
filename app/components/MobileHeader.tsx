@@ -111,7 +111,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
         
         {/* Mobile CTA Buttons - Icons Only */}
         <motion.div 
-          className="flex flex-wrap gap-4 lg:gap-6 pt-2"
+          className="flex items-center justify-start gap-3 pt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -120,31 +120,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
+              className="flex items-center justify-center"
             >
-              <div className="w-6 h-6 flex items-center justify-center overflow-hidden">
-                <div className="text-2xl leading-none">
-                  <AnimatedCTA 
-                    type="portfolio" 
-                    label="🎯" 
-                    href="#"
-                    theme={theme}
-                    onClick={onTogglePortfolio}
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </Suspense>
-
-          <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
-            <motion.div
-              whileHover={iconHover}
-              whileTap={iconTap}
-            >
-              <a
-                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
+              <button
+                onClick={onTogglePortfolio}
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
                   theme === 'dark'
                     ? 'text-gray-200 hover:text-white'
                     : 'text-gray-700 hover:text-gray-900'
@@ -156,7 +136,60 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 transition-all duration-150 group-hover:scale-110"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="2"
+                    fill="#ef4444"
+                  />
+                </svg>
+              </button>
+            </motion.div>
+          </Suspense>
+
+          <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+              className="flex items-center justify-center"
+            >
+              <a
+                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
+                  theme === 'dark'
+                    ? 'text-gray-200 hover:text-white'
+                    : 'text-gray-700 hover:text-gray-900'
+                }`}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 >
                   <path
                     d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H18C19.11 22 20 21.11 20 20V8L14 2Z"
@@ -208,22 +241,23 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
+              className="flex items-center justify-center"
             >
               <a
                 href="mailto:shazzadhossainmukit@gmail.com"
-                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
                   theme === 'dark'
                     ? 'text-gray-200 hover:text-white'
                     : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
                 <svg
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 transition-all duration-150 group-hover:scale-110"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 >
                   <path
                     d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
@@ -248,12 +282,13 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
+              className="flex items-center justify-center"
             >
               <a
                 href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
                   theme === 'dark'
                     ? 'text-gray-200 hover:text-white'
                     : 'text-gray-700 hover:text-gray-900'
@@ -262,7 +297,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                 <img
                   src={theme === 'dark' ? '/InBug-White.png' : '/InBug-Black.png'}
                   alt="LinkedIn"
-                  className="w-6 h-6 transition-all duration-150 group-hover:scale-110"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>
             </motion.div>
@@ -272,12 +307,13 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
+              className="flex items-center justify-center"
             >
               <a
                 href="https://github.com/shmukit"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
                   theme === 'dark'
                     ? 'text-gray-200 hover:text-white'
                     : 'text-gray-700 hover:text-gray-900'
@@ -286,7 +322,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                 <img
                   src={theme === 'dark' ? '/github-mark-white.svg' : '/github-mark.svg'}
                   alt="GitHub"
-                  className="w-6 h-6 transition-all duration-150 group-hover:scale-110"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>
             </motion.div>
@@ -324,22 +360,12 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
               Last updated: <span className="font-medium">October 2025</span>
             </div>
             
-            <div className={`text-xs flex items-center gap-2 ${
+            <div className={`text-sm flex items-center gap-2 ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
             }`}>
               <span>Vibed while making this site</span>
-              <motion.span 
-                role="img" 
-                aria-label="coffee"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-              >☕</motion.span>
-              <motion.span 
-                role="img" 
-                aria-label="headphones"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-              >🎧</motion.span>
+              <span className="text-lg">☕</span>
+              <span className={`text-lg ${theme === 'dark' ? '' : 'text-gray-700'}`}>🎧</span>
             </div>
           </div>
         </motion.div>

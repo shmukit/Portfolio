@@ -80,7 +80,7 @@ const ProjectPill = memo(({
     }}
   >
     <span className={`relative z-10 text-xs font-medium mb-1 ${
-      theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
     }`}>
       {project.year}
     </span>
@@ -528,7 +528,7 @@ export default function Home() {
                     >
                       {/* Year on first line */}
                       <span className={`relative z-10 text-xs font-medium mb-1 ${
-                        theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}>
                         {project.year}
                       </span>
@@ -858,7 +858,7 @@ export default function Home() {
                 >
                   {/* Year on first line */}
                   <span className={`relative z-10 text-[10px] font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-500' : 'text-gray-700'
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                   }`}>
                     {project.year}
                   </span>
@@ -1046,6 +1046,40 @@ export default function Home() {
                         </div>
                       )}
 
+                    {/* Key Results - Mobile Card - Moved to top after description */}
+                    {hoveredProject.keyResults && hoveredProject.keyResults.length > 0 && (
+                      <div className={`p-4 rounded-lg shadow-sm ${
+                        theme === 'dark'
+                          ? 'bg-gray-800/50 border border-gray-700' 
+                          : 'bg-gray-50 border border-gray-200'
+                      }`}>
+                        <h3 className={`text-sm font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                        }`}>Key Results</h3>
+                        <div className="space-y-3">
+                          {hoveredProject.keyResults.map((keyResult, index) => (
+                            <div key={index}>
+                              <div className={`text-lg font-bold mb-1 ${
+                                theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                              }`}>
+                                {keyResult.value}
+                              </div>
+                              <div className={`text-xs font-medium mb-1 ${
+                                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                              }`}>
+                                {keyResult.label}
+                              </div>
+                                <div className={`text-xs ${
+                                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                              }`}>
+                                {keyResult.description}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Situation */}
                     {hoveredProject.situation && (
                       <div>
@@ -1112,39 +1146,6 @@ export default function Home() {
                       </div>
                     )}
 
-                    {/* Key Results - Mobile Card */}
-                    {hoveredProject.keyResults && hoveredProject.keyResults.length > 0 && (
-                      <div className={`p-4 rounded-lg shadow-sm ${
-                        theme === 'dark'
-                          ? 'bg-gray-800/50 border border-gray-700' 
-                          : 'bg-gray-50 border border-gray-200'
-                      }`}>
-                        <h3 className={`text-sm font-semibold mb-3 ${
-                          theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-                        }`}>Key Results</h3>
-                        <div className="space-y-3">
-                          {hoveredProject.keyResults.map((keyResult, index) => (
-                            <div key={index}>
-                              <div className={`text-lg font-bold mb-1 ${
-                                theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
-                              }`}>
-                                {keyResult.value}
-                              </div>
-                              <div className={`text-xs font-medium mb-1 ${
-                                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                              }`}>
-                                {keyResult.label}
-                              </div>
-                                <div className={`text-xs ${
-                                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                              }`}>
-                                {keyResult.description}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
 
                     {/* Skills & Technologies - Mobile Card */}
                     {hoveredProject.tags && hoveredProject.tags.length > 0 && (
