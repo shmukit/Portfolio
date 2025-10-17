@@ -768,18 +768,8 @@ export default function Home() {
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                 }`}>
                       <span>Vibed while making this site</span>
-                      <motion.span 
-                        role="img" 
-                        aria-label="coffee"
-                        animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                      >☕</motion.span>
-                      <motion.span 
-                        role="img" 
-                        aria-label="headphones"
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-                      >🎧</motion.span>
+                      <span className="text-lg">☕</span>
+                      <span className={`text-lg ${theme === 'dark' ? '' : 'text-gray-700'}`}>🎧</span>
                 </div>
                   </div>
                 </motion.div>

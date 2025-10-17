@@ -118,7 +118,7 @@ export const useProjects = (): UseProjectsReturn => {
               tags: project.tags || [],
               metrics: project.metrics || {},
             }));
-            console.log('🔄 Transformed projects:', transformedProjects.slice(0, 2));
+            console.log('🔄 Transformed projects:', transformedProjects.length);
             setProjects(transformedProjects as Project[]);
             return;
           }

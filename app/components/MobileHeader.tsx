@@ -354,14 +354,14 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           transition={{ duration: 0.8, ease: "easeOut", delay: 1.0 }}
         >
           <div className="flex flex-col gap-3">
-            <div className={`text-xs ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+            <div className={`text-sm ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
             }`}>
               Last updated: <span className="font-medium">October 2025</span>
             </div>
             
             <div className={`text-sm flex items-center gap-2 ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
             }`}>
               <span>Vibed while making this site</span>
               <span className="text-lg">☕</span>
