@@ -17,7 +17,7 @@ export default function PerformanceMonitor() {
         } else if (entry.entryType === 'first-input') {
           console.log('FID:', entry.processingStart - entry.startTime);
         } else if (entry.entryType === 'layout-shift') {
-          console.log('CLS:', (entry as any).value);
+          console.log('CLS:', (entry as PerformanceEntry & { value: number }).value);
         }
       }
     });
@@ -31,8 +31,9 @@ export default function PerformanceMonitor() {
     // Monitor image loading performance
     const imageObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (entry.entryType === 'resource' && (entry as any).name.includes('.gif')) {
-          console.warn('Large GIF detected:', (entry as any).name, 'Size:', (entry as any).transferSize);
+        if (entry.entryType === 'resource' && (entry as PerformanceEntry & { name: string; transferSize: number }).name.includes('.gif')) {
+          const resourceEntry = entry as PerformanceEntry & { name: string; transferSize: number };
+          console.warn('Large GIF detected:', resourceEntry.name, 'Size:', resourceEntry.transferSize);
         }
       }
     });

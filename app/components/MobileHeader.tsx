@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Suspense, lazy } from "react";
+import Image from "next/image";
 import { iconHover, iconTap } from '../../lib/utils/animations';
 
-// Lazy load heavy components
-const AnimatedCTA = lazy(() => import('./AnimatedCTA'));
+// Removed unused AnimatedCTA import
 
 interface MobileHeaderProps {
   theme: 'light' | 'dark';
@@ -294,9 +294,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                     : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
-                <img
+                <Image
                   src={theme === 'dark' ? '/InBug-White.png' : '/InBug-Black.png'}
                   alt="LinkedIn"
+                  width={20}
+                  height={20}
                   className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>
@@ -319,9 +321,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                     : 'text-gray-700 hover:text-gray-900'
                 }`}
               >
-                <img
+                <Image
                   src={theme === 'dark' ? '/github-mark-white.svg' : '/github-mark.svg'}
                   alt="GitHub"
+                  width={20}
+                  height={20}
                   className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>

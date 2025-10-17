@@ -22,12 +22,12 @@ const nextConfig: NextConfig = {
   generateEtags: true,
   experimental: {
     optimizePackageImports: ['framer-motion'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -35,7 +35,6 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   // Performance optimizations
-  swcMinify: true,
   reactStrictMode: true,
 };
 

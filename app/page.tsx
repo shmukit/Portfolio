@@ -1,7 +1,6 @@
 'use client';
 
 import { ErrorBoundary } from './components/ErrorBoundary';
-import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
 import { Project } from '../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -18,7 +17,6 @@ import {
   mobileModalSlide,
   mobileCardDrag,
   staggeredReveal,
-  revealItem,
   buttonHover,
   buttonTap,
   iconHover,
@@ -30,7 +28,6 @@ import { usePortfolio } from '../lib/hooks/usePortfolio';
 import ThemeToggle from './components/ThemeToggle';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
-import UrlCTA from './components/UrlCTA';
 import UrlCTAMultiple from './components/UrlCTAMultiple';
 import MukitLoader from './components/MukitLoader';
 import ProjectStructuredData from './components/ProjectStructuredData';
@@ -475,13 +472,13 @@ export default function Home() {
                     {hoveredProject.imageUrl.includes('RCT_tara') || 
                      hoveredProject.imageUrl.includes('Rating System') || 
                      hoveredProject.imageUrl.includes('quizards') ? (
-                      // Mobile screenshots - smaller container
-                      <div className="max-w-xs mx-auto">
+                      // Mobile screenshots - much smaller container to fit without scrolling
+                      <div className="max-w-[280px] mx-auto">
                         <PerformanceOptimizedImage
                           src={hoveredProject.imageUrl}
                           alt={hoveredProject.title}
-                          width={300}
-                          height={500}
+                          width={280}
+                          height={450}
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           quality={75}
                         />
@@ -868,13 +865,13 @@ export default function Home() {
                       {hoveredProject.imageUrl.includes('RCT_tara') || 
                        hoveredProject.imageUrl.includes('Rating System') || 
                        hoveredProject.imageUrl.includes('quizards') ? (
-                        // Mobile screenshots - medium container
-                        <div className="max-w-[280px] mx-auto">
+                        // Mobile screenshots - much smaller container to fit without scrolling
+                        <div className="max-w-[250px] mx-auto">
                           <PerformanceOptimizedImage
                             src={hoveredProject.imageUrl}
                             alt={hoveredProject.title}
-                            width={280}
-                            height={450}
+                            width={250}
+                            height={400}
                             sizes="(max-width: 768px) 100vw, 50vw"
                             quality={75}
                           />
