@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import Image from "next/image";
 import { iconHover, iconTap } from '../../lib/utils/animations';
 

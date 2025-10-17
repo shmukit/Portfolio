@@ -15,7 +15,8 @@ export default function PerformanceMonitor() {
         if (entry.entryType === 'largest-contentful-paint') {
           console.log('LCP:', entry.startTime);
         } else if (entry.entryType === 'first-input') {
-          console.log('FID:', entry.processingStart - entry.startTime);
+          const fidEntry = entry as PerformanceEntry & { processingStart: number };
+          console.log('FID:', fidEntry.processingStart - entry.startTime);
         } else if (entry.entryType === 'layout-shift') {
           console.log('CLS:', (entry as PerformanceEntry & { value: number }).value);
         }
