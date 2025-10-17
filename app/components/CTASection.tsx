@@ -28,9 +28,10 @@ interface CTASectionProps {
   theme: 'light' | 'dark';
   onTogglePortfolio: () => void;
   isMobile?: boolean;
+  hasAnimated?: boolean;
 }
 
-export default function CTASection({ theme, onTogglePortfolio, isMobile = false }: CTASectionProps) {
+export default function CTASection({ theme, onTogglePortfolio, isMobile = false, hasAnimated = false }: CTASectionProps) {
   if (isMobile) {
     // Mobile CTAs are handled in MobileHeader component
     return null;
@@ -39,9 +40,9 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
   return (
     <motion.div 
       className="flex flex-wrap gap-2 lg:gap-3 pt-8"
-      initial={{ opacity: 0, y: 30 }}
+      initial={hasAnimated ? false : { opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut", delay: 0.4 }}
+      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.4 }}
     >
       <Suspense fallback={<SkeletonButton theme={theme} />}>
         <AnimatedCTA 
@@ -50,6 +51,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           href="#"
           theme={theme}
           onClick={onTogglePortfolio}
+          hasAnimated={hasAnimated}
         />
       </Suspense>
 
@@ -59,6 +61,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           label="CV" 
           href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
           theme={theme}
+          hasAnimated={hasAnimated}
         />
       </Suspense>
 
@@ -68,6 +71,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           label="Email" 
           href="mailto:shazzadhossainmukit@gmail.com"
           theme={theme}
+          hasAnimated={hasAnimated}
         />
       </Suspense>
 
@@ -77,6 +81,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           label="LinkedIn" 
           href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
           theme={theme}
+          hasAnimated={hasAnimated}
         />
       </Suspense>
 
@@ -86,6 +91,7 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false 
           label="GitHub" 
           href="https://github.com/shmukit"
           theme={theme}
+          hasAnimated={hasAnimated}
         />
       </Suspense>
 

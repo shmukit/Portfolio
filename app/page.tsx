@@ -5,7 +5,10 @@ import Image from 'next/image';
 import { useProjects } from '../lib/hooks/useProjects';
 import { Project } from '../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useCallback, useMemo, memo, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useState, useCallback, useMemo, memo, useEffect, lazy, Suspense } from 'react';
+import PerformanceOptimizedImage from './components/PerformanceOptimizedImage';
+import PerformanceMonitor from './components/PerformanceMonitor';
 import { 
   pillTap, 
   swipeCard,
@@ -25,7 +28,6 @@ import {
 import { useTheme } from '../lib/hooks/useTheme';
 import { usePortfolio } from '../lib/hooks/usePortfolio';
 import ThemeToggle from './components/ThemeToggle';
-import AnimatedBackground from './components/AnimatedBackground';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
 import UrlCTA from './components/UrlCTA';
@@ -33,6 +35,13 @@ import UrlCTAMultiple from './components/UrlCTAMultiple';
 import MukitLoader from './components/MukitLoader';
 import ProjectStructuredData from './components/ProjectStructuredData';
 import { isValidImageUrl } from '../lib/utils/imageValidation';
+
+// Lazy load heavy components
+const ProjectContent = lazy(() => import('./components/ProjectContent'));
+const AnimatedBackground = dynamic(() => import('./components/AnimatedBackground'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-gradient-to-br from-gray-50 to-gray-100" />
+});
 
 // Memoized Project Pill Component for better performance
 const ProjectPill = memo(({ 
@@ -95,188 +104,6 @@ const ProjectPill = memo(({
 
 ProjectPill.displayName = 'ProjectPill';
 
-// Memoized Project Content Component for better performance
-const ProjectContent = memo(({ 
-  project, 
-  theme 
-}: {
-  project: Project;
-  theme: string;
-}) => (
-  <div className="flex gap-8 h-full">
-    {/* Left Column - Project Details */}
-    <div className="flex-1 space-y-6">
-      {/* Project Description - Only show if it doesn't contain tag names */}
-      {project.description && !project.description.includes('Vide Coding') && !project.description.includes('Feature Suit') && !project.description.includes('Rapid Prototyping') && !project.description.includes('Digital Public Infrastructure') && !project.description.includes('Comprehensive Learning Management System') && (
-        <div className={`text-base leading-relaxed ${
-          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-        }`}>
-          {project.description}
-        </div>
-      )}
-
-      {/* Main Content Grid - Two Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        {/* Left Column - Project Details */}
-        <div className="space-y-6">
-      
-        {/* Situation */}
-        {project.situation && (
-          <div>
-                <h3 className={`text-sm font-semibold mb-2 ${
-                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>Situation</h3>
-                <p className={`text-sm leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {project.situation}
-              </p>
-            </div>
-        )}
-
-        {/* Task */}
-        {project.task && (
-          <div>
-                <h3 className={`text-sm font-semibold mb-2 ${
-                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>Task</h3>
-                <p className={`text-sm leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {project.task}
-              </p>
-            </div>
-        )}
-
-        {/* Result */}
-        {project.result && (
-          <div>
-                <h3 className={`text-sm font-semibold mb-2 ${
-                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>Result</h3>
-                <p className={`text-sm leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {project.result}
-              </p>
-            </div>
-        )}
-
-        {/* My Contributions */}
-        {project.contributions && project.contributions.length > 0 && (
-              <div>
-                <h3 className={`text-sm font-semibold mb-3 ${
-                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>My Contribution</h3>
-                <ul className={`space-y-2 ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                }`}>
-                  {project.contributions.map((contribution, index) => (
-                    <li key={index} className="text-sm leading-relaxed flex items-start">
-                      <span className="text-gray-500 mr-2 mt-1">•</span>
-                      <span>{contribution.contribution}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-      </div>
-
-        {/* Right Column - Stats */}
-    <div className="space-y-6">
-      
-          {/* Key Results Card */}
-          {project.keyResults && project.keyResults.length > 0 && (
-            <div className={`p-4 rounded-lg shadow-sm ${
-            theme === 'dark'
-                ? 'bg-gray-800/50 border border-gray-700' 
-                : 'bg-gray-50 border border-gray-200'
-          }`}>
-              <h3 className={`text-sm font-semibold mb-3 ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>Key Results</h3>
-              <div className="space-y-3">
-                {project.keyResults.map((keyResult, index) => (
-                  <div key={index}>
-                    <div className={`text-lg font-bold mb-1 ${
-                      theme === 'dark' ? 'text-gray-100' : 'text-gray-900'
-                    }`}>
-                      {keyResult.value}
-                    </div>
-                    <div className={`text-xs font-medium mb-1 ${
-                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      {keyResult.label}
-                    </div>
-                    <div className={`text-xs ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
-                    }`}>
-                      {keyResult.description}
-                    </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-          {/* Skills & Technologies Card */}
-      {project.tags && project.tags.length > 0 && (
-            <div className={`p-4 rounded-lg shadow-sm ${
-            theme === 'dark'
-                ? 'bg-gray-800/50 border border-gray-700' 
-                : 'bg-gray-50 border border-gray-200'
-          }`}>
-              <h3 className={`text-sm font-semibold mb-3 ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-              }`}>Skills & Technologies</h3>
-          <div className="flex flex-wrap gap-2">
-                {project.tags.slice(0, 6).map((tag, index) => (
-                  <span key={index} className={`text-xs px-2 py-1 rounded-full ${
-                    theme === 'dark'
-                      ? 'bg-gray-700 text-gray-200' 
-                      : 'bg-gray-200 text-gray-700'
-                  }`}>
-                {tag}
-              </span>
-            ))}
-                {project.tags.length > 6 && (
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    theme === 'dark' 
-                      ? 'bg-gray-700 text-gray-200' 
-                      : 'bg-gray-200 text-gray-700'
-                  }`}>
-                    +{project.tags.length - 6}
-                  </span>
-                )}
-          </div>
-        </div>
-      )}
-
-      {/* URL CTAs */}
-      <UrlCTAMultiple 
-        companyUrl={project.companyUrl}
-        projectUrl={project.projectUrl}
-        reportUrl={project.reportUrl}
-        demoUrl={project.demoUrl}
-        companyLabel={project.companyLabel}
-        projectLabel={project.projectLabel}
-        reportLabel={project.reportLabel}
-        demoLabel={project.demoLabel}
-        companyUrls={project.companyUrls}
-        projectUrls={project.projectUrls}
-        reportUrls={project.reportUrls}
-        demoUrls={project.demoUrls}
-        theme={theme as "light" | "dark"}
-      />
-    </div>
-      </div>
-    </div>
-  </div>
-));
-
-ProjectContent.displayName = 'ProjectContent';
 
 export default function Home() {
   const { projects, loading, error } = useProjects();
@@ -293,7 +120,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setHasAnimated(true);
-    }, 1000); // Allow initial animations to complete
+    }, 2000); // Allow initial animations to complete
     
     return () => clearTimeout(timer);
   }, []);
@@ -468,12 +295,16 @@ export default function Home() {
 
   return (
     <ErrorBoundary>
+      {/* Performance monitoring */}
+      <PerformanceMonitor />
       {/* Project-specific structured data for SEO & GenAI */}
       <ProjectStructuredData projects={projects} />
       
       <main className="min-h-screen relative" role="main">
-        {/* Animated Background */}
-        <AnimatedBackground theme={theme} />
+        {/* Animated Background - Lazy loaded */}
+        <Suspense fallback={<div className="fixed inset-0 bg-gradient-to-br from-gray-50 to-gray-100" />}>
+          <AnimatedBackground theme={theme} />
+        </Suspense>
         {/* Theme Toggle Button */}
         <ThemeToggle theme={theme} onToggle={toggleTheme} />
 
@@ -498,7 +329,7 @@ export default function Home() {
                   className="space-y-3"
                   variants={staggeredReveal}
                   initial="hidden"
-                  animate="visible"
+                  animate={hasAnimated ? "visible" : "visible"}
                 >
                   {projects.map((project) => (
                     <motion.button
@@ -514,8 +345,7 @@ export default function Home() {
                       animate={shouldReduceMotion ? {} : (hoveredProject?.id === project.id ? "breathing" : "idle")}
                       variants={{
                         breathing: pillBreathe,
-                        idle: {},
-                        ...revealItem
+                        idle: {}
                       }}
                       style={{
                         background: hoveredProject?.id === project.id 
@@ -638,25 +468,44 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Project Image - Only show if image exists and is valid */}
+                {/* Project Image - Performance optimized with smart sizing */}
                 {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
-                  <div className="w-full aspect-video lg:aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6 lg:mb-8">
-                    <Image
-                      src={hoveredProject.imageUrl}
-                      alt={hoveredProject.title}
-                      width={1200}
-                      height={750}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                  <div className="mb-6 lg:mb-8 flex justify-center">
+                    {/* Detect if it's a mobile screenshot based on filename */}
+                    {hoveredProject.imageUrl.includes('RCT_tara') || 
+                     hoveredProject.imageUrl.includes('Rating System') || 
+                     hoveredProject.imageUrl.includes('quizards') ? (
+                      // Mobile screenshots - smaller container
+                      <div className="max-w-xs mx-auto">
+                        <PerformanceOptimizedImage
+                          src={hoveredProject.imageUrl}
+                          alt={hoveredProject.title}
+                          width={300}
+                          height={500}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          quality={75}
+                        />
+                      </div>
+                    ) : (
+                      // Desktop/web screenshots - larger container
+                      <div className="max-w-2xl mx-auto">
+                        <PerformanceOptimizedImage
+                          src={hoveredProject.imageUrl}
+                          alt={hoveredProject.title}
+                          width={800}
+                          height={500}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          quality={75}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
 
-                {/* Project Content - Memoized Component */}
-                <ProjectContent project={hoveredProject} theme={theme} />
+                {/* Project Content - Lazy loaded */}
+                <Suspense fallback={<div className="animate-pulse bg-gray-200 h-64 rounded-lg" />}>
+                  <ProjectContent project={hoveredProject} theme={theme} />
+                </Suspense>
               </motion.div>
             ) : (
               /* Enhanced Hero Section */
@@ -698,8 +547,8 @@ export default function Home() {
                       aria-label="waving hand"
                         className="inline-block origin-[70%_70%] ml-3"
                         style={{ filter: 'hue-rotate(-30deg) saturate(0.7) brightness(1.1) sepia(0.3)' }}
-                      animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
-                      transition={{ 
+                      animate={shouldReduceMotion ? {} : { rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                      transition={shouldReduceMotion ? {} : { 
                         duration: 2.5, 
                         ease: "easeInOut",
                         repeat: Infinity,
@@ -751,16 +600,17 @@ export default function Home() {
                 <CTASection 
                   theme={theme} 
                   onTogglePortfolio={togglePortfolio} 
+                  hasAnimated={hasAnimated}
                 />
 
-                {/* Enhanced Footer Section */}
+                {/* Enhanced Footer Section - Static after initial load */}
                 <motion.div 
                   className={`mt-12 pt-8 border-t ${
                     theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
                   }`}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.4 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.4 }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className={`text-sm ${
@@ -804,7 +654,7 @@ export default function Home() {
             className="space-y-2 max-w-md mx-auto"
             variants={staggeredReveal}
             initial="hidden"
-            animate="visible"
+            animate={hasAnimated ? "visible" : "visible"}
           >
             {projects.map((project) => (
               <motion.div
@@ -826,8 +676,7 @@ export default function Home() {
                   }
                 }}
                 variants={{
-                  ...swipeCard,
-                  ...revealItem
+                  ...swipeCard
                 }}
               >
                 <motion.button
@@ -1012,20 +861,37 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* Project Image with lazy loading - Only show if image is valid */}
+                  {/* Project Image - Performance optimized for mobile view */}
                   {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
-                    <div className="w-full aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden mb-6">
-                      <Image
-                        src={hoveredProject.imageUrl}
-                        alt={hoveredProject.title}
-                        width={800}
-                        height={450}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+                    <div className="mb-6 flex justify-center">
+                      {/* Detect if it's a mobile screenshot based on filename */}
+                      {hoveredProject.imageUrl.includes('RCT_tara') || 
+                       hoveredProject.imageUrl.includes('Rating System') || 
+                       hoveredProject.imageUrl.includes('quizards') ? (
+                        // Mobile screenshots - medium container
+                        <div className="max-w-[280px] mx-auto">
+                          <PerformanceOptimizedImage
+                            src={hoveredProject.imageUrl}
+                            alt={hoveredProject.title}
+                            width={280}
+                            height={450}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            quality={75}
+                          />
+                        </div>
+                      ) : (
+                        // Desktop/web screenshots - larger container
+                        <div className="max-w-sm mx-auto">
+                          <PerformanceOptimizedImage
+                            src={hoveredProject.imageUrl}
+                            alt={hoveredProject.title}
+                            width={400}
+                            height={250}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            quality={75}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 

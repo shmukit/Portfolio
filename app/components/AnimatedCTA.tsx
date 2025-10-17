@@ -18,9 +18,10 @@ interface AnimatedCTAProps {
   href: string;
   theme?: 'light' | 'dark';
   onClick?: () => void;
+  hasAnimated?: boolean;
 }
 
-export default function AnimatedCTA({ type, label, href, theme = 'light', onClick }: AnimatedCTAProps) {
+export default function AnimatedCTA({ type, label, href, theme = 'light', onClick, hasAnimated = false }: AnimatedCTAProps) {
   const [hovered, setHovered] = useState(false);
   const items = iconsMap[type] || [];
 
@@ -48,7 +49,7 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
           y: -2
         }}
         whileTap={{ scale: 0.98 }}
-        initial={{ opacity: 0, y: 20 }}
+        initial={hasAnimated ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
