@@ -62,6 +62,7 @@ export interface KeyResult {
 export interface UrlWithLabel {
   url: string;
   label: string;
+  description?: string;
 }
 
 export interface ProjectsByYear {

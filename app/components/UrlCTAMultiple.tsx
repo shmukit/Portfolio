@@ -2,51 +2,83 @@
 
 import { motion } from 'framer-motion';
 import { ArrowTopRightOnSquareIcon, DocumentIcon, PlayIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
-import { UrlWithLabel } from '../../types/project';
+
+interface UrlItem {
+  url: string;
+  label?: string;
+  description?: string;
+}
 
 interface UrlCTAMultipleProps {
-  companyUrls?: UrlWithLabel[];
-  projectUrls?: UrlWithLabel[];
-  reportUrls?: UrlWithLabel[];
-  demoUrls?: UrlWithLabel[];
+  // Single URL fields (for backward compatibility)
+  companyUrl?: string;
+  projectUrl?: string;
+  reportUrl?: string;
+  demoUrl?: string;
+  companyLabel?: string;
+  projectLabel?: string;
+  reportLabel?: string;
+  demoLabel?: string;
+  
+  // Multiple URL arrays (for enhanced support)
+  companyUrls?: UrlItem[];
+  projectUrls?: UrlItem[];
+  reportUrls?: UrlItem[];
+  demoUrls?: UrlItem[];
+  
   theme: 'light' | 'dark';
 }
 
 export default function UrlCTAMultiple({ 
-  companyUrls, 
-  projectUrls, 
-  reportUrls, 
-  demoUrls, 
+  companyUrl, 
+  projectUrl, 
+  reportUrl, 
+  demoUrl, 
+  companyLabel = 'Company Website',
+  projectLabel = 'Project Link',
+  reportLabel = 'Report/Document',
+  demoLabel = 'Demo',
+  companyUrls,
+  projectUrls,
+  reportUrls,
+  demoUrls,
   theme 
 }: UrlCTAMultipleProps) {
-  const linkGroups = [
-    {
-      urls: companyUrls,
-      label: 'Company Websites',
-      icon: BuildingOfficeIcon,
-      color: 'blue'
-    },
-    {
-      urls: projectUrls,
-      label: 'Project Links',
-      icon: ArrowTopRightOnSquareIcon,
-      color: 'green'
-    },
-    {
-      urls: reportUrls,
-      label: 'Reports & Documents',
-      icon: DocumentIcon,
-      color: 'purple'
-    },
-    {
-      urls: demoUrls,
-      label: 'Demos',
-      icon: PlayIcon,
-      color: 'orange'
+  
+  // Process URLs - prioritize arrays over single URLs
+  const processUrls = (singleUrl?: string, singleLabel?: string, urlArray?: UrlItem[], defaultLabel?: string) => {
+    if (urlArray && urlArray.length > 0) {
+      // Use multiple URLs from array
+      return urlArray.map(item => ({
+        url: item.url,
+        label: item.label || defaultLabel || 'Link',
+        description: item.description
+      }));
+    } else if (singleUrl && singleUrl.trim() !== '') {
+      // Fallback to single URL
+      return [{
+        url: singleUrl,
+        label: singleLabel || defaultLabel || 'Link',
+        description: undefined
+      }];
     }
-  ].filter(group => group.urls && group.urls.length > 0);
+    return [];
+  };
 
-  if (linkGroups.length === 0) return null;
+  const companyLinks = processUrls(companyUrl, companyLabel, companyUrls, 'Company Website');
+  const projectLinks = processUrls(projectUrl, projectLabel, projectUrls, 'Project Link');
+  const reportLinks = processUrls(reportUrl, reportLabel, reportUrls, 'Report/Document');
+  const demoLinks = processUrls(demoUrl, demoLabel, demoUrls, 'Demo');
+
+  // Combine all links with their categories
+  const allLinks = [
+    ...companyLinks.map(link => ({ ...link, icon: BuildingOfficeIcon, color: 'blue', category: 'company' })),
+    ...projectLinks.map(link => ({ ...link, icon: ArrowTopRightOnSquareIcon, color: 'green', category: 'project' })),
+    ...reportLinks.map(link => ({ ...link, icon: DocumentIcon, color: 'purple', category: 'report' })),
+    ...demoLinks.map(link => ({ ...link, icon: PlayIcon, color: 'orange', category: 'demo' }))
+  ];
+
+  if (allLinks.length === 0) return null;
 
   const getColorClasses = () => {
     const baseClasses = "flex items-center gap-1.5 px-2 py-1.5 rounded text-xs font-normal transition-all duration-200 hover:scale-105";
@@ -58,6 +90,23 @@ export default function UrlCTAMultiple({
     }
   };
 
+  // Group links by category for better organization
+  const groupedLinks = allLinks.reduce((acc, link) => {
+    if (!acc[link.category]) acc[link.category] = [];
+    acc[link.category].push(link);
+    return acc;
+  }, {} as Record<string, typeof allLinks>);
+
+  const getCategoryTitle = (category: string) => {
+    switch (category) {
+      case 'company': return 'Company';
+      case 'project': return 'Projects';
+      case 'report': return 'Reports';
+      case 'demo': return 'Demos';
+      default: return 'Links';
+    }
+  };
+
   return (
     <div className="space-y-4">
       <h3 className={`text-sm font-semibold ${
@@ -66,34 +115,37 @@ export default function UrlCTAMultiple({
         Links & Resources
       </h3>
       
-      {linkGroups.map((group, groupIndex) => {
-        const IconComponent = group.icon;
-        return (
-          <div key={groupIndex} className="space-y-2">
-            <h4 className={`text-[10px] font-medium ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+      {Object.entries(groupedLinks).map(([category, links]) => (
+        <div key={category} className="space-y-2">
+          {links.length > 1 && (
+            <h4 className={`text-xs font-medium ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              {group.label}
+              {getCategoryTitle(category)} ({links.length})
             </h4>
-            <div className="flex flex-wrap gap-2">
-              {group.urls?.map((urlItem, index) => (
+          )}
+          <div className="flex flex-wrap gap-2">
+            {links.map((link, index) => {
+              const IconComponent = link.icon;
+              return (
                 <motion.a
-                  key={index}
-                  href={urlItem.url}
+                  key={`${category}-${index}`}
+                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={getColorClasses()}
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
+                  title={link.description}
                 >
                   <IconComponent className="w-3 h-3" />
-                  <span>{urlItem.label}</span>
+                  <span>{link.label}</span>
                 </motion.a>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }

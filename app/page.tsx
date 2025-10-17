@@ -29,6 +29,7 @@ import AnimatedBackground from './components/AnimatedBackground';
 import MobileHeader from './components/MobileHeader';
 import CTASection from './components/CTASection';
 import UrlCTA from './components/UrlCTA';
+import UrlCTAMultiple from './components/UrlCTAMultiple';
 import MukitLoader from './components/MukitLoader';
 import ProjectStructuredData from './components/ProjectStructuredData';
 import { isValidImageUrl } from '../lib/utils/imageValidation';
@@ -254,7 +255,7 @@ const ProjectContent = memo(({
       )}
 
       {/* URL CTAs */}
-      <UrlCTA 
+      <UrlCTAMultiple 
         companyUrl={project.companyUrl}
         projectUrl={project.projectUrl}
         reportUrl={project.reportUrl}
@@ -263,6 +264,10 @@ const ProjectContent = memo(({
         projectLabel={project.projectLabel}
         reportLabel={project.reportLabel}
         demoLabel={project.demoLabel}
+        companyUrls={project.companyUrls}
+        projectUrls={project.projectUrls}
+        reportUrls={project.reportUrls}
+        demoUrls={project.demoUrls}
         theme={theme as "light" | "dark"}
       />
     </div>
@@ -1171,7 +1176,7 @@ export default function Home() {
                     )}
 
                     {/* URL CTAs - Mobile */}
-                    <UrlCTA 
+                    <UrlCTAMultiple 
                       companyUrl={hoveredProject.companyUrl}
                       projectUrl={hoveredProject.projectUrl}
                       reportUrl={hoveredProject.reportUrl}
@@ -1180,6 +1185,10 @@ export default function Home() {
                       projectLabel={hoveredProject.projectLabel}
                       reportLabel={hoveredProject.reportLabel}
                       demoLabel={hoveredProject.demoLabel}
+                      companyUrls={hoveredProject.companyUrls}
+                      projectUrls={hoveredProject.projectUrls}
+                      reportUrls={hoveredProject.reportUrls}
+                      demoUrls={hoveredProject.demoUrls}
                       theme={theme}
                     />
 
