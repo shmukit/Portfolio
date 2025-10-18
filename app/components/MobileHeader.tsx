@@ -26,7 +26,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           className="mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
           <span className={`text-base font-medium ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
@@ -42,7 +42,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           }`}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: 0.05 }}
         >
           <span className={`${
             theme === 'dark' 
@@ -71,7 +71,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           className="mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: 0.1 }}
         >
           <p className={`text-lg leading-relaxed font-medium ${
             theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
@@ -89,7 +89,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: 0.15 }}
         >
           <h3 className={`text-xs font-semibold mb-1 uppercase tracking-wider ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
@@ -114,7 +114,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           className="flex items-center justify-start gap-3 pt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
             <motion.div
@@ -355,7 +355,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 1.0 }}
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
         >
           <div className="flex flex-col gap-3">
             <div className={`text-sm ${

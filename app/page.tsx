@@ -518,7 +518,7 @@ export default function Home() {
                       className="mb-4"
                       initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       <span className={`text-lg lg:text-xl font-medium ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
@@ -534,7 +534,7 @@ export default function Home() {
                       }`}
                       initial={hasAnimated ? false : { opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.1 }}
+                      transition={{ duration: 0.25, ease: "easeOut", delay: hasAnimated ? 0 : 0.05 }}
                     >
                       <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
                         Mukit
@@ -559,7 +559,7 @@ export default function Home() {
                       className="space-y-4"
                       initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.2 }}
+                      transition={{ duration: 0.25, ease: "easeOut", delay: hasAnimated ? 0 : 0.1 }}
                     >
                       <p className={`text-xl lg:text-2xl leading-relaxed font-medium ${
                         theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
@@ -577,7 +577,7 @@ export default function Home() {
                       }`}
                       initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.3 }}
+                      transition={{ duration: 0.25, ease: "easeOut", delay: hasAnimated ? 0 : 0.15 }}
                     >
                       <h3 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
@@ -607,7 +607,7 @@ export default function Home() {
                   }`}
                   initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut", delay: hasAnimated ? 0 : 0.4 }}
+                  transition={{ duration: 0.25, ease: "easeOut", delay: hasAnimated ? 0 : 0.2 }}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className={`text-sm ${
@@ -763,7 +763,7 @@ export default function Home() {
                     e.stopPropagation();
                     handleModalSwipeRight();
                   }}
-                  className="absolute left-0 top-16 w-1/3 h-[calc(100%-4rem)] z-20 pointer-events-auto"
+                  className="absolute left-0 top-16 w-1/4 h-[calc(100%-4rem)] z-20 pointer-events-auto"
                   aria-label="Previous project"
                 />
               )}
@@ -775,7 +775,7 @@ export default function Home() {
                     e.stopPropagation();
                     handleModalSwipeLeft();
                   }}
-                  className="absolute right-0 top-16 w-1/3 h-[calc(100%-4rem)] z-20 pointer-events-auto"
+                  className="absolute right-0 top-16 w-1/4 h-[calc(100%-4rem)] z-20 pointer-events-auto"
                   aria-label="Next project"
                 />
               )}
