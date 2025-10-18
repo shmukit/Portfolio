@@ -23,7 +23,7 @@ export default function PerformanceOptimizedImage({
   className = "w-full h-auto object-contain",
   priority = false,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-  quality = 75
+  quality = 60
 }: PerformanceOptimizedImageProps) {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

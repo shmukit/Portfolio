@@ -61,7 +61,7 @@ export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
           scale: [1, 1.02, 0.98, 1.04, 1]
         }}
         transition={{
-          duration: 30,
+          duration: 60,
           repeat: Infinity,
           ease: "linear"
         }}
@@ -86,7 +86,7 @@ export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
           scale: [1, 0.98, 1.02, 0.96, 1]
         }}
         transition={{
-          duration: 35,
+          duration: 70,
           repeat: Infinity,
           ease: "linear"
         }}
@@ -111,7 +111,7 @@ export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
           scale: [1, 1.02, 0.98, 1.04, 1]
         }}
         transition={{
-          duration: 32,
+          duration: 64,
           repeat: Infinity,
           ease: "linear"
         }}
@@ -136,7 +136,7 @@ export default function AnimatedBackground({ theme }: AnimatedBackgroundProps) {
           scale: [1, 1.02, 0.98, 1.04, 1]
         }}
         transition={{
-          duration: 33,
+          duration: 66,
           repeat: Infinity,
           ease: "linear"
         }}

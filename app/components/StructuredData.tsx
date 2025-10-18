@@ -239,30 +239,35 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        suppressHydrationWarning
       />
       
       {/* Website Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
+        suppressHydrationWarning
       />
       
       {/* ProfilePage Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageData) }}
+        suppressHydrationWarning
       />
       
       {/* FAQ Schema for AI Understanding */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+        suppressHydrationWarning
       />
       
       {/* HowTo Schema for Process Documentation */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToData) }}
+        suppressHydrationWarning
       />
     </>
   );

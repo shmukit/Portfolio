@@ -3,6 +3,7 @@ import { Inter, Inter_Tight, Manrope } from 'next/font/google';
 import './globals.css';
 import StructuredData from './components/StructuredData';
 import PerformanceMonitor from './components/PerformanceMonitor';
+import { ThemeProvider } from '../lib/hooks/useTheme';
 
 // Optimize font loading
 const inter = Inter({
@@ -200,8 +201,10 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className="antialiased font-manrope" suppressHydrationWarning={true}>
-        <PerformanceMonitor />
-        {children}
+        <ThemeProvider>
+          <PerformanceMonitor />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

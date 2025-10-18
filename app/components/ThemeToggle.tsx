@@ -12,7 +12,7 @@ export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   return (
     <motion.button
       onClick={onToggle}
-      className={`fixed top-6 right-6 z-50 w-11 h-6 rounded-full flex items-center transition-all duration-500 shadow-lg ${
+      className={`w-11 h-6 rounded-full flex items-center transition-all duration-500 shadow-lg ${
         theme === 'dark' 
           ? 'bg-gradient-to-r from-blue-600 to-purple-600' 
           : 'bg-gradient-to-r from-yellow-400 to-orange-500'

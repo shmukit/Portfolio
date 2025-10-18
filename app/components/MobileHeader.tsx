@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Suspense } from "react";
 import Image from "next/image";
 import { iconHover, iconTap } from '../../lib/utils/animations';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 // Removed unused AnimatedCTA import
 
@@ -14,36 +16,31 @@ interface MobileHeaderProps {
 }
 
 export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }: MobileHeaderProps) {
+  const { toggleTheme } = useTheme();
   return (
     <div className={`lg:hidden bg-transparent p-6 relative z-10 ${!showPortfolio ? 'min-h-screen flex items-center justify-center' : ''}`}>
+      {/* Pin toggle to header's top-right, not viewport */}
+      <div className="absolute top-4 right-4 z-40">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+      </div>
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-left"
       >
         {/* Enhanced greeting with better typography */}
-        <motion.div 
-          className="mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
+        <div className="mb-4">
           <span className={`text-base font-medium ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
           }`}>
             Hello there! I&apos;m
           </span>
-        </motion.div>
+        </div>
 
         {/* Enhanced main heading with gradient text */}
-        <motion.h1 
-          className={`text-3xl font-bold mb-4 leading-tight ${
+        <h1 className={`text-3xl font-bold mb-4 leading-tight ${
             theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: 0.05 }}
-        >
+          }`}>
           <span className={`${
             theme === 'dark' 
               ? 'bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent' 
@@ -51,46 +48,29 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
           }`}>
             Mukit
           </span>
-          <motion.span 
+          <span 
             role="img" 
             aria-label="waving hand"
             className="inline-block origin-[70%_70%] ml-2"
             style={{ filter: 'hue-rotate(-30deg) saturate(0.7) brightness(1.1) sepia(0.3)' }}
-            animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
-            transition={{ 
-              duration: 2.5, 
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatDelay: 1
-            }}
-          >👋</motion.span>
-        </motion.h1>
+          >👋</span>
+        </h1>
 
         {/* Enhanced subtitle with better styling */}
-        <motion.div 
-          className="mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: 0.1 }}
-        >
+        <div className="mb-4">
           <p className={`text-lg leading-relaxed font-medium ${
             theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
           }`}>
             Builder & Philomath, learning by doing
           </p>
-        </motion.div>
+        </div>
 
         {/* Enhanced product ethos with better visual treatment - Mobile optimized */}
-        <motion.div 
-          className={`mb-3 p-2 rounded-lg border backdrop-blur-sm ${
+        <div className={`mb-3 p-2 rounded-lg border backdrop-blur-sm ${
             theme === 'dark' 
               ? 'bg-gray-800/50 border-gray-700/50' 
               : 'bg-white/50 border-gray-200/50'
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: 0.15 }}
-        >
+          }`}>
           <h3 className={`text-xs font-semibold mb-1 uppercase tracking-wider ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
           }`}>
@@ -107,15 +87,10 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
               theme === 'dark' ? 'from-pink-400 to-cyan-400' : 'from-pink-600 to-cyan-600'
             } bg-clip-text text-transparent`}>Design</span> (service)
           </p>
-        </motion.div>
+        </div>
         
         {/* Mobile CTA Buttons - Icons Only */}
-        <motion.div 
-          className="flex items-center justify-start gap-3 pt-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
+        <div className="flex items-center justify-start gap-3 pt-2">
           <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
             <motion.div
               whileHover={iconHover}
@@ -346,17 +321,12 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
               />
             </motion.div>
           </Suspense> */}
-        </motion.div>
+        </div>
 
         {/* Enhanced Footer Section */}
-        <motion.div 
-          className={`mt-8 pt-6 border-t ${
+        <div className={`mt-8 pt-6 border-t ${
             theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
-          }`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
-        >
+          }`}>
           <div className="flex flex-col gap-3">
             <div className={`text-sm ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
@@ -372,7 +342,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
               <span className={`text-lg ${theme === 'dark' ? '' : 'text-gray-700'}`}>🎧</span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );
