@@ -2,10 +2,9 @@
 
 import { Project } from '../../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useCallback, useMemo, memo, useEffect } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import PerformanceOptimizedImage from './PerformanceOptimizedImage';
 import { 
-  pillTap, 
   pillBreathe,
   modalOverlay,
   modalContent,

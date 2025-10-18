@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
   generateEtags: true,
   experimental: {
     optimizePackageImports: ['framer-motion'],
-    optimizeCss: true,
   },
   turbopack: {
     rules: {
