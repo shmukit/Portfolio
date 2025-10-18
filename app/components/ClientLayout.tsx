@@ -36,8 +36,8 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
       />
 
       <div className="hidden lg:block relative z-10">
-        {/* Desktop-only theme toggle positioned within the header area */}
-        <div className="absolute top-6 right-6 z-40">
+        {/* Desktop-only theme toggle fixed to viewport */}
+        <div className="fixed top-6 right-6 z-40">
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
         <div className="flex">

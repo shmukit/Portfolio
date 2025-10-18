@@ -2,13 +2,15 @@
 
 import { Project } from '../../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import PerformanceOptimizedImage from './PerformanceOptimizedImage';
 import { 
   pillBreathe,
   modalOverlay,
   modalContent,
   mobileModalSlide,
+  mobileModalSlideLeft,
+  mobileModalSlideRight,
   buttonHover,
   buttonTap,
   iconHover,
@@ -32,6 +34,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
   const [isPinned, setIsPinned] = useState(false);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [glowColors, setGlowColors] = useState<Record<string, string>>({});
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | 'none'>('none');
   const shouldReduceMotion = useReducedMotion();
 
   const gradients = useMemo(() => [
@@ -76,10 +79,12 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
   const handleProjectClose = useCallback(() => {
     setHoveredProject(null);
     setIsPinned(false);
+    setSlideDirection('none');
   }, []);
 
   const handleModalSwipeLeft = useCallback(() => {
     if (currentProjectIndex < projects.length - 1) {
+      setSlideDirection('left');
       const nextProject = projects[currentProjectIndex + 1];
       setCurrentProjectIndex(currentProjectIndex + 1);
       setHoveredProject(nextProject);
@@ -94,6 +99,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
 
   const handleModalSwipeRight = useCallback(() => {
     if (currentProjectIndex > 0) {
+      setSlideDirection('right');
       const prevProject = projects[currentProjectIndex - 1];
       setCurrentProjectIndex(currentProjectIndex - 1);
       setHoveredProject(prevProject);
@@ -138,6 +144,23 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
     setTouchStart(null);
     setTouchEnd(null);
   };
+
+  // Get the appropriate animation variant based on slide direction
+  const getModalAnimation = () => {
+    if (slideDirection === 'left') return mobileModalSlideLeft;
+    if (slideDirection === 'right') return mobileModalSlideRight;
+    return mobileModalSlide;
+  };
+
+  // Reset slide direction after animation completes
+  useEffect(() => {
+    if (slideDirection !== 'none') {
+      const timer = setTimeout(() => {
+        setSlideDirection('none');
+      }, 300); // Reset after animation duration
+      return () => clearTimeout(timer);
+    }
+  }, [slideDirection]);
 
   return (
     <>
@@ -439,7 +462,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                   ? 'bg-gray-800 border-gray-700'
                   : 'bg-white border-gray-200'
               }`}
-              variants={mobileModalSlide}
+              variants={getModalAnimation()}
               initial="hidden"
               animate="visible"
               exit="exit"

@@ -438,6 +438,61 @@ export const mobileModalSlide: Variants = {
   }
 };
 
+// Mobile modal slide left/right animations for project navigation
+export const mobileModalSlideLeft: Variants = {
+  hidden: { 
+    x: "100%",
+    opacity: 0.8,
+    scale: 0.98
+  },
+  visible: { 
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 30
+    }
+  },
+  exit: {
+    x: "-100%",
+    opacity: 0.8,
+    scale: 0.98,
+    transition: { 
+      duration: 0.25, 
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  }
+};
+
+export const mobileModalSlideRight: Variants = {
+  hidden: { 
+    x: "-100%",
+    opacity: 0.8,
+    scale: 0.98
+  },
+  visible: { 
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 30
+    }
+  },
+  exit: {
+    x: "100%",
+    opacity: 0.8,
+    scale: 0.98,
+    transition: { 
+      duration: 0.25, 
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  }
+};
+
 // Stagger children animation for project pills
 export const pillContainer: Variants = {
   hidden: { opacity: 0 },
