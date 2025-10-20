@@ -199,6 +199,11 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${interTight.variable} ${manrope.variable}`}>
       <head>
         <StructuredData />
+        {/* Performance optimizations */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://your-project.supabase.co" />
+        <meta name="format-detection" content="telephone=no" />
       </head>
       <body className="antialiased font-manrope" suppressHydrationWarning={true}>
         <ThemeProvider>

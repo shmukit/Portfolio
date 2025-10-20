@@ -1,0 +1,141 @@
+[
+  {
+    "id": "6665081a-dd35-4fe7-ac0a-ec2886cce3b5",
+    "title": "Gamification: Financial Literacy Course",
+    "year": 2025,
+    "company": "10 Minute School x bKash",
+    "role": "Lead Product Manager",
+    "description": "Developed gamified learning modules for financial literacy with leaderboards, badges, and progress tracking.",
+    "lessons": "Financial literacy gamification works best when tied to real-world financial behaviors and decisions.",
+    "imageUrl": "/images/projects/gamification-demo.webm",
+    "videoPoster": "/images/projects/gamification-demo-poster.jpg",
+    "videoFallback": "/images/projects/gamification-demo.mov",
+    "orderIndex": 17,
+    "category": "Gamification",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "B2B2C",
+    "situation": "Users lacked engaging ways to learn financial literacy concepts and build money management skills.",
+    "task": "Led product design and gamification logic integration across user journeys with leaderboards, badges, and progress tracking.",
+    "result": "Just launched — awaiting learner engagement data to measure impact and retention.",
+    "contributions": [
+      {
+        "type": "UX Design",
+        "contribution": "Led product design for gamified learning modules",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design", 
+        "contribution": "Integrated gamification logic across user journeys",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Designed leaderboards, badges, and progress tracking systems",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Current Status",
+        "value": "Just Launched",
+        "category": "Development",
+        "description": "Platform live and operational"
+      },
+      {
+        "label": "Features Delivered",
+        "value": "Gamified Modules",
+        "category": "Features",
+        "description": "Leaderboards, badges, progress tracking"
+      },
+      {
+        "label": "Impact Measurement",
+        "value": "Awaiting Data",
+        "category": "Analytics",
+        "description": "Learner engagement metrics pending"
+      }
+    ],
+    "tags": ["gamification", "game economy", "User journey"],
+    "metrics": {
+      "status": "launched",
+      "metrics": "pending",
+      "features": "gamification_complete"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null
+  },
+  {
+    "id": "d20b1578-b515-4e29-88e7-0ec866504399",
+    "title": "Group Guidance/Roadmaps",
+    "year": 2025,
+    "company": "10 Minute School",
+    "role": "Consultant X Forward Deployed Engineer",
+    "description": "Vibe coded a RnD platform to provide content-agnostic mentor guided learning roadmaps. Developed end to end journey in 4 days.",
+    "lessons": null,
+    "imageUrl": "/images/projects/group-guidance-demo.webm",
+    "videoPoster": "/images/projects/group-guidance-demo-poster.jpg",
+    "videoFallback": "/images/projects/group-guidance-demo.webm",
+    "orderIndex": 4,
+    "category": "Vide Coding",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "Rapid Prototyping",
+    "situation": "STEM graduates required guided mentorship to bridge their skills gaps to lands jobs.",
+    "task": "Defined the specs/PRD, designed the system architecture for two sided platform- Mentors & Students, designed UI with Banani AI, defined Supabase backend database, vibe coded with Cursor. Four Days.",
+    "result": "Product RnD deployed in record time of 4 days to seek users feedback.",
+    "contributions": [
+      {
+        "type": "System Architecture",
+        "contribution": "Defined end to end workflow of two types of stakeholders- Mentors and Students. Defined the specs.",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX/UI Design",
+        "contribution": "Rapid design prototypes with Banani AI.",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Vibe coding.",
+        "contribution": "Database designed and vibe coded the prototype in 4 days.",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Define to Deployment",
+        "value": "04 Days",
+        "category": "Rapid Prototyping",
+        "description": "Forward Deployed Engineer."
+      }
+    ],
+    "tags": ["Vibe Coding", "Specifications", "Database", "User journey mapping", "System Architecture", "Rapid Prototyping"],
+    "metrics": {
+      "rapid_prototyping": "04 Days",
+      "Human Resources Required": 1
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null
+  }
+]

@@ -1,6 +1,25 @@
 import { Variants } from 'framer-motion';
 
 // Animation utility functions for the portfolio
+// Optimized for GPU acceleration and performance
+
+// Performance optimization: Only animate transform and opacity properties
+// Avoid animating layout-triggering properties like width, height, top, left
+// Use will-change: transform sparingly and only when needed
+
+// Utility to check for reduced motion preference
+export const shouldReduceMotion = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
+// Optimized spring configuration for better performance
+export const optimizedSpring = {
+  type: "spring" as const,
+  stiffness: 300,
+  damping: 30,
+  mass: 0.8
+};
 export const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -61,7 +80,7 @@ export const cardHover = {
   boxShadow: "0 8px 25px -8px rgba(0, 0, 0, 0.15)",
   transition: { 
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 25
   }
 };
@@ -71,7 +90,7 @@ export const buttonHover = {
   y: -1,
   transition: { 
     type: "spring" as const,
-    stiffness: 500,
+    stiffness: 350,
     damping: 30
   }
 };
@@ -87,7 +106,7 @@ export const iconHover = {
   rotate: 5,
   transition: { 
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 20
   }
 };
@@ -106,7 +125,7 @@ export const pillHoverEnhanced = {
   boxShadow: "0 12px 35px -8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.15)",
   transition: {
     type: "spring" as const,
-    stiffness: 500,
+    stiffness: 350,
     damping: 30
   }
 };
@@ -118,7 +137,7 @@ export const closeButtonHover = {
   backgroundColor: "rgba(239, 68, 68, 0.1)",
   transition: {
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 25
   }
 };
@@ -133,7 +152,7 @@ export const themeToggleHover = {
   scale: 1.1,
   transition: {
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 20
   }
 };
@@ -145,7 +164,7 @@ export const linkHover = {
   textShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   transition: {
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 25
   }
 };
@@ -283,11 +302,6 @@ export const bouncingDots: Variants = {
   }
 };
 
-// Utility function to check for reduced motion preference
-export const shouldReduceMotion = (): boolean => {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
 
 // Animation variants that respect reduced motion
 export const motionSafeFadeInUp: Variants = {
@@ -423,8 +437,9 @@ export const mobileModalSlide: Variants = {
     scale: 1,
     transition: {
       type: "spring",
-      stiffness: 500,
-      damping: 35
+      stiffness: 300, // Reduced for smoother performance
+      damping: 30,   // Reduced for less bouncy feel
+      mass: 0.8      // Added for more natural motion
     }
   },
   exit: {
@@ -451,7 +466,7 @@ export const mobileModalSlideLeft: Variants = {
     scale: 1,
     transition: {
       type: "spring",
-      stiffness: 400,
+      stiffness: 300,
       damping: 30
     }
   },
@@ -478,7 +493,7 @@ export const mobileModalSlideRight: Variants = {
     scale: 1,
     transition: {
       type: "spring",
-      stiffness: 400,
+      stiffness: 300,
       damping: 30
     }
   },
@@ -544,7 +559,7 @@ export const swipeCard: Variants = {
     opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 400,
+      stiffness: 300,
       damping: 25
     }
   },
@@ -590,7 +605,7 @@ export const mobileCardHover = {
   boxShadow: "0 8px 25px -8px rgba(0, 0, 0, 0.15)",
   transition: {
     type: "spring" as const,
-    stiffness: 400,
+    stiffness: 300,
     damping: 25
   }
 };

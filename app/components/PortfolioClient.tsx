@@ -4,6 +4,7 @@ import { Project } from '../../types/project';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import PerformanceOptimizedImage from './PerformanceOptimizedImage';
+import AutoVideo from './AutoVideo';
 import { 
   pillBreathe,
   modalOverlay,
@@ -313,6 +314,19 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                         priority={true}
                       />
                     </div>
+                  ) : hoveredProject.imageUrl.includes('.webm') || hoveredProject.imageUrl.includes('.mp4') ? (
+                    <div className="w-full mx-auto max-w-[360px] sm:max-w-[390px]">
+                      <AutoVideo
+                        src={hoveredProject.imageUrl}
+                        alt={hoveredProject.title}
+                        width={390}
+                        height={640}
+                        sizes="(max-width: 640px) 90vw, 390px"
+                        priority={true}
+                        poster={hoveredProject.videoPoster || '/images/projects/gamification-demo-poster.jpg'}
+                        fallbackImage={hoveredProject.videoFallback || '/images/projects/gamification-financial-literacy.gif'}
+                      />
+                    </div>
                   ) : (
                     <div className="max-w-2xl mx-auto">
                       <PerformanceOptimizedImage
@@ -515,7 +529,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                 </div>
 
                 {isValidImageUrl(hoveredProject.imageUrl) && hoveredProject.imageUrl && (
-                  <div className="mb-6 flex justify-center -mx-4">
+                  <div className="mb-6 flex justify-center">
                     {hoveredProject.imageUrl.includes('RCT_tara') || 
                      hoveredProject.imageUrl.includes('Rating System') || 
                      hoveredProject.imageUrl.includes('quizards') ? (
@@ -527,6 +541,19 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                           height={520}
                           sizes="(max-width: 768px) 320px, 320px"
                           quality={60}
+                        />
+                      </div>
+                    ) : hoveredProject.imageUrl.includes('.webm') || hoveredProject.imageUrl.includes('.mp4') ? (
+                      <div className="w-full mx-auto max-w-[200px] sm:max-w-[260px]">
+                        <AutoVideo
+                          src={hoveredProject.imageUrl}
+                          alt={hoveredProject.title}
+                          width={260}
+                          height={160}
+                          sizes="(max-width: 640px) 80vw, 260px"
+                          priority={false}
+                          poster={hoveredProject.videoPoster || '/images/projects/gamification-demo-poster.jpg'}
+                          fallbackImage={hoveredProject.videoFallback || '/images/projects/gamification-financial-literacy.gif'}
                         />
                       </div>
                     ) : (

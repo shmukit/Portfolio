@@ -44,6 +44,10 @@ export interface Project {
   projectUrls?: UrlWithLabel[]; // Multiple project URLs
   reportUrls?: UrlWithLabel[]; // Multiple report URLs
   demoUrls?: UrlWithLabel[]; // Multiple demo URLs
+  
+  // Video support for motion assets
+  videoPoster?: string; // Poster image for video
+  videoFallback?: string; // Fallback image/video for unsupported browsers
 }
 
 export interface Contribution {

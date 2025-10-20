@@ -1,5 +1,7 @@
 import { supabase } from './supabase';
 import { Project } from '../types/project';
+import fs from 'fs';
+import path from 'path';
 
 interface DatabaseProject {
   id: string;
@@ -36,73 +38,101 @@ interface DatabaseProject {
   key_results?: unknown;
   tags?: unknown;
   metrics?: unknown;
+  video_poster?: string;
+  video_fallback?: string;
+}
+
+// Helper function to load static fallback
+function loadStaticProjects(): Project[] {
+  try {
+    const filePath = path.join(process.cwd(), 'data', 'projects.json');
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const projects = JSON.parse(fileContents);
+    console.log('📁 Loaded static projects:', projects.length);
+    return projects;
+  } catch (error) {
+    console.error('❌ Failed to load static projects:', error);
+    return [];
+  }
 }
 
 export async function getProjects(): Promise<Project[]> {
   try {
     console.log('🔄 Fetching projects server-side...');
 
-    if (!supabase) {
-      throw new Error('Supabase client is not initialized');
+    // Try Supabase first if available
+    if (supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('year', { ascending: false })
+          .order('order_index', { ascending: true });
+
+        if (error) {
+          console.error('❌ Supabase fetch failed:', error);
+          console.log('📁 Falling back to static data...');
+          return loadStaticProjects();
+        }
+
+        if (!data || data.length === 0) {
+          console.log('⚠️ No projects found in Supabase, using static fallback');
+          return loadStaticProjects();
+        }
+
+        console.log('✅ Fetched projects from Supabase:', data.length);
+
+        // Transform database fields to match TypeScript interface
+        const transformedProjects = data.map((project: DatabaseProject) => ({
+          ...project,
+          // Basic field transformations
+          imageUrl: project.image_url,
+          orderIndex: project.order_index,
+          isUnlocked: project.is_unlocked,
+          createdAt: project.created_at,
+          updatedAt: project.updated_at,
+          projectType: project.project_type,
+          
+          // URL field transformations
+          companyUrl: project.company_url,
+          projectUrl: project.project_url,
+          reportUrl: project.report_url,
+          demoUrl: project.demo_url,
+          companyLabel: project.company_label,
+          projectLabel: project.project_label,
+          reportLabel: project.report_label,
+          demoLabel: project.demo_label,
+          
+          // Parse JSONB fields
+          companyUrls: project.company_urls ? (Array.isArray(project.company_urls) ? project.company_urls : []) : undefined,
+          projectUrls: project.project_urls ? (Array.isArray(project.project_urls) ? project.project_urls : []) : undefined,
+          reportUrls: project.report_urls ? (Array.isArray(project.report_urls) ? project.report_urls : []) : undefined,
+          demoUrls: project.demo_urls ? (Array.isArray(project.demo_urls) ? project.demo_urls : []) : undefined,
+          
+          contributions: project.contributions ? (Array.isArray(project.contributions) ? project.contributions : []) : undefined,
+          keyResults: project.key_results ? (Array.isArray(project.key_results) ? project.key_results : []) : undefined,
+          tags: project.tags ? (Array.isArray(project.tags) ? project.tags : []) : undefined,
+          metrics: project.metrics ? (Array.isArray(project.metrics) ? project.metrics : []) : undefined,
+          
+          // Video support
+          videoPoster: project.video_poster,
+          videoFallback: project.video_fallback,
+        }));
+
+        return transformedProjects as Project[];
+      } catch (supabaseError) {
+        console.error('❌ Supabase connection failed:', supabaseError);
+        console.log('📁 Falling back to static data...');
+        return loadStaticProjects();
+      }
+    } else {
+      console.log('⚠️ Supabase not configured, using static data...');
+      return loadStaticProjects();
     }
-
-    const { data, error } = await supabase
-      .from('projects')
-      .select('*')
-      .order('year', { ascending: false })
-      .order('order_index', { ascending: true });
-
-    if (error) {
-      console.error('❌ Supabase fetch failed:', error);
-      // Return empty array instead of throwing to prevent app crash
-      console.log('⚠️ Returning empty projects array due to fetch error');
-      return [];
-    }
-
-    if (!data || data.length === 0) {
-      console.log('⚠️ No projects found');
-      return [];
-    }
-
-    console.log('✅ Fetched projects:', data.length);
-
-    // Transform database fields to match TypeScript interface
-    const transformedProjects = data.map((project: DatabaseProject) => ({
-      ...project,
-      // Basic field transformations
-      imageUrl: project.image_url,
-      orderIndex: project.order_index,
-      isUnlocked: project.is_unlocked,
-      createdAt: project.created_at,
-      updatedAt: project.updated_at,
-      projectType: project.project_type,
-      
-      // URL field transformations
-      companyUrl: project.company_url,
-      projectUrl: project.project_url,
-      reportUrl: project.report_url,
-      demoUrl: project.demo_url,
-      companyLabel: project.company_label,
-      projectLabel: project.project_label,
-      reportLabel: project.report_label,
-      demoLabel: project.demo_label,
-      
-      // Parse JSONB fields
-      companyUrls: project.company_urls ? (Array.isArray(project.company_urls) ? project.company_urls : []) : undefined,
-      projectUrls: project.project_urls ? (Array.isArray(project.project_urls) ? project.project_urls : []) : undefined,
-      reportUrls: project.report_urls ? (Array.isArray(project.report_urls) ? project.report_urls : []) : undefined,
-      demoUrls: project.demo_urls ? (Array.isArray(project.demo_urls) ? project.demo_urls : []) : undefined,
-      
-      contributions: project.contributions ? (Array.isArray(project.contributions) ? project.contributions : []) : undefined,
-      keyResults: project.key_results ? (Array.isArray(project.key_results) ? project.key_results : []) : undefined,
-      tags: project.tags ? (Array.isArray(project.tags) ? project.tags : []) : undefined,
-      metrics: project.metrics ? (Array.isArray(project.metrics) ? project.metrics : []) : undefined,
-    }));
-
-    return transformedProjects as Project[];
   } catch (error) {
     console.error('❌ Error fetching projects:', error);
-    throw error;
+    console.log('📁 Falling back to static data...');
+    return loadStaticProjects();
   }
 }
 

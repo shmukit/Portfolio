@@ -37,8 +37,11 @@ export function isValidImageUrl(imageUrl: string | null | undefined): boolean {
     return false;
   }
 
-  // Check for valid image extensions
-  const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
+  // Check for valid media extensions (images + lightweight videos used as previews)
+  const validExtensions = [
+    '.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', // images
+    '.webm', '.mp4', '.mov' // videos used in place of images for demos
+  ];
   const hasValidExtension = validExtensions.some(ext => 
     trimmedUrl.toLowerCase().endsWith(ext)
   );
