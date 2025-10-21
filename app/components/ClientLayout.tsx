@@ -148,7 +148,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
       </div>
 
       {/* Failures floating entry (both desktop and mobile) */}
-      <FailuresClient theme={theme} showFailures={showFailures} />
+      <FailuresClient theme={theme} />
     </main>
   );
 }

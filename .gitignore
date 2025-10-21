@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# SQL scripts (database management files)
-*.sql
+# SQL scripts (database management files) - now organized in database/ folder
+# *.sql

@@ -17,7 +17,6 @@ import {
 
 interface FailuresClientProps {
   theme: string;
-  showFailures?: boolean;
 }
 
 // Returns true if the failure has enough content to show a modal
@@ -34,8 +33,8 @@ const hasDetails = (failure: Failure): boolean => {
   );
 };
 
-export default function FailuresClient({ theme, showFailures = true }: FailuresClientProps) {
-  const { failures, loading } = useFailures();
+export default function FailuresClient({ theme }: FailuresClientProps) {
+  const { failures } = useFailures();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFailure, setSelectedFailure] = useState<Failure | null>(null);
 

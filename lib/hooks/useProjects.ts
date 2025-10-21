@@ -68,7 +68,7 @@ const fetchCollaboratorsForProject = async (projectId: string): Promise<Collabor
       return [];
     }
 
-    return (data || []).map((collaborator: any) => ({
+    return (data || []).map((collaborator: Record<string, any>) => ({
       id: collaborator.id,
       projectId: collaborator.project_id,
       name: collaborator.name,

@@ -38,7 +38,7 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
         throw fetchError;
       }
 
-      const formattedCollaborators: Collaborator[] = (data || []).map((collaborator: any) => ({
+      const formattedCollaborators: Collaborator[] = (data || []).map((collaborator: Record<string, any>) => ({
         id: collaborator.id,
         projectId: collaborator.project_id,
         name: collaborator.name,
@@ -51,10 +51,10 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
       }));
 
       setCollaborators(formattedCollaborators);
-    } catch (err) {
+    } catch (err: unknown) {
       // If table doesn't exist, return empty array instead of throwing
       if (err && typeof err === 'object' && 'code' in err && 
-          (err.code === 'PGRST116' || (err as any).message?.includes('relation "collaborators" does not exist'))) {
+          (err.code === 'PGRST116' || (err as Record<string, any>).message?.includes('relation "collaborators" does not exist'))) {
         console.log('Collaborators table does not exist yet, returning empty array');
         setCollaborators([]);
         return;
@@ -68,7 +68,7 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
 
   useEffect(() => {
     fetchCollaborators();
-  }, [projectId]);
+  }, [projectId, fetchCollaborators]);
 
   return {
     collaborators,

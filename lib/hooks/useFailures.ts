@@ -39,7 +39,7 @@ export const useFailures = (): UseFailuresReturn => {
         throw fetchError;
       }
 
-      const formattedFailures: Failure[] = (data || []).map((failure: any) => ({
+      const formattedFailures: Failure[] = (data || []).map((failure: Record<string, any>) => ({
         id: failure.id,
         title: failure.title,
         year: failure.year,
