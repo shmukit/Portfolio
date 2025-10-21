@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { Project } from '../types/project';
+import { Project, Collaborator } from '../types/project';
 import fs from 'fs';
 import path from 'path';
 
@@ -42,6 +42,44 @@ interface DatabaseProject {
   video_fallback?: string;
 }
 
+// Helper function to fetch collaborators for a project
+async function fetchCollaboratorsForProject(projectId: string): Promise<Collaborator[]> {
+  try {
+    if (!supabase) return [];
+
+    const { data, error } = await supabase
+      .from('collaborators')
+      .select('*')
+      .eq('project_id', projectId)
+      .order('order_index', { ascending: true });
+
+    if (error) {
+      // If table doesn't exist, return empty array instead of throwing
+      if (error.code === 'PGRST116' || error.message?.includes('relation "collaborators" does not exist')) {
+        console.log('Collaborators table does not exist yet, returning empty array');
+        return [];
+      }
+      console.error('Error fetching collaborators for project', projectId, ':', error);
+      return [];
+    }
+
+    return (data || []).map((collaborator: any) => ({
+      id: collaborator.id,
+      projectId: collaborator.project_id,
+      name: collaborator.name,
+      linkedinUrl: collaborator.linkedin_url,
+      profileImageUrl: collaborator.profile_image_url,
+      role: collaborator.role,
+      orderIndex: collaborator.order_index,
+      createdAt: collaborator.created_at,
+      updatedAt: collaborator.updated_at,
+    }));
+  } catch (err) {
+    console.error('Error fetching collaborators:', err);
+    return [];
+  }
+}
+
 // Helper function to load static fallback
 function loadStaticProjects(): Project[] {
   try {
@@ -82,41 +120,49 @@ export async function getProjects(): Promise<Project[]> {
 
         console.log('✅ Fetched projects from Supabase:', data.length);
 
-        // Transform database fields to match TypeScript interface
-        const transformedProjects = data.map((project: DatabaseProject) => ({
-          ...project,
-          // Basic field transformations
-          imageUrl: project.image_url,
-          orderIndex: project.order_index,
-          isUnlocked: project.is_unlocked,
-          createdAt: project.created_at,
-          updatedAt: project.updated_at,
-          projectType: project.project_type,
+        // Transform database fields to match TypeScript interface and fetch collaborators
+        const transformedProjects = await Promise.all(data.map(async (project: DatabaseProject) => {
+          // Fetch collaborators for each project
+          const collaborators = await fetchCollaboratorsForProject(project.id).catch(() => []);
           
-          // URL field transformations
-          companyUrl: project.company_url,
-          projectUrl: project.project_url,
-          reportUrl: project.report_url,
-          demoUrl: project.demo_url,
-          companyLabel: project.company_label,
-          projectLabel: project.project_label,
-          reportLabel: project.report_label,
-          demoLabel: project.demo_label,
-          
-          // Parse JSONB fields
-          companyUrls: project.company_urls ? (Array.isArray(project.company_urls) ? project.company_urls : []) : undefined,
-          projectUrls: project.project_urls ? (Array.isArray(project.project_urls) ? project.project_urls : []) : undefined,
-          reportUrls: project.report_urls ? (Array.isArray(project.report_urls) ? project.report_urls : []) : undefined,
-          demoUrls: project.demo_urls ? (Array.isArray(project.demo_urls) ? project.demo_urls : []) : undefined,
-          
-          contributions: project.contributions ? (Array.isArray(project.contributions) ? project.contributions : []) : undefined,
-          keyResults: project.key_results ? (Array.isArray(project.key_results) ? project.key_results : []) : undefined,
-          tags: project.tags ? (Array.isArray(project.tags) ? project.tags : []) : undefined,
-          metrics: project.metrics ? (Array.isArray(project.metrics) ? project.metrics : []) : undefined,
-          
-          // Video support
-          videoPoster: project.video_poster,
-          videoFallback: project.video_fallback,
+          return {
+            ...project,
+            // Basic field transformations
+            imageUrl: project.image_url,
+            orderIndex: project.order_index,
+            isUnlocked: project.is_unlocked,
+            createdAt: project.created_at,
+            updatedAt: project.updated_at,
+            projectType: project.project_type,
+            
+            // URL field transformations
+            companyUrl: project.company_url,
+            projectUrl: project.project_url,
+            reportUrl: project.report_url,
+            demoUrl: project.demo_url,
+            companyLabel: project.company_label,
+            projectLabel: project.project_label,
+            reportLabel: project.report_label,
+            demoLabel: project.demo_label,
+            
+            // Parse JSONB fields
+            companyUrls: project.company_urls ? (Array.isArray(project.company_urls) ? project.company_urls : []) : undefined,
+            projectUrls: project.project_urls ? (Array.isArray(project.project_urls) ? project.project_urls : []) : undefined,
+            reportUrls: project.report_urls ? (Array.isArray(project.report_urls) ? project.report_urls : []) : undefined,
+            demoUrls: project.demo_urls ? (Array.isArray(project.demo_urls) ? project.demo_urls : []) : undefined,
+            
+            contributions: project.contributions ? (Array.isArray(project.contributions) ? project.contributions : []) : undefined,
+            keyResults: project.key_results ? (Array.isArray(project.key_results) ? project.key_results : []) : undefined,
+            tags: project.tags ? (Array.isArray(project.tags) ? project.tags : []) : undefined,
+            metrics: project.metrics ? (Array.isArray(project.metrics) ? project.metrics : []) : undefined,
+            
+            // Video support
+            videoPoster: project.video_poster,
+            videoFallback: project.video_fallback,
+            
+            // Collaborators
+            collaborators: collaborators,
+          };
         }));
 
         return transformedProjects as Project[];
