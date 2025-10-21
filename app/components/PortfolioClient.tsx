@@ -686,8 +686,8 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                                 href={collaborator.linkedinUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`text-sm font-medium underline hover:no-underline ${
-                                  theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                                className={`text-sm font-medium ${
+                                  theme === 'dark' ? 'text-gray-300 hover:text-gray-200' : 'text-gray-700 hover:text-gray-900'
                                 }`}
                               >
                                 {collaborator.name}
