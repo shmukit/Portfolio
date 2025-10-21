@@ -24,7 +24,7 @@ interface ClientLayoutProps {
 export default function ClientLayout({ projects }: ClientLayoutProps) {
   const { theme, toggleTheme } = useTheme();
   const { showPortfolio, togglePortfolio } = usePortfolio();
-  const { showFailures, toggleFailures } = useFailuresToggle();
+  const { toggleFailures } = useFailuresToggle();
 
   return (
     <main className="min-h-screen relative" role="main">

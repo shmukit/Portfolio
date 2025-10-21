@@ -42,6 +42,18 @@ interface DatabaseProject {
   video_fallback?: string;
 }
 
+interface DatabaseCollaborator {
+  id: string;
+  project_id: string;
+  name: string;
+  linkedin_url?: string;
+  profile_image_url?: string;
+  role?: string;
+  order_index?: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
 // Helper function to fetch collaborators for a project
 async function fetchCollaboratorsForProject(projectId: string): Promise<Collaborator[]> {
   try {
@@ -63,7 +75,7 @@ async function fetchCollaboratorsForProject(projectId: string): Promise<Collabor
       return [];
     }
 
-    return (data || []).map((collaborator: Record<string, any>) => ({
+    return (data || []).map((collaborator: DatabaseCollaborator) => ({
       id: collaborator.id,
       projectId: collaborator.project_id,
       name: collaborator.name,

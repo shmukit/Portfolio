@@ -39,7 +39,8 @@ export const useFailures = (): UseFailuresReturn => {
         throw fetchError;
       }
 
-      const formattedFailures: Failure[] = (data || []).map((failure: Record<string, any>) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const formattedFailures: Failure[] = (data || []).map((failure: any) => ({
         id: failure.id,
         title: failure.title,
         year: failure.year,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabase';
 import { Collaborator } from '../../types/project';
 
@@ -14,7 +14,7 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchCollaborators = async () => {
+  const fetchCollaborators = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -38,7 +38,8 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
         throw fetchError;
       }
 
-      const formattedCollaborators: Collaborator[] = (data || []).map((collaborator: Record<string, any>) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const formattedCollaborators: Collaborator[] = (data || []).map((collaborator: any) => ({
         id: collaborator.id,
         projectId: collaborator.project_id,
         name: collaborator.name,
@@ -54,7 +55,8 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
     } catch (err: unknown) {
       // If table doesn't exist, return empty array instead of throwing
       if (err && typeof err === 'object' && 'code' in err && 
-          (err.code === 'PGRST116' || (err as Record<string, any>).message?.includes('relation "collaborators" does not exist'))) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err.code === 'PGRST116' || (err as any).message?.includes('relation "collaborators" does not exist'))) {
         console.log('Collaborators table does not exist yet, returning empty array');
         setCollaborators([]);
         return;
@@ -64,7 +66,7 @@ export const useCollaborators = (projectId?: string): UseCollaboratorsReturn => 
     } finally {
       setLoading(false);
     }
-  };
+  }, [projectId]);
 
   useEffect(() => {
     fetchCollaborators();

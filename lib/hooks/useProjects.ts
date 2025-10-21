@@ -68,7 +68,8 @@ const fetchCollaboratorsForProject = async (projectId: string): Promise<Collabor
       return [];
     }
 
-    return (data || []).map((collaborator: Record<string, any>) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (data || []).map((collaborator: any) => ({
       id: collaborator.id,
       projectId: collaborator.project_id,
       name: collaborator.name,
