@@ -75,6 +75,8 @@ async function fetchCollaboratorsForProject(projectId: string): Promise<Collabor
       return [];
     }
 
+    console.log(`Fetched ${data?.length || 0} collaborators for project ${projectId}:`, data?.map(c => c.name));
+
     return (data || []).map((collaborator: DatabaseCollaborator) => ({
       id: collaborator.id,
       projectId: collaborator.project_id,
@@ -135,7 +137,11 @@ export async function getProjects(): Promise<Project[]> {
         // Transform database fields to match TypeScript interface and fetch collaborators
         const transformedProjects = await Promise.all(data.map(async (project: DatabaseProject) => {
           // Fetch collaborators for each project
-          const collaborators = await fetchCollaboratorsForProject(project.id).catch(() => []);
+          console.log(`Processing project: ${project.title} (${project.id})`);
+          const collaborators = await fetchCollaboratorsForProject(project.id).catch((err) => {
+            console.error(`Error fetching collaborators for ${project.title}:`, err);
+            return [];
+          });
           
           return {
             ...project,
