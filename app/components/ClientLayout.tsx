@@ -5,9 +5,11 @@ import dynamic from 'next/dynamic';
 import { useTheme } from '../../lib/hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
 import { usePortfolio } from '../../lib/hooks/usePortfolio';
+import { useFailuresToggle } from '../../lib/hooks/useFailuresToggle';
 import MobileHeader from './MobileHeader';
 import CTASection from './CTASection';
 import PortfolioClient from './PortfolioClient';
+import FailuresClient from './FailuresClient';
 import { Project } from '../../types/project';
 
 const AnimatedBackground = dynamic(() => import('./AnimatedBackground'), {
@@ -22,6 +24,7 @@ interface ClientLayoutProps {
 export default function ClientLayout({ projects }: ClientLayoutProps) {
   const { theme, toggleTheme } = useTheme();
   const { showPortfolio, togglePortfolio } = usePortfolio();
+  const { showFailures, toggleFailures } = useFailuresToggle();
 
   return (
     <main className="min-h-screen relative" role="main">
@@ -104,6 +107,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
                   <CTASection 
                     theme={theme} 
                     onTogglePortfolio={togglePortfolio} 
+                    onToggleFailures={toggleFailures}
                     hasAnimated={true}
                   />
 
@@ -142,6 +146,9 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
       <div className="lg:hidden relative z-10">
         <PortfolioClient projects={projects} theme={theme} showPortfolio={showPortfolio} />
       </div>
+
+      {/* Failures floating entry (both desktop and mobile) */}
+      <FailuresClient theme={theme} showFailures={showFailures} />
     </main>
   );
 }

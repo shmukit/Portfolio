@@ -27,11 +27,12 @@ const SkeletonButton = ({ theme }: { theme: 'light' | 'dark' }) => (
 interface CTASectionProps {
   theme: 'light' | 'dark';
   onTogglePortfolio: () => void;
+  onToggleFailures?: () => void;
   isMobile?: boolean;
   hasAnimated?: boolean;
 }
 
-export default function CTASection({ theme, onTogglePortfolio, isMobile = false, hasAnimated = false }: CTASectionProps) {
+export default function CTASection({ theme, onTogglePortfolio, onToggleFailures, isMobile = false, hasAnimated = false }: CTASectionProps) {
   if (isMobile) {
     // Mobile CTAs are handled in MobileHeader component
     return null;
@@ -94,6 +95,20 @@ export default function CTASection({ theme, onTogglePortfolio, isMobile = false,
           hasAnimated={hasAnimated}
         />
       </Suspense>
+
+      {/* Failures CTA - HIDDEN FOR NOW */}
+      {false && onToggleFailures && (
+        <Suspense fallback={<SkeletonButton theme={theme} />}>
+          <AnimatedCTA 
+            type="failures" 
+            label="Failures" 
+            href="#"
+            theme={theme}
+            onClick={onToggleFailures}
+            hasAnimated={hasAnimated}
+          />
+        </Suspense>
+      )}
 
       {/* Tools CTA hidden as requested */}
       {/* <Suspense fallback={<SkeletonButton theme={theme} />}>

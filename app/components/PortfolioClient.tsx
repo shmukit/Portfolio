@@ -673,6 +673,41 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                     </div>
                   )}
 
+                  {hoveredProject.collaborators && hoveredProject.collaborators.length > 0 && (
+                    <div>
+                      <h3 className={`text-sm font-semibold mb-3 ${
+                        theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                      }`}>Collaborators</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {hoveredProject.collaborators.map((collaborator, index) => (
+                          <span key={collaborator.id}>
+                            {collaborator.linkedinUrl ? (
+                              <a
+                                href={collaborator.linkedinUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-sm font-medium underline hover:no-underline ${
+                                  theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                                }`}
+                              >
+                                {collaborator.name}
+                              </a>
+                            ) : (
+                              <span className={`text-sm font-medium ${
+                                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                              }`}>
+                                {collaborator.name}
+                              </span>
+                            )}
+                            {hoveredProject.collaborators && index < hoveredProject.collaborators.length - 1 && (
+                              <span className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>, </span>
+                            )}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {hoveredProject.tags && hoveredProject.tags.length > 0 && (
                     <div className={`p-4 rounded-lg shadow-sm ${
                       theme === 'dark'

@@ -10,6 +10,7 @@ const iconsMap: Record<string, string[]> = {
   github: ["0", "1", "0", "1", "0"],
   portfolio: ["💼", "🎯", "🚀", "⚡"],
   tools: ["🛠️", "✏️", "📏", "🔧"],
+  failures: ["❌", "⚠️", "💥", "🔄"],
 };
 
 interface AnimatedCTAProps {

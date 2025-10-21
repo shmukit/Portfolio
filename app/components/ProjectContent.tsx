@@ -3,6 +3,7 @@
 import { memo } from 'react';
 import { Project } from '../../types/project';
 import UrlCTAMultiple from './UrlCTAMultiple';
+import CollaboratorsSection from './CollaboratorsSection';
 
 // Memoized Project Content Component for better performance
 const ProjectContent = memo(({ 
@@ -90,6 +91,12 @@ const ProjectContent = memo(({
             </ul>
           </div>
         )}
+
+        {/* Collaborators */}
+        <CollaboratorsSection 
+          collaborators={project.collaborators || []} 
+          theme={theme} 
+        />
 
       </div>
 

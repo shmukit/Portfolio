@@ -48,6 +48,9 @@ export interface Project {
   // Video support for motion assets
   videoPoster?: string; // Poster image for video
   videoFallback?: string; // Fallback image/video for unsupported browsers
+  
+  // Collaborators
+  collaborators?: Collaborator[];
 }
 
 export interface Contribution {
@@ -83,4 +86,65 @@ export interface ProjectFormData {
   imageUrl?: string;
   orderIndex?: number;
   category?: string;
+}
+
+// New interfaces for collaborators and failures
+export interface Collaborator {
+  id: string;
+  projectId: string;
+  name: string;
+  linkedinUrl?: string;
+  profileImageUrl?: string;
+  role?: string;
+  orderIndex?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Failure {
+  id: string;
+  title: string;
+  year: number;
+  company?: string;
+  role?: string;
+  description?: string;
+  lessons?: string;
+  imageUrl?: string;
+  orderIndex?: number;
+  category?: string;
+  isUnlocked?: boolean;
+  published?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  
+  // Additional fields similar to projects
+  phase?: string;
+  projectType?: string;
+  situation?: string;
+  task?: string;
+  result?: string;
+  contributions?: Contribution[];
+  keyResults?: KeyResult[];
+  tags?: string[];
+  metrics?: Record<string, any>;
+  
+  // URL fields
+  companyUrl?: string;
+  projectUrl?: string;
+  reportUrl?: string;
+  demoUrl?: string;
+  companyLabel?: string;
+  projectLabel?: string;
+  reportLabel?: string;
+  demoLabel?: string;
+  companyUrls?: UrlWithLabel[];
+  projectUrls?: UrlWithLabel[];
+  reportUrls?: UrlWithLabel[];
+  demoUrls?: UrlWithLabel[];
+  videoPoster?: string;
+  videoFallback?: string;
+}
+
+export interface FailuresByYear {
+  [year: number]: Failure[];
 }
