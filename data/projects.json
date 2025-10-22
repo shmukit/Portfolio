@@ -18,7 +18,7 @@
     "projectType": "B2B2C",
     "situation": "Users lacked engaging ways to learn financial literacy concepts and build money management skills.",
     "task": "Led product design and gamification logic integration across user journeys with leaderboards, badges, and progress tracking.",
-    "result": "Just launched — awaiting learner engagement data to measure impact and retention.",
+    "result": "Launched on Oct, 2025; awaiting learner engagement data to measure impact and retention.",
     "contributions": [
       {
         "type": "UX Design",
@@ -39,7 +39,7 @@
     "keyResults": [
       {
         "label": "Current Status",
-        "value": "Just Launched",
+        "value": "Launched on Oct, '25",
         "category": "Development",
         "description": "Platform live and operational"
       },
@@ -51,9 +51,9 @@
       },
       {
         "label": "Impact Measurement",
-        "value": "Awaiting Data",
-        "category": "Analytics",
-        "description": "Learner engagement metrics pending"
+        "value": "1.7K",
+        "category": "Enrollment",
+        "description": "In first 07 days."
       }
     ],
     "tags": ["gamification", "game economy", "User journey"],
