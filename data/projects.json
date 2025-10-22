@@ -87,7 +87,7 @@
     "videoPoster": "/images/projects/group-guidance-demo-poster.jpg",
     "videoFallback": "/images/projects/group-guidance-demo.webm",
     "orderIndex": 4,
-    "category": "Vide Coding",
+    "category": "Vibe Coding",
     "isUnlocked": true,
     "published": true,
     "phase": "Feature Suit",
@@ -137,5 +137,124 @@
     "projectLabel": null,
     "reportLabel": null,
     "demoLabel": null
+  },
+  {
+    "id": "b33013ab-ce46-4757-8653-049c3a892412",
+    "title": "HSEP Florida State University",
+    "year": 2024,
+    "company": "10 Minute School x USAID x FSU",
+    "role": "Lead Product Manager",
+    "description": "Co-led USAID-funded HSEP initiative to roll out comprehensive LMS for 3,000 colleges and train 60,000 teachers. Discontinued, due to dismantling of USAID.",
+    "lessons": "National-scale learning projects require institutional buy-in and teacher-first UX.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 10,
+    "category": "Digital Public Infrastructure",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "B2B",
+    "situation": "Bangladesh lacked digital teaching infrastructure at high school level for 140K+ teachers and would take 50+ years for Govt to physically train all teachers.",
+    "task": "Design comprehensive LMS for learning rollout, coordinate with FSU, Chemonics Int, A2i & Education Ministry/DSHE.",
+    "result": "Secured $3M grant; trained 500 teachers and led the prototyping of the platform in 21 days. Later discontinued (USAID).",
+    "contributions": [
+      {
+        "type": "Decision Strategy",
+        "contribution": "Planned and applied to the public tender. Secured USAID grant",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Designed comprehensive LMS end to end user journey for several feature suits- PLC, P2P asssessment, Discussion, etc.",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Led teacher training of the system countrywide.",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Master Trainee Teachers Trained",
+        "value": "500",
+        "category": "Impact",
+        "description": "Nationwide teacher training program"
+      },
+      {
+        "label": "Prototype",
+        "value": "21 days",
+        "category": "DPI",
+        "description": "Digital Infrastructure Plan Design"
+      },
+      {
+        "label": "Budget Secured",
+        "value": "$3M",
+        "category": "Financial",
+        "description": "USAID grant funding. Later Discontinued."
+      }
+    ],
+    "tags": ["complex stakeholder management", "lms", "project management", "Govt project", "national scale", "DPI"],
+    "metrics": {
+      "reach": "nationwide",
+      "budget": "$3M",
+      "target_teachers": 60000,
+      "target-institutions": 3000
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "377ed160-c506-45b7-a961-bd0a1662448b",
+        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
+        "name": "Raied",
+        "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
+        "role": "CTO",
+        "orderIndex": 1
+      },
+      {
+        "id": "1eaa4509-9d33-42c0-bf34-76b61ba13734",
+        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
+        "name": "Mehdi",
+        "linkedinUrl": "https://www.linkedin.com/in/mehdisophy/",
+        "role": "Edtech Consultant",
+        "orderIndex": 1
+      },
+      {
+        "id": "660daf06-685f-43b1-a20a-ea8207799880",
+        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
+        "name": "Shad",
+        "linkedinUrl": "https://www.linkedin.com/in/shad-iqbal/",
+        "role": "Design Lead",
+        "orderIndex": 2
+      },
+      {
+        "id": "879e363b-a196-4ba9-9535-48dfd4317311",
+        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
+        "name": "Shihab",
+        "linkedinUrl": "https://www.linkedin.com/in/shihabus-siddiqin/",
+        "role": "Project Manager",
+        "orderIndex": 3
+      },
+      {
+        "id": "6b58c85c-c602-42bc-a35b-bad009b06238",
+        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
+        "name": "Shipu",
+        "linkedinUrl": "https://www.linkedin.com/in/toshipu/",
+        "role": "Engineering Lead",
+        "orderIndex": 4
+      }
+    ]
   }
 ]
