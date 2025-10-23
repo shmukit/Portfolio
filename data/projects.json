@@ -1,66 +1,85 @@
 [
   {
-    "id": "6665081a-dd35-4fe7-ac0a-ec2886cce3b5",
-    "title": "Gamification: Financial Literacy Course",
-    "year": 2025,
-    "company": "10 Minute School x bKash",
-    "role": "Lead Product Manager",
-    "description": "Developed gamified learning modules for financial literacy with leaderboards, badges, and progress tracking.",
-    "lessons": "Financial literacy gamification works best when tied to real-world financial behaviors and decisions.",
-    "imageUrl": "/images/projects/gamification-demo.webm",
-    "videoPoster": "/images/projects/gamification-demo-poster.jpg",
-    "videoFallback": "/images/projects/gamification-demo.mov",
-    "orderIndex": 17,
-    "category": "Gamification",
+    "id": "aa5f8b0c-a5bb-4a7e-a634-c915f75c521d",
+    "title": "World Bank IFC Survey on 10MS Impact",
+    "year": 2022,
+    "company": "10 Minute School",
+    "role": "Research Lead",
+    "description": "Led World Bank IFC Survey on 4.7K students to measure the impact of 10MS on delivering quality education.",
+    "lessons": "Research collaboration with international institutions validates product impact and builds credibility.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 1,
+    "category": "Analysis",
     "isUnlocked": true,
     "published": true,
-    "phase": "Feature Suit",
-    "projectType": "B2B2C",
-    "situation": "Users lacked engaging ways to learn financial literacy concepts and build money management skills.",
-    "task": "Led product design and gamification logic integration across user journeys with leaderboards, badges, and progress tracking.",
-    "result": "Launched on Oct, 2025; awaiting learner engagement data to measure impact and retention.",
+    "phase": "Research",
+    "projectType": "Impact Assessment",
+    "situation": "World Bank IFC wanted to understand the impact of 10MS on K-12 students across Bangladesh in different locations both for paid and free courses.",
+    "task": "I was the research lead for the project.",
+    "result": "At 10MS we did not have concrete data about our impact on access to quality education across Bangladesh. Data shows 10MS is more popular in rural and suburban areas than metropolitan cities as students at these places lack access to quality teachers and educational contents.",
     "contributions": [
       {
-        "type": "UX Design",
-        "contribution": "Led product design for gamified learning modules",
-        "value_chain_position": "upstream"
-      },
-      {
-        "type": "UX Design", 
-        "contribution": "Integrated gamification logic across user journeys",
+        "type": "Data Analysis",
+        "contribution": "Research design & planning",
         "value_chain_position": "upstream"
       },
       {
         "type": "Data Analysis",
-        "contribution": "Designed leaderboards, badges, and progress tracking systems",
+        "contribution": "Data cleaning & result analysis using tableau",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Report preparation",
         "value_chain_position": "downstream"
       }
     ],
     "keyResults": [
       {
-        "label": "Current Status",
-        "value": "Launched on Oct, '25",
-        "category": "Development",
-        "description": "Platform live and operational"
+        "label": "Students Surveyed",
+        "value": "4,781",
+        "category": "Research",
+        "description": "+46 Parents"
       },
       {
-        "label": "Features Delivered",
-        "value": "Gamified Modules",
-        "category": "Features",
-        "description": "Leaderboards, badges, progress tracking"
+        "label": "Rural & Semi-Urban Users",
+        "value": "66%",
+        "category": "Demographics",
+        "description": "From villages and district cities"
       },
       {
-        "label": "Impact Measurement",
-        "value": "1.7K",
-        "category": "Enrollment",
-        "description": "In first 07 days."
+        "label": "High Performers",
+        "value": "50%",
+        "category": "Academic Impact",
+        "description": "Scored 80-100 in last academic year"
+      },
+      {
+        "label": "Positive Impact",
+        "value": "78%",
+        "category": "Satisfaction",
+        "description": "Agreed 10MS has positive impact (45% Strongly, 33% Agree)"
+      },
+      {
+        "label": "~50+ (Free)",
+        "value": "39 (Avg)",
+        "category": "Satisfaction",
+        "description": "Net Promoter Score"
       }
     ],
-    "tags": ["gamification", "game economy", "User journey"],
+    "tags": [
+      "research",
+      "impact-assessment",
+      "research ops",
+      "tableau",
+      "data-analysis"
+    ],
     "metrics": {
-      "status": "launched",
-      "metrics": "pending",
-      "features": "gamification_complete"
+      "nps": 39,
+      "rural_users": "66%",
+      "survey_size": 4781,
+      "gender_split": "32.5% female, 66% male"
     },
     "companyUrl": null,
     "projectUrl": null,
@@ -73,28 +92,207 @@
     "companyLabel": null,
     "projectLabel": null,
     "reportLabel": null,
-    "demoLabel": null
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "6fc21ce2-467d-404c-a504-affa6a0ba1a6",
+        "name": "Salman",
+        "linkedinUrl": "https://www.linkedin.com/in/salmanhossain/",
+        "role": "COO",
+        "orderIndex": 1
+      },
+      {
+        "id": "72778693-e584-4a34-a631-ffc045b9c3a1",
+        "name": "Galib",
+        "linkedinUrl": "https://www.linkedin.com/in/galib-mubashir-4326531b7/",
+        "role": "Researcher",
+        "orderIndex": 2
+      }
+    ]
+  },
+  {
+    "id": "a3dd4a3e-d144-4ee2-bdf1-ead1dbc2e91f",
+    "title": "Leads Collection Management",
+    "year": 2023,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Established new leads collection system that resulted in 262K new leads with 5% CVR & brought visibility of which sources of leads works best to convert a visitor into enrolled learner for the customer support team.",
+    "lessons": "Lead source tracking is critical for conversion optimization. What gets measured gets managed.",
+    "imageUrl": "/images/projects/lead-management.png",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 2,
+    "category": "Analysis",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Growth",
+    "projectType": "Conversion Optimization",
+    "situation": "Visitors without enrollment or providing any data could watch free videos. And we had no idea, which sources of leads works best for the CX team to convert a visitor into enrolled learner.",
+    "task": "With the help of Business Intelligence team analyzed data how users see free video on course pages and analyzed if we know which channel/sources of leads works best for CVR.",
+    "result": "Implemented force log-in to watch free videos in any course page and break down the conversion flow for different channels. Within 6 months collected 262K new leads with 5% CVR & brought visibility of which sources of leads works best to convert a visitor into enrolled learner for the CX team.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Discovery: Identified the flaw in the dashboard",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Helped Business Intelligence team to reset the dashboard- defined what is required, why and how we want to visualize it",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "New Leads Collected",
+        "value": "262K",
+        "category": "Growth",
+        "description": "Total new leads generated in 6 months"
+      },
+      {
+        "label": "Conversion Rate",
+        "value": "Avg 5%",
+        "category": "Conversion",
+        "description": "Lead to enrolled learner CVR"
+      },
+      {
+        "label": "Channel wise CVR Visibility",
+        "value": "Full",
+        "category": "Analytics",
+        "description": "Complete breakdown by source"
+      }
+    ],
+    "tags": [
+      "growth",
+      "conversion",
+      "lead-generation",
+      "analysis",
+      "metrics"
+    ],
+    "metrics": {
+      "cvr": "5%",
+      "leads_collected": 262000,
+      "channels_tracked": "multiple"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": []
+  },
+  {
+    "id": "96a41220-6c46-43ca-8450-7b65401f0ae6",
+    "title": "Free to Paid Conversion Audit",
+    "year": 2023,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "As PM at 10MS first task- Conducted audits on 50+ dashboards for non-academic product vertical. Found that Free courses & Paid courses CVR significantly different on the platform and none noticed. Hence our project of free to paid users conversion initiated.",
+    "lessons": "Dashboard audits reveal hidden insights. Clear metric definitions prevent strategic blind spots.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 3,
+    "category": "Analysis",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Growth",
+    "projectType": "Conversion Optimization",
+    "situation": "At 10MS almost 50+ dashboards and hundreds of metrics were underutilized & underanalyzed to discover business issues or learners issues. When I took over, I wanted to deeply understand these metrics we track and dashboards we maintain.",
+    "task": "Conducted audits leading to insights and adjustments for enhanced user engagement, LX User journey, Leads management, CVR, and Platform Search.",
+    "result": "Found that Free courses CVR is 30%+ and Paid course CVR is way low. Hence our strategy for free to paid conversion initiated.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Analysis/dashboard audit",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Developed product & UX strategies to increase paid conversion",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Aligned management and tech team to prioritise paid conversion.",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Free Course CVR increase",
+        "value": "30% to 45%",
+        "category": "Discovery",
+        "description": "Conversion rate for free courses"
+      },
+      {
+        "label": "Paid Course CVR",
+        "value": "Maintained between 0.8 to 1.2%",
+        "category": "Discovery",
+        "description": "Fluctuated among courses/products"
+      },
+      {
+        "label": "Conversion Strategy",
+        "value": "New",
+        "category": "Impact",
+        "description": "Free to paid conversion initiative"
+      }
+    ],
+    "tags": [
+      "analytics",
+      "dashboard-audit",
+      "conversion",
+      "growth",
+      "data-analysis",
+      "strategy"
+    ],
+    "metrics": {
+      "free_cvr": "30%+ to 45%",
+      "paid_cvr": "maintained around 0.8-1.2%",
+      "discovery": "CVR gap",
+      "dashboards_audited": 50
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": []
   },
   {
     "id": "d20b1578-b515-4e29-88e7-0ec866504399",
     "title": "Group Guidance/Roadmaps",
     "year": 2025,
     "company": "10 Minute School",
-    "role": "Consultant X Forward Deployed Engineer",
-    "description": "Vibe coded a RnD platform to provide content-agnostic mentor guided learning roadmaps. Developed end to end journey in 4 days.",
+    "role": "Consultant\n",
+    "description": "Vibe coded a RnD platform to provide content-agnostic mentor guided learning roadmaps. Developed end to end journey in 4 days. ",
     "lessons": null,
     "imageUrl": "/images/projects/group-guidance-demo.webm",
     "videoPoster": "/images/projects/group-guidance-demo-poster.jpg",
     "videoFallback": "/images/projects/group-guidance-demo.webm",
     "orderIndex": 4,
-    "category": "Vibe Coding",
+    "category": "Vide Coding\n",
     "isUnlocked": true,
     "published": true,
     "phase": "Feature Suit",
     "projectType": "Rapid Prototyping",
-    "situation": "STEM graduates required guided mentorship to bridge their skills gaps to lands jobs.",
-    "task": "Defined the specs/PRD, designed the system architecture for two sided platform- Mentors & Students, designed UI with Banani AI, defined Supabase backend database, vibe coded with Cursor. Four Days.",
-    "result": "Product RnD deployed in record time of 4 days to seek users feedback.",
+    "situation": "STEM graduates required guided mentorship to bridge their skills gaps to lands jobs. ",
+    "task": "Defined the specs/PRD, designed the system architecture for two sided platform- Mentors & Students, designed UI with Banani AI, defined Supabase backend database, vibe coded with Cursor. Four Days.  ",
+    "result": "Product RnD deployed in record time of 4 days to seek users feedback. ",
     "contributions": [
       {
         "type": "System Architecture",
@@ -120,7 +318,15 @@
         "description": "Forward Deployed Engineer."
       }
     ],
-    "tags": ["Vibe Coding", "Specifications", "Database", "User journey mapping", "System Architecture", "Rapid Prototyping"],
+    "tags": [
+      "Vibe Coding",
+      "Specifications",
+      "Database",
+      "User journey mapping",
+      "System Architecture",
+      "Rapid Prototyping",
+      "Forward Deployed Engineer"
+    ],
     "metrics": {
       "rapid_prototyping": "04 Days",
       "Human Resources Required": 1
@@ -136,7 +342,596 @@
     "companyLabel": null,
     "projectLabel": null,
     "reportLabel": null,
-    "demoLabel": null
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "df6fc362-a80d-46f3-98bb-6a25423ab123",
+        "name": "Raihana",
+        "linkedinUrl": "https://www.linkedin.com/in/raihana-rahim/",
+        "role": "Project Manager",
+        "orderIndex": 1
+      }
+    ]
+  },
+  {
+    "id": "a5603511-a9c0-48c5-a14f-8f17e0823890",
+    "title": "EdTech Market Thesis & $2Mn from Sequoia",
+    "year": 2021,
+    "company": "10 Minute School",
+    "role": "Strategy Consultant",
+    "description": "My \"Bangladesh Edtech Market Thesis\" facilitated a 2Mn investment from Sequoia Capital India in 10MS.",
+    "lessons": "Vision must be backed by credible narrative and data — that's how ecosystems get funded.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 5,
+    "category": "Strategy",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Research",
+    "projectType": "Market Research & Strategic Narrative",
+    "situation": "Edtech funding ecosystem lacked credible data on market size and user adoption.",
+    "task": "Authored comprehensive market landscape and TAM analysis of Bangladesh's EdTech sector and different segments. ",
+    "result": "Enabled Sequoia's $2M seed investment into 10MS.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Conducted comprehensive market research",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Authored TAM analysis",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Assisted 10MS team to set their long term strategy.",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Investment Secured",
+        "value": "$2M",
+        "category": "Financial",
+        "description": "Seed funding from Sequoia Capital India"
+      },
+      {
+        "label": "Total Market Size",
+        "value": "$11.11 Bn",
+        "category": "Market",
+        "description": "Education Market in 2022 (B2B-B2C)"
+      },
+      {
+        "label": "K-12 After School",
+        "value": "$6.1 Bn",
+        "category": "Market",
+        "description": "Largest market segment"
+      },
+      {
+        "label": "Upskilling + Hiring",
+        "value": "$1.98 Bn",
+        "category": "Market",
+        "description": "Professional development"
+      }
+    ],
+    "tags": [
+      "strategy",
+      "investment",
+      "market-research",
+      "edtech",
+      "fundraising",
+      "sequoia"
+    ],
+    "metrics": {
+      "tam": "$11.11B",
+      "investor": "Sequoia Capital India",
+      "investment_round": "Seed"
+    },
+    "companyUrl": "https://www.10minuteschool.com",
+    "projectUrl": "https://www.10minuteschool.com",
+    "reportUrl": "https://www.linkedin.com/pulse/making-sense-edtech-bangladesh-shazzad-hossain-mukit/",
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [
+      {
+        "url": "https://www.linkedin.com/pulse/making-sense-edtech-bangladesh-shazzad-hossain-mukit/",
+        "label": "LinkedIn Article"
+      },
+      {
+        "url": "https://drive.google.com/file/d/example-report.pdf",
+        "label": "Full Report PDF"
+      }
+    ],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": "EdTech Analysis Article",
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "46d6cec1-b2f4-4280-9a1e-014ed57fb843",
+        "name": "Ayman",
+        "linkedinUrl": "https://www.linkedin.com/in/aymansadiq/",
+        "role": "CEO",
+        "orderIndex": 1
+      }
+    ]
+  },
+  {
+    "id": "9091cbf7-5089-47dd-b5e9-831aa5da4c5c",
+    "title": "CareerKi – Workforce EdTech",
+    "year": 2018,
+    "company": "CareerKi",
+    "role": "Co-founder & Product Lead",
+    "description": "CareerKi is a workforce edtech focused on career opportunities in Bangladesh.",
+    "lessons": "Building for Bangladesh means designing for accessibility before aesthetics.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 6,
+    "category": "Entrepreneurship",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Startup",
+    "projectType": "Workforce Edtech",
+    "situation": "Bangladesh has the 7th largest labor market in the world, but students & parents had no way to take evidence based decisions to pursue careers.",
+    "task": "To help students take evidence based career decisions, we researched and profiled 300+ white collar, blue collar and entrepreneurial job roles from labor market with data on salary, technical skills, academic qualification, career challenges, etc. Along with career related evidence based 200 contents, we launched CareerKi in 2018.",
+    "result": "MAU range: 30K-45K, Till date served over 1.5 million users. ",
+    "contributions": [
+      {
+        "type": "Decision Strategy",
+        "contribution": "Ideation, Founding the team, Raised grants from USAID Bangladesh and Govt of Bangladesh",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Product lead, Content development",
+        "value_chain_position": "upstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Total Users",
+        "value": "1.5M",
+        "category": "Scale",
+        "description": "Served till 2023"
+      },
+      {
+        "label": "Monthly Active Users",
+        "value": "30K-45K",
+        "category": "Engagement",
+        "description": "MAU range 2019-2023"
+      },
+      {
+        "label": "USAID Funding",
+        "value": "$100K+",
+        "category": "Financial",
+        "description": "Grant received"
+      },
+      {
+        "label": "Job Roles Profiled",
+        "value": "300+",
+        "category": "Content",
+        "description": "Career pathways documented"
+      },
+      {
+        "label": "Tiger Challenge 2019",
+        "value": "Top 15",
+        "category": "Recognition",
+        "description": "MIT SOLVE Bangladesh startups"
+      }
+    ],
+    "tags": [
+      "entrepreneurship",
+      "edtech",
+      "research",
+      "workforce edtech"
+    ],
+    "metrics": {
+      "mau": "30K-45K",
+      "users": 1500000,
+      "status": "autopilot",
+      "funding": "$100K+"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "ef5ab186-6ffc-479a-b95e-afe3f9571995",
+        "name": "Bishwa",
+        "linkedinUrl": "https://www.linkedin.com/in/bishwamc/",
+        "role": "Co-founder",
+        "orderIndex": 1
+      },
+      {
+        "id": "0ad8af5d-0466-4ea5-82fa-45531d7620a0",
+        "name": "Dipesh",
+        "linkedinUrl": "https://www.linkedin.com/in/dipeshdewan/",
+        "role": "Co-founder",
+        "orderIndex": 2
+      },
+      {
+        "id": "1ac6a08d-1f68-4717-96eb-d422cd3f75d8",
+        "name": "Rakib",
+        "linkedinUrl": "https://www.linkedin.com/in/rakibulhaq/",
+        "role": "Backend Engineer",
+        "orderIndex": 3
+      },
+      {
+        "id": "2620d0b9-139c-4375-a2dc-73d80d0f5ce2",
+        "name": "Anupam",
+        "linkedinUrl": "https://www.linkedin.com/in/anupam-samodder/",
+        "role": "UX/UI Designer",
+        "orderIndex": 4
+      }
+    ]
+  },
+  {
+    "id": "d31b5b0b-7055-45d6-ba2a-e857cc7fe859",
+    "title": "Quizards – Bangla Edutainment Platform",
+    "year": 2014,
+    "company": "Quizards",
+    "role": "Co-founder & Product Lead",
+    "description": "Quizards a Bangla edutainment web platform.",
+    "lessons": "Learned to ship fast and iterate with early community feedback.",
+    "imageUrl": "/images/projects/quizards.png",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 7,
+    "category": "Entrepreneurship",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Startup",
+    "projectType": "Edutainment Edtech",
+    "situation": "Wanted to create a national platform in Bangla language to practice general knowledge trivia in interactive form.",
+    "task": "To promote inquisitiveness among youngs in Bangla language, I co-founded Quizards in 2014.",
+    "result": "Served over 0.25 million users. MAU range: 1.2K-1.5K. Currently we do not work for quizards, it is in autopilot mode.",
+    "contributions": [
+      {
+        "type": "Decision Strategy",
+        "contribution": "Co-founded Quizards platform",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Designed gamified quiz mechanics",
+        "value_chain_position": "upstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Total Users",
+        "value": "250K",
+        "category": "Scale",
+        "description": "Served till date"
+      },
+      {
+        "label": "Monthly Active Users",
+        "value": "1.2K-1.5K",
+        "category": "Engagement",
+        "description": "MAU range"
+      },
+      {
+        "label": "Online Start-ups Bangladesh 2016",
+        "value": "Top 10",
+        "category": "Recognition",
+        "description": "Award by G&R"
+      },
+      {
+        "label": "BRAC Manthan Digital Innovation Award 2016",
+        "value": "Special Mention",
+        "category": "Recognition",
+        "description": "Journalism and entertainment"
+      }
+    ],
+    "tags": [
+      "entrepreneurship",
+      "edutainment",
+      "gamification",
+      "quiz"
+    ],
+    "metrics": {
+      "mau": "1.2K-1.5K",
+      "users": 250000,
+      "status": "autopilot",
+      "language": "Bangla"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "9a720a1c-cb20-41d6-9f9c-06fd6af76ca4",
+        "name": "Bishwa",
+        "linkedinUrl": "https://www.linkedin.com/in/bishwamc/",
+        "role": "Co-founder",
+        "orderIndex": 1
+      },
+      {
+        "id": "3acc3cbc-4e07-47cc-b799-054ce3a0d607",
+        "name": "Dipesh",
+        "linkedinUrl": "https://www.linkedin.com/in/dipeshdewan/",
+        "role": "Co-founder",
+        "orderIndex": 2
+      },
+      {
+        "id": "9dd54e2f-627d-48da-b3dc-6299e30fd21c",
+        "name": "Shatil",
+        "linkedinUrl": "https://www.linkedin.com/in/aaqibmdshatil/",
+        "role": "Project Manager",
+        "orderIndex": 3
+      }
+    ]
+  },
+  {
+    "id": "34f858ee-96a4-4e9e-a30d-f20fb79bff8f",
+    "title": "Unibiome (France)",
+    "year": 2016,
+    "company": "Unibiome SAS",
+    "role": "Co-founder & COO",
+    "description": "Unibiome (previously known as Peer to Peer Probiotics): Engineered fermentative microbes using synthetic and molecular biology to fortify foods with micronutrients. Later discontinued.",
+    "lessons": "Learned how science and venture capital intersect through experimentation.",
+    "imageUrl": "/images/projects/unibiome-vitamins-chart.jpg",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 8,
+    "category": "Biotech",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Startup",
+    "projectType": "Synthetic biology",
+    "situation": "We won gold medal for our iGEM 2015 project as part of Paris Bettencourt team. The key idea was to engineer fermentative microbes to fortify foods with micronutrients like vitamins and iron.",
+    "task": "I was one of the cofounders and COO.",
+    "result": "Got 100K USD fund, participated in Rebelbio startup accelerator, Ireland in 2016. Special Prize for \"International Potential\", Genopole Young Biotech Prize 2016, France. Won 30K Euro Grant. Kirchner Food Fellowship in Thought for Food (TFF) Global Summit 2016, Zurich, Switzerland. Top 500 Deep Tech Start-ups in the world by Hello Tomorrow Summit 2016, Paris, France.",
+    "contributions": [
+      {
+        "type": "Decision Strategy",
+        "contribution": "Business Development & application for funding, competitions, grants",
+        "value_chain_position": "upstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Funding Raised",
+        "value": "$100K",
+        "category": "Financial",
+        "description": "From RebelBio accelerator"
+      },
+      {
+        "label": "Grant Won",
+        "value": "€30K",
+        "category": "Financial",
+        "description": "Genopole Young Biotech Prize, France"
+      },
+      {
+        "label": "Deep Tech Start-ups",
+        "value": "Top 500",
+        "category": "Recognition",
+        "description": "Hello Tomorrow Summit 2016"
+      },
+      {
+        "label": "iGEM 2015, MIT, USA",
+        "value": "Gold Medal",
+        "category": "Recognition",
+        "description": "Paris Bettencourt team"
+      }
+    ],
+    "tags": [
+      "biotech",
+      "entrepreneurship",
+      "probiotics",
+      "synthetic-biology"
+    ],
+    "metrics": {
+      "sector": "Biotech",
+      "status": "discontinued",
+      "funding": "$100K",
+      "location": "France"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [
+      {
+        "url": "https://thisismold.com/process/cook/unibiome-biotech-startup-is-tackling-malnutrition-with-engineered-probiotics",
+        "label": "MOLD Article - Unibiome BioTech Startup",
+        "description": "How This BioTech Startup is Tackling Malnutrition with Engineered Probiotics"
+      }
+    ],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": "Media",
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "4ebbb35f-77df-4814-9c2d-a15a3167d985",
+        "name": "Sophie",
+        "linkedinUrl": "https://www.linkedin.com/in/sophie-gontier-9b9b53109/",
+        "role": "Co-founder",
+        "orderIndex": 1
+      },
+      {
+        "id": "59035a9d-611a-4d4c-87bd-f4e4df4df359",
+        "name": "Ihab",
+        "linkedinUrl": "https://www.linkedin.com/in/ihabboulas/",
+        "role": "Co-founder",
+        "orderIndex": 2
+      },
+      {
+        "id": "38478ffb-e3a3-44da-bed0-272075a8a607",
+        "name": "Prateek",
+        "linkedinUrl": "https://www.linkedin.com/in/prateek-garg-4b416583/",
+        "role": "Co-founder",
+        "orderIndex": 3
+      },
+      {
+        "id": "cb267767-8c75-4ab7-bbfe-58d34a89e0bb",
+        "name": "Juanma",
+        "linkedinUrl": "https://www.linkedin.com/in/juanmagar/",
+        "role": "Co-founder",
+        "orderIndex": 4
+      }
+    ]
+  },
+  {
+    "id": "31339193-fc68-4fa7-a4d8-db496ccf97a8",
+    "title": "Teaching at the Right Level (TaRL)",
+    "year": 2024,
+    "company": "10 Minute School x Monash University",
+    "role": "Lead Product Manager",
+    "description": "Developed the TARA app using Teaching at the Right Level (TaRL) methodology for adaptive learning system for class 3-5 kids learning Math and English.",
+    "lessons": "Adaptive learning systems are most effective when grounded in proven pedagogy like TaRL, especially for foundational subjects.",
+    "imageUrl": "/images/projects/rct-tara-app.png",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 9,
+    "category": "Learning Science & Pedagogy",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "RCT",
+    "situation": "Class 3-5 students lacked adaptive learning support aligned with their actual learning levels in Math and English.",
+    "task": "Build and pilot TARA app using TaRL methodology in collaboration with Monash researchers.",
+    "result": "Project paused but it helped to develop a comprehensive and dynamic adaptive learning system for 10 Minute School. ",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Co-led RCT design for TaRL methodology",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "With the help of design team led the development of the prototype.",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Managed Monash collaboration and research coordination",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Students Planned to onboard",
+        "value": "3,000+",
+        "category": "Scale",
+        "description": "Class 3-5 students in RCT pilot"
+      },
+      {
+        "label": "Pilot Type",
+        "value": "Temporarily Paused.",
+        "category": "Research",
+        "description": "Randomized Controlled Trial"
+      },
+      {
+        "label": "Methodology",
+        "value": "TaRL",
+        "category": "Innovation",
+        "description": "Teaching at the Right Level"
+      },
+      {
+        "label": "Subjects",
+        "value": "Math & English",
+        "category": "Curriculum",
+        "description": "Core subjects for class 3-5"
+      }
+    ],
+    "tags": [
+      "adaptive-learning",
+      "UI/UX",
+      "taRL",
+      "gamification",
+      "research"
+    ],
+    "metrics": {
+      "subjects": "Math & English",
+      "methodology": "TaRL",
+      "target_grade": "3-5",
+      "collaboration": "Monash University",
+      "pilot_outcome": "paused"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "9c1a2b6b-34ed-4f01-b382-85549e355901",
+        "name": "Risan",
+        "linkedinUrl": "https://www.linkedin.com/in/mohammad-risan/",
+        "role": "Content Manager",
+        "orderIndex": 1
+      },
+      {
+        "id": "c6ae04d8-ab4d-4a3c-9238-efa566131d47",
+        "name": "Shihab",
+        "linkedinUrl": "https://www.linkedin.com/in/shihabus-siddiqin/",
+        "role": "Project Manager",
+        "orderIndex": 2
+      },
+      {
+        "id": "9f933e5e-53b0-4095-980b-f32f3bc9b7f4",
+        "name": "Tara",
+        "linkedinUrl": "https://www.linkedin.com/in/tarannum-azim-baigh/",
+        "role": "Researcher",
+        "orderIndex": 3
+      },
+      {
+        "id": "ea407f39-1bba-4f9b-a504-10777f70a098",
+        "name": "Dr. Asad",
+        "linkedinUrl": "https://www.linkedin.com/in/asad-islam-74a6bb80/",
+        "role": "Research Lead",
+        "orderIndex": 4
+      },
+      {
+        "id": "2de38de0-046f-4b06-bd1b-3efd22757006",
+        "name": "Mahbub",
+        "linkedinUrl": "https://www.linkedin.com/in/md-mahbubur-rahman07/",
+        "role": "Lead App Developer",
+        "orderIndex": 5
+      },
+      {
+        "id": "9543c304-7604-433e-a694-e88311d8f3e2",
+        "name": "Farhana",
+        "linkedinUrl": "https://www.linkedin.com/in/farhana-quayyum/",
+        "role": "Product Manager",
+        "orderIndex": 5
+      }
+    ]
   },
   {
     "id": "b33013ab-ce46-4757-8653-049c3a892412",
@@ -155,7 +950,7 @@
     "published": true,
     "phase": "Feature Suit",
     "projectType": "B2B",
-    "situation": "Bangladesh lacked digital teaching infrastructure at high school level for 140K+ teachers and would take 50+ years for Govt to physically train all teachers.",
+    "situation": "Bangladesh lacked digital teaching infrastructure at high school level for 140K+ teachers and would take 50+ years for Govt to physically train all teachers. ",
     "task": "Design comprehensive LMS for learning rollout, coordinate with FSU, Chemonics Int, A2i & Education Ministry/DSHE.",
     "result": "Secured $3M grant; trained 500 teachers and led the prototyping of the platform in 21 days. Later discontinued (USAID).",
     "contributions": [
@@ -195,7 +990,14 @@
         "description": "USAID grant funding. Later Discontinued."
       }
     ],
-    "tags": ["complex stakeholder management", "lms", "project management", "Govt project", "national scale", "DPI"],
+    "tags": [
+      "complex stakeholder management",
+      "lms",
+      "project management",
+      "Govt project",
+      "national scale",
+      "DPI"
+    ],
     "metrics": {
       "reach": "nationwide",
       "budget": "$3M",
@@ -217,7 +1019,6 @@
     "collaborators": [
       {
         "id": "377ed160-c506-45b7-a961-bd0a1662448b",
-        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
         "name": "Raied",
         "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
         "role": "CTO",
@@ -225,7 +1026,6 @@
       },
       {
         "id": "1eaa4509-9d33-42c0-bf34-76b61ba13734",
-        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
         "name": "Mehdi",
         "linkedinUrl": "https://www.linkedin.com/in/mehdisophy/",
         "role": "Edtech Consultant",
@@ -233,7 +1033,6 @@
       },
       {
         "id": "660daf06-685f-43b1-a20a-ea8207799880",
-        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
         "name": "Shad",
         "linkedinUrl": "https://www.linkedin.com/in/shad-iqbal/",
         "role": "Design Lead",
@@ -241,7 +1040,6 @@
       },
       {
         "id": "879e363b-a196-4ba9-9535-48dfd4317311",
-        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
         "name": "Shihab",
         "linkedinUrl": "https://www.linkedin.com/in/shihabus-siddiqin/",
         "role": "Project Manager",
@@ -249,11 +1047,1215 @@
       },
       {
         "id": "6b58c85c-c602-42bc-a35b-bad009b06238",
-        "projectId": "b33013ab-ce46-4757-8653-049c3a892412",
         "name": "Shipu",
         "linkedinUrl": "https://www.linkedin.com/in/toshipu/",
         "role": "Engineering Lead",
         "orderIndex": 4
+      }
+    ]
+  },
+  {
+    "id": "4d1d38e4-5fe8-4b8f-9b05-46049011ea76",
+    "title": "GenAI English Speaking Feature",
+    "year": 2025,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Developed an English-speaking GenAI feature for Bangla learners, focusing on contextual practice and feedback.",
+    "lessons": "GenAI speaking tools must balance linguistic accuracy with emotional confidence building.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 11,
+    "category": "GenAI & Language Learning",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "AI Product Dev",
+    "situation": "Bangladeshi students lacked affordable, interactive & locally contextual English-speaking practice platform.",
+    "task": "Design, train, and pilot GenAI conversational tutor in English learning course based on 30 real life scenarios. ",
+    "result": "Pilot ongoing.",
+    "contributions": [
+      {
+        "type": "AI Product Dev",
+        "contribution": "Defined AI product spec",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "LLM",
+        "contribution": "Assisted with LLM Gaurdrails",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "AI UI/UX",
+        "contribution": "AI Learning UX Development",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Status",
+        "value": "Pilot Ongoing",
+        "category": "Pilot",
+        "description": "30 Scenarios"
+      }
+    ],
+    "tags": [
+      "genai",
+      "prompt engineering",
+      "UX Design",
+      "conversational-ai"
+    ],
+    "metrics": {
+      "status": "Pilot"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "d2e8e505-aac4-4ca7-b1da-c815fe5681e1",
+        "name": "Uttam",
+        "linkedinUrl": "https://www.linkedin.com/in/uttam-deb/",
+        "role": "BI Engineer",
+        "orderIndex": 1
+      },
+      {
+        "id": "7354241b-6e0c-4c14-9801-d5f510ddff0e",
+        "name": "Shipu",
+        "linkedinUrl": "https://www.linkedin.com/in/toshipu/",
+        "role": "Engineering Lead",
+        "orderIndex": 2
+      },
+      {
+        "id": "532add98-d9d8-46c4-875c-a230c796d2a2",
+        "name": "Moshiur",
+        "linkedinUrl": "https://www.linkedin.com/in/moshiurhridoy/",
+        "role": "Designer",
+        "orderIndex": 3
+      },
+      {
+        "id": "d61ca155-3c77-4570-8f89-45456357abd3",
+        "name": "Raied",
+        "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
+        "role": "CTO",
+        "orderIndex": 4
+      }
+    ]
+  },
+  {
+    "id": "1c04c3aa-d61b-4bc9-9984-74eac1cd0e99",
+    "title": "Gamification System",
+    "year": 2024,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Designed gamification framework and behavioral design system for motivating learning streaks and engagement.",
+    "lessons": "Gamification works when tied to intrinsic learning motivation, not vanity points.",
+    "imageUrl": "/images/projects/gamification-system.png",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 12,
+    "category": "Behavioral & Gamification",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "Strategy",
+    "situation": "10MS did not have a detailed plan to scale the gamification system, particularly for converter and drainage system in the game economy. ",
+    "task": "Planned gamified system based on game economy, proper drainage/converter system and MDA (Mechanism > Design > Aesthetics) philosophy to achieve learning outcome and commercial goals.",
+    "result": "Clarity & Scaleable plan to build cascade of features and gamification system on the platform. ",
+    "contributions": [
+      {
+        "type": "UX Design",
+        "contribution": "Created gamification playbook",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Mapped behavioral triggers",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Collaborated with design & data teams",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": null,
+    "tags": [
+      "gamification",
+      "behavioral-design",
+      "strategy",
+      "learning-engagement",
+      "motivation"
+    ],
+    "metrics": {
+      "features": "Badges",
+      "feature_count": 3
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "903772ff-60a1-47cf-bc48-91d04efa3ec0",
+        "name": "Mohammad",
+        "linkedinUrl": "https://www.linkedin.com/in/mohammadsultankhaja/",
+        "role": "Senior Designer",
+        "orderIndex": 1
+      },
+      {
+        "id": "405f5b95-bc3d-495c-b792-0ec2fbe19b7d",
+        "name": "Shad",
+        "linkedinUrl": "https://www.linkedin.com/in/shad-iqbal/",
+        "role": "Lead Designer",
+        "orderIndex": 2
+      },
+      {
+        "id": "1bdc3706-d92a-42d6-9c1e-379e10a9a2b8",
+        "name": "Galib",
+        "linkedinUrl": "https://www.linkedin.com/in/galib-mubashir-4326531b7/",
+        "role": "Product Manager",
+        "orderIndex": 3
+      },
+      {
+        "id": "a61bc3fc-6f6a-4579-8a24-bb217152e1e1",
+        "name": "Farhan",
+        "linkedinUrl": "https://www.linkedin.com/in/farhanur-rahaman-56b605195/",
+        "role": "Product Manager",
+        "orderIndex": 4
+      }
+    ]
+  },
+  {
+    "id": "f6adecd5-1c59-4a03-9927-09867573c57b",
+    "title": "DAEF: Digital Economy & Sectoral Analysis",
+    "year": 2021,
+    "company": "Innovision Consulting",
+    "role": "Portfolio Manager",
+    "description": "Assisted to set up DAEF team to study digital economy, consumer behavior, and startup ecosystems across Bangladesh.\n",
+    "lessons": "Sectoral insights scale when frameworks are replicable and localized.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 14,
+    "category": "Consulting & Research",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Research",
+    "projectType": "B2B",
+    "situation": "Growing need for private sector-aligned research in development context.",
+    "task": "Manage 20+ clients, publish 15+ reports. Lead several experimental projects. ",
+    "result": "Delivered 4 industry white papers and 20 consulting outputs.",
+    "contributions": [
+      {
+        "type": "Decision Strategy",
+        "contribution": "Formed DAEF team",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Delivered white papers",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Managed 20+ clients",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Reports Delivered",
+        "value": "15",
+        "category": "Output",
+        "description": "Research and consulting outputs"
+      },
+      {
+        "label": "Clients Managed",
+        "value": "20+",
+        "category": "Scale",
+        "description": "B2B consulting clients"
+      },
+      {
+        "label": "White Papers",
+        "value": "4",
+        "category": "Thought Leadership",
+        "description": "Industry white papers published"
+      }
+    ],
+    "tags": [
+      "research",
+      "consulting",
+      "digital-economy",
+      "startup-ecosystem",
+      "b2b"
+    ],
+    "metrics": {
+      "clients": 20,
+      "reports": 15,
+      "surveys": 10
+    },
+    "companyUrl": "https://innovision-bd.com/",
+    "projectUrl": null,
+    "reportUrl": "https://innovision-bd.com/Impact/healthtech-in-bangladesh/",
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [
+      {
+        "url": "https://innovision-bd.com/Impact/healthtech-in-bangladesh/",
+        "label": "HealthTech in Bangladesh Report",
+        "description": "Healthtech is the use of technology in healthcare with an aim to improve efficiency, yield, and profitability. Healthtech startups work on services, products, or applications that are derived from healthcare, improving various processes."
+      },
+      {
+        "url": "https://innovision-bd.com/Impact/agritech-in-bangladesh/",
+        "label": "Agritech in Bangladesh Report",
+        "description": "Bangladesh has a superior competitive advantage of being of the most fertile delta/land on this earth, the country is blessed with superior agricultural industry from ancient times."
+      },
+      {
+        "url": "https://innovision-bd.com/Impact/fintech-in-bangladesh/",
+        "label": "Fintech in Bangladesh Report",
+        "description": "Bangladesh has all the right ingredients to welcome the second wave of Fintech services. The sector has so many possibilities and can offer so much more than just e-wallets and payment gateways."
+      },
+      {
+        "url": "https://innovision-bd.com/Impact/smetech-in-bangladesh/",
+        "label": "SMEtech in Bangladesh Report",
+        "description": "Bangladesh's SME sector serves as a catalyst for progress, bolstering the nation's workforce by creating 7.8 million jobs. Government initiatives driving digital adoption propel SME-tech startups and facilitate the country's digital transformation."
+      }
+    ],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": "Industry Sector Reports",
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "788524a8-f4ea-4227-9908-b94a09efaefe",
+        "name": "Rubaiyat",
+        "linkedinUrl": "https://www.linkedin.com/in/md-rubaiyath-sarwar-6b795123/",
+        "role": "Supervisor",
+        "orderIndex": 1
+      },
+      {
+        "id": "a9c7f3ac-5944-4174-8cc4-c4f5795c0d24",
+        "name": "Tania",
+        "linkedinUrl": "https://www.linkedin.com/in/tania-tabassum/",
+        "role": "Analyst",
+        "orderIndex": 2
+      },
+      {
+        "id": "9ce823de-f9a5-4b6b-9d17-1d4ee77ed5e3",
+        "name": "Nabila",
+        "linkedinUrl": "https://www.linkedin.com/in/nabila-nishat-raisa-0639b1164/",
+        "role": "Analyst",
+        "orderIndex": 3
+      }
+    ]
+  },
+  {
+    "id": "b495ab11-29f3-43be-a253-ac9ade03f66d",
+    "title": "Co-authored book on SMEs digital adoption",
+    "year": 2022,
+    "company": "Friedrich-Ebert-Stiftung (FES) x SME Foundation\n",
+    "role": "Co-Author & Researcher",
+    "description": "Co-authored book and journal exploring ICT adoption pace and challenges among Bangladeshi SMEs.",
+    "lessons": "SME digitization depends on managerial attitude more than technology cost.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 15,
+    "category": "Research Publication",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "B2B\n",
+    "projectType": "Digital Adoption",
+    "situation": "SMEs lagged in adopting ICT for productivity and competitiveness.",
+    "task": "Conduct nationwide interviews and co-author publication.",
+    "result": "Published book and peer-reviewed journal; informed SME policy dialogues.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Co-authored book",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Conducted SME survey & Interviews across Bangladesh",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Decision Strategy",
+        "contribution": "Published journal article",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "SME Industries",
+        "value": "09",
+        "category": "Research",
+        "description": "Research Scope"
+      },
+      {
+        "label": "Publication Years",
+        "value": "2021-2022",
+        "category": "Output",
+        "description": "Book and journal publication timeline"
+      }
+    ],
+    "tags": [
+      "research",
+      "sme",
+      "ict",
+      "publication",
+      "academic",
+      "policy"
+    ],
+    "metrics": {
+      "book_year": 2021,
+      "respondents": 500,
+      "journal_year": 2022
+    },
+    "companyUrl": "https://bangladesh.fes.de/",
+    "projectUrl": "https://bangladesh.fes.de/fileadmin/user_upload/pdf-files/Edited_for_Website_Combind-SME-Training-Manual_V4A.pdf",
+    "reportUrl": "http://ijsmed.smef.gov.bd/upload/issues/issues_05/articles/5_are_small_and_medium_enterprises_%28smes%29_in_bangladesh_adapting_ict_in_good_pace_challenges_and_way_forward.pdf",
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [
+      {
+        "url": "https://bangladesh.fes.de/fileadmin/user_upload/pdf-files/Edited_for_Website_Combind-SME-Training-Manual_V4A.pdf",
+        "label": "Co-authored Book: ICT Adoption of SMEs in Bangladesh",
+        "description": "Book: ICT Adoption of SMEs in Bangladesh, Dr. Mohammed Shafiul Alam Khan, Shazzad Hossain Mukit, Nabila Nishat Raisa. 2021, Friedrich-Ebert-Stiftung (FES) Bangladesh"
+      },
+      {
+        "url": "http://ijsmed.smef.gov.bd/upload/issues/issues_05/articles/5_are_small_and_medium_enterprises_%28smes%29_in_bangladesh_adapting_ict_in_good_pace_challenges_and_way_forward.pdf",
+        "label": "Journal Article: Are Small and Medium Enterprises (SMEs) in Bangladesh Adapting ICT at a Good Pace?",
+        "description": "Dr. Mohammed Shafiul Alam Khan, Shazzad Hossain Mukit. International Journal of SME Development, Issue 05, Jun 2022"
+      }
+    ],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "a80a010e-c442-470e-a620-ca92c9b98132",
+        "name": "Prof. Shafiq",
+        "linkedinUrl": "https://www.linkedin.com/in/shafiul-alam-khan/",
+        "role": "Co-author",
+        "orderIndex": 1
+      },
+      {
+        "id": "b41856b6-4ccb-41e8-a82a-603a0bafb12a",
+        "name": "Nabila",
+        "linkedinUrl": "https://www.linkedin.com/in/nabila-nishat-raisa-0639b1164/",
+        "role": "Co-author",
+        "orderIndex": 2
+      }
+    ]
+  },
+  {
+    "id": "2ac37748-ee57-45ea-87c4-9daf580e0c58",
+    "title": "IDRC: EdTech Policy Platform for SEA",
+    "year": 2025,
+    "company": "mPower x IDRC",
+    "role": "Consultant X Co-PI",
+    "description": "Multi-country research to strengthen policymakers capacities for appropriate EdTech integration.",
+    "lessons": "Policy research requires understanding both technical feasibility and political implementation challenges.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 16,
+    "category": "Research, Policy & Tech",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Research\n",
+    "projectType": "Tech Policy & Platform",
+    "situation": "In SEA, due to policymakers lacked contextual frameworks & platform for assessing EdTech tools and making evidence-based integration decisions.",
+    "task": "Designed frameworks for EdTech usage assessment, decision-making capability evaluation, and tech platform to find contextualized Edtech solutions for policymakers.",
+    "result": "Research and Tech platform development ongoing. ",
+    "contributions": [
+      {
+        "type": "Research",
+        "contribution": "Designing EdTech tools assessment frameworks",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Tech Platform",
+        "contribution": "Developing tech platform for policymakers to pick Edtech tools.",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Research Scope",
+        "value": "South-East Asia",
+        "category": "Scale",
+        "description": "Bangladesh, Sri-Lanka, Vietnam, Cambodia, Phillipines, etc."
+      },
+      {
+        "label": "Current Status",
+        "value": "Research Phase",
+        "category": "Development",
+        "description": "Cross-country analysis ongoing"
+      }
+    ],
+    "tags": [
+      "research",
+      "policy",
+      "edtech",
+      "policy frameworks",
+      "Tech4Dev"
+    ],
+    "metrics": {
+      "status": "synthesis",
+      "countries": "multiple",
+      "deliverables": "bangladesh_complete"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "851e787d-3ed1-49ac-a9ed-4602c292f6bd",
+        "name": "Jawad",
+        "linkedinUrl": "https://www.linkedin.com/in/jawad-ahmed-5a01b7367/",
+        "role": null,
+        "orderIndex": 1
+      },
+      {
+        "id": "e4616e94-f656-47b1-b737-71b49a5b63c6",
+        "name": "Mridul",
+        "linkedinUrl": "https://www.linkedin.com/in/mridulch/",
+        "role": null,
+        "orderIndex": 2
+      }
+    ]
+  },
+  {
+    "id": "6665081a-dd35-4fe7-ac0a-ec2886cce3b5",
+    "title": "Gamification: Financial Literacy Course\n",
+    "year": 2025,
+    "company": "10 Minute School x bKash",
+    "role": "Lead Product Manager",
+    "description": "Developed gamified learning modules for financial literacy with leaderboards, badges, and progress tracking.",
+    "lessons": "Financial literacy gamification works best when tied to real-world financial behaviors and decisions.",
+    "imageUrl": "/images/projects/gamification-demo.webm",
+    "videoPoster": "/images/projects/gamification-demo-poster.jpg",
+    "videoFallback": "/images/projects/gamification-demo.mov",
+    "orderIndex": 17,
+    "category": "Gamification",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "B2B2C",
+    "situation": "Introduced interactive ways to learn financial literacy concepts and build money management skills.",
+    "task": "Led product design and gamification logic integration across user journeys with leaderboards, badges, and progress tracking.",
+    "result": "Launched on Oct, 2025; awaiting learner engagement data to measure impact and retention.",
+    "contributions": [
+      {
+        "type": "UX Design",
+        "contribution": "Led product design for gamified learning modules",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Integrated gamification logic across user journeys",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Designed leaderboards, badges, and progress tracking systems",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Current Status",
+        "value": "Launched on Oct, '25",
+        "category": "Development",
+        "description": "Platform live and operational"
+      },
+      {
+        "label": "Features Delivered",
+        "value": "Gamified Modules",
+        "category": "Features",
+        "description": "Leaderboards, badges, progress tracking"
+      },
+      {
+        "label": "Enrollment",
+        "value": "1.7K",
+        "category": "Impact",
+        "description": "In first 07 days."
+      }
+    ],
+    "tags": [
+      "gamification",
+      "game economy",
+      "User journey"
+    ],
+    "metrics": {
+      "status": "launched",
+      "metrics": "pending",
+      "features": "gamification_complete"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "c1476979-47d4-491e-bd7e-0a3939af4c4c",
+        "name": "Shad",
+        "linkedinUrl": "https://www.linkedin.com/in/shad-iqbal/",
+        "role": "Design Lead",
+        "orderIndex": 1
+      },
+      {
+        "id": "715eafda-f90e-4d2b-b124-d907ad3e62cb",
+        "name": "Dip",
+        "linkedinUrl": "https://www.linkedin.com/in/diponkar10/",
+        "role": "Designer",
+        "orderIndex": 2
+      },
+      {
+        "id": "b80ae087-9fe6-4852-9aed-efb0c06dc275",
+        "name": "Raihana",
+        "linkedinUrl": "https://www.linkedin.com/in/raihana-rahim/",
+        "role": "Project Manager",
+        "orderIndex": 3
+      }
+    ]
+  },
+  {
+    "id": "35acac9a-c75b-4f11-a023-78d238accf08",
+    "title": "In Stealth Edtech Platform (A/O Levels - B2C)",
+    "year": 2025,
+    "company": "mPower",
+    "role": "Consulant",
+    "description": "Personalized exam prep and progress tracking for A/O level students with integrated assessment analytics. Developed digital distribution channels and growth strategies for scalable user acquisition.",
+    "lessons": "Student-focused design requires balancing personalization with simplicity. Digital distribution channels must align with student behavior and parent decision-making patterns.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 19,
+    "category": "Rapid Prototyping",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Prototype",
+    "projectType": "Global B2C Edtech",
+    "situation": "A/O level students needed personalized exam preparation and progress tracking tools. ",
+    "task": "Conducted 30+ teachers/student interviews and competitor analysis; designed student experience and MVP for personalized learning. ",
+    "result": "Handed off design for development in 3 weeks — reduced MVP delivery timeline from 1 year to 1 month for client. Assisting in scalable digital distribution framework for user acquisition.\n",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Conducted 30+ interviews for user research",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Performed competitor analysis for market positioning",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Rapid Prototyping through AI tools.",
+        "value_chain_position": "upstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Design Timeline",
+        "value": "3 Weeks",
+        "category": "Efficiency",
+        "description": "Complete UX design and research"
+      },
+      {
+        "label": "Timeline Reduction",
+        "value": "1 Year → 1 Month",
+        "category": "Impact",
+        "description": "MVP delivery acceleration"
+      },
+      {
+        "label": "User Research",
+        "value": "30+ Interviews",
+        "category": "Research",
+        "description": "Student interviews conducted"
+      },
+      {
+        "label": "Distribution Strategy",
+        "value": "Multi-Channel",
+        "category": "Growth",
+        "description": "Organic and Inorganic."
+      }
+    ],
+    "tags": [
+      "vibe coding",
+      "rapid prototyping",
+      "user research",
+      "Forward Deployed Engineer",
+      "strategy",
+      "distribution"
+    ],
+    "metrics": {
+      "interviews": 8,
+      "design_time": "3_weeks",
+      "growth_framework": "scalable",
+      "timeline_reduction": "12_to_1_month",
+      "distribution_channels": "multi_channel"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": []
+  },
+  {
+    "id": "e1f70ba7-585b-4895-b5c4-5ca35136fb77",
+    "title": "Course Rating System",
+    "year": 2023,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Introduced a new trust-based course rating metric — % of users rating 5/5.",
+    "lessons": "Trust-based metrics often provide more meaningful signals than traditional average ratings for educational content.",
+    "imageUrl": "/images/projects/rating-system.png",
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 21,
+    "category": "Trust & Credibility",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature",
+    "projectType": "Rating System Innovation",
+    "situation": "Traditional rating systems didn't effectively communicate course quality and credibility to learners. Most of them mention, number of users rating 4 and above. ",
+    "task": "Conceptualized and implemented rating logic for credibility benchmarking using percentage of 5-star ratings. \n",
+    "result": "First-of-its-kind course rating approach so far we knew.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Analyzed platform wide ratings for all the major courses.",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Conceptualized trust-based rating metric (% of 5-star ratings)",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "UX Design",
+        "contribution": "Implemented rating logic for credibility benchmarking",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Innovation",
+        "value": "First-of-its-kind",
+        "category": "Innovation",
+        "description": "New rating approach in Edtech"
+      },
+      {
+        "label": "Rating Metric",
+        "value": "5/5 Percentage",
+        "category": "Features",
+        "description": "Trust-based credibility measure"
+      }
+    ],
+    "tags": [
+      "rating-system",
+      "analysis",
+      "credibility",
+      "innovation",
+      "UI/UX",
+      "rapid prototyping"
+    ],
+    "metrics": {
+      "scope": "bangladesh_global",
+      "metric": "5_star_percentage",
+      "innovation": "first_of_kind"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "5e4fe50d-4980-431e-9821-856acdd1a16c",
+        "name": "Raied",
+        "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
+        "role": "CTO",
+        "orderIndex": 1
+      },
+      {
+        "id": "cceb1bea-2b5f-4808-8bfe-1c07c76a429c",
+        "name": "Dip",
+        "linkedinUrl": "https://www.linkedin.com/in/diponkar10/",
+        "role": "Designer",
+        "orderIndex": 2
+      }
+    ]
+  },
+  {
+    "id": "4ee5efb8-697f-45f3-a083-4d80e612bcec",
+    "title": "10MS Brand Recall Survey",
+    "year": 2024,
+    "company": "10 Minute School x Innovision Consulting",
+    "role": "Lead Product Manager",
+    "description": "Conducted comprehensive brand recall and pricing sensitivity survey across Bangladesh to understand market positioning and optimal pricing for English and Tech products.",
+    "lessons": "Brand recall surveys provide crucial insights for market expansion and pricing strategy, especially in emerging edtech markets.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 22,
+    "category": "Brand Recall",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Research",
+    "projectType": "Market Research",
+    "situation": "We wanted to understand 10MS brand recall & pricing sensitivity across Bangladesh particularly in some key regions to expand English and Tech business.",
+    "task": "Designed survey for 2300 respondents across Bangladesh, in 3 divisions- Dhaka, Chittagong, Sylhet. Product categories- Kids English, IELTS and Tech Skills. Pricing Analysis method: Van Westerndorp's price sensitivity meter.",
+    "result": "Brand recall across Tech courses & English Product categories- 22 to 25% and particularly in IELTS highest 31%.",
+    "contributions": [
+      {
+        "type": "Research Planning",
+        "contribution": "Designed comprehensive survey methodology and respondent selection strategy",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Questionnaire Development",
+        "contribution": "Developed survey questions and Van Westerndorp pricing analysis framework",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis & Report Preparation",
+        "contribution": "Analyzed survey data and prepared comprehensive market insights report",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Brand Recall - IELTS",
+        "value": "31%",
+        "category": "Brand Performance",
+        "description": "Highest brand recall among all product categories"
+      },
+      {
+        "label": "Brand Recall - Tech Courses",
+        "value": "22-25%",
+        "category": "Brand Performance",
+        "description": "Strong brand recognition in tech education"
+      },
+      {
+        "label": "Survey Scale",
+        "value": "2,300",
+        "category": "Research",
+        "description": "Respondents across 3 major divisions"
+      },
+      {
+        "label": "Market Coverage",
+        "value": "3 Divisions",
+        "category": "Geographic",
+        "description": "Dhaka, Chittagong, Sylhet"
+      }
+    ],
+    "tags": [
+      "Market Research",
+      "User Research",
+      "Pricing Research",
+      "Brand Recall"
+    ],
+    "metrics": {
+      "methodology": "Van Westerndorp",
+      "survey_scale": "2,300 respondents",
+      "brand_recall_tech": "22-25%",
+      "divisions_covered": 3,
+      "brand_recall_ielts": "31%",
+      "product_categories": 3
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": []
+  },
+  {
+    "id": "be82af94-bbe2-42e7-8d00-3fca701dad03",
+    "title": "Certificate Sharing Journey Optimization",
+    "year": 2023,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Optimized certificate sharing functionality to increase organic traffic and user engagement through improved public pages, profile sections, and tracking capabilities.",
+    "lessons": "Certificate sharing is crucial for organic growth and peer-to-peer marketing. Technical improvements combined with user experience enhancements can significantly impact engagement metrics.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 22,
+    "category": "Product Optimization",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature Suit",
+    "projectType": "Growth",
+    "situation": "Certificate was the key way to signal positive learning outcome among peers and becoming a major way to increase organic traffic. However, the sharing experience had technical issues and lacked proper tracking.",
+    "task": "Certificate Public Page UI Fix and PDP Redirection, Certificate (Profile) section sharing issue fix, UTM parameter added to Certificate public URLs for data tracking, Paid certificate template change.",
+    "result": "Within 6 months, increased Avg Certificates downloads by 66.11% and increased Avg visitors by 91.62%.",
+    "contributions": [
+      {
+        "type": "UX Design",
+        "contribution": "Certificate Public Page UI Fix and PDP Redirection",
+        "value_chain_position": "downstream"
+      },
+      {
+        "type": "Technical Implementation",
+        "contribution": "Certificate (Profile) section sharing issue fix",
+        "value_chain_position": "downstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "UTM parameter added to Certificate public URLs for data tracking",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Product Strategy",
+        "contribution": "Paid certificate template change",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Certificate Downloads Increase",
+        "value": "66.11%",
+        "category": "Growth",
+        "description": "Average certificates downloads improvement"
+      },
+      {
+        "label": "Visitor Increase",
+        "value": "91.62%",
+        "category": "Growth",
+        "description": "Average visitors improvement"
+      },
+      {
+        "label": "Timeline",
+        "value": "6 Months",
+        "category": "Timeline",
+        "description": "Project duration and results timeframe"
+      }
+    ],
+    "tags": [
+      "certification",
+      "analysis",
+      "organic-growth",
+      "tracking",
+      "optimization",
+      "product-enhancement"
+    ],
+    "metrics": {
+      "timeline": "6_months",
+      "utm_tracking": "implemented",
+      "visitors_increase": "91.62_percent",
+      "downloads_increase": "66.11_percent"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "a73b65e3-c40e-4e8a-866f-a9afcb5a832e",
+        "name": "Raied",
+        "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
+        "role": "CTO",
+        "orderIndex": 1
+      },
+      {
+        "id": "7c1261d1-c969-4af6-b40f-ca0424a8cebe",
+        "name": "Avipsu",
+        "linkedinUrl": "https://www.linkedin.com/in/avipsuarko/",
+        "role": "Content Lead",
+        "orderIndex": 2
+      },
+      {
+        "id": "05eb1455-328c-4c6e-9638-a78554929a0d",
+        "name": "Dip",
+        "linkedinUrl": "https://www.linkedin.com/in/diponkar10/",
+        "role": "Designer",
+        "orderIndex": 3
+      }
+    ]
+  },
+  {
+    "id": "d7aaaaa5-6892-4586-9d18-2731a9009b3d",
+    "title": "Course Validity Date Implementation",
+    "year": 2023,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Implemented course validity dates to drive user progress and course completion by creating urgency and clear deadlines for learners.",
+    "lessons": "Adding time constraints to courses can significantly improve user engagement and completion rates. Clear deadlines create psychological urgency that drives action.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 23,
+    "category": "Product Strategy",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Feature",
+    "projectType": "Learning Experience\n",
+    "situation": "After purchasing courses, users were not progressing or finishing courses, leading to poor completion rates and reduced learning outcomes.",
+    "task": "Implemented Course validation date system to create urgency and drive user engagement with clear deadlines for course completion.",
+    "result": "In 6 months, increased user course progress (for first 7 days) from 48% to 77%.",
+    "contributions": [
+      {
+        "type": "Product Strategy",
+        "contribution": "Designed course validity date system",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Technical Implementation",
+        "contribution": "Implemented course validation date functionality",
+        "value_chain_position": "midstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Monitored and optimized user progress metrics",
+        "value_chain_position": "downstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Progress Improvement",
+        "value": "48% → 77%",
+        "category": "Engagement",
+        "description": "User course progress increase in first 7 days"
+      },
+      {
+        "label": "Timeline",
+        "value": "6 Months",
+        "category": "Timeline",
+        "description": "Project duration and results timeframe"
+      },
+      {
+        "label": "Feature Implementation",
+        "value": "Validity Date",
+        "category": "Technical",
+        "description": "Course expiration system for urgency"
+      }
+    ],
+    "tags": [
+      "UX",
+      "learning experience",
+      "engagement",
+      "completion-rates",
+      "product-strategy"
+    ],
+    "metrics": {
+      "timeline": "6_months",
+      "validity_system": "implemented",
+      "progress_improvement": "48_to_77_percent"
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "b3476ec0-09d9-4f3b-8ae3-59eab202569d",
+        "name": "Raied",
+        "linkedinUrl": "https://www.linkedin.com/in/abyadraied94/",
+        "role": "CTO",
+        "orderIndex": 1
+      },
+      {
+        "id": "527d13cd-301d-409c-bcd5-2fd7a3cb679c",
+        "name": "Avipsu",
+        "linkedinUrl": "https://www.linkedin.com/in/avipsuarko/",
+        "role": "Content Lead",
+        "orderIndex": 2
+      }
+    ]
+  },
+  {
+    "id": "719045d8-21f8-461f-83c9-f2ac91a271b9",
+    "title": "Page Loading Time Optimization",
+    "year": 2024,
+    "company": "10 Minute School",
+    "role": "Lead Product Manager",
+    "description": "Comprehensive page performance optimization initiative that reduced loading times by 242% and improved Page Score by 1.45x through cross-team collaboration and systematic monitoring.",
+    "lessons": "Page performance directly impacts user experience and business metrics. Cross-functional collaboration is essential for successful performance optimization. Measurement and monitoring are critical for sustained improvements.",
+    "imageUrl": null,
+    "videoPoster": null,
+    "videoFallback": null,
+    "orderIndex": 24,
+    "category": "Performance Optimization",
+    "isUnlocked": true,
+    "published": true,
+    "phase": "Growth",
+    "projectType": "Technical Optimization",
+    "situation": "Page loading time across platform was not measured initially. When measured, it showed page loading time avg = 8.11 sec and Page Score Avg = 44.3 (web), leading to poor user experience and revenue loss.",
+    "task": "Established Page loading time dashboard for all customer-facing major pages, conducted analysis, and executed page loading time optimization drive in collaboration with design team, frontend team and content team.",
+    "result": "In 4 months, page loading time improved by 242% and page score got 1.45x better, helping to reduce dropout from pages and increase revenue.",
+    "contributions": [
+      {
+        "type": "Data Analysis",
+        "contribution": "Established Page loading time dashboard",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Data Analysis",
+        "contribution": "Analyzed performance bottlenecks across platform",
+        "value_chain_position": "upstream"
+      },
+      {
+        "type": "Project Management",
+        "contribution": "Led cross-team optimization drive",
+        "value_chain_position": "midstream"
+      },
+      {
+        "type": "Stakeholder Management",
+        "contribution": "Collaborated with design, frontend, and content teams",
+        "value_chain_position": "midstream"
+      }
+    ],
+    "keyResults": [
+      {
+        "label": "Loading Time Improvement",
+        "value": "242%",
+        "category": "Performance",
+        "description": "Page loading time optimization"
+      },
+      {
+        "label": "Page Score Improvement",
+        "value": "1.45x",
+        "category": "Performance",
+        "description": "Overall page performance score increase"
+      },
+      {
+        "label": "Timeline",
+        "value": "4 Months",
+        "category": "Timeline",
+        "description": "Project duration and results timeframe"
+      },
+      {
+        "label": "Initial Performance",
+        "value": "8.11s → Under 3s",
+        "category": "Baseline",
+        "description": "Brought top pages under 3 seconds."
+      }
+    ],
+    "tags": [
+      "performance optimization",
+      "loading-time",
+      "page-score",
+      "data analysis",
+      "metrics"
+    ],
+    "metrics": {
+      "timeline": "4_months",
+      "loading_improvement": "242_percent",
+      "page_score_improvement": "1.45x",
+      "cross_team_collaboration": true
+    },
+    "companyUrl": null,
+    "projectUrl": null,
+    "reportUrl": null,
+    "demoUrl": null,
+    "companyUrls": [],
+    "projectUrls": [],
+    "reportUrls": [],
+    "demoUrls": [],
+    "companyLabel": null,
+    "projectLabel": null,
+    "reportLabel": null,
+    "demoLabel": null,
+    "collaborators": [
+      {
+        "id": "72607422-396a-4151-ade0-d5787448b71e",
+        "name": "Saiful",
+        "linkedinUrl": "https://www.linkedin.com/in/saiful-bashar/",
+        "role": "Frontend Engineer",
+        "orderIndex": 1
+      },
+      {
+        "id": "5f9a9e6e-8577-47c3-8d47-4d77826622ca",
+        "name": "Sumaiya",
+        "linkedinUrl": "https://www.linkedin.com/in/sumaiyatzakaria/",
+        "role": "Senior Product Manager",
+        "orderIndex": 2
       }
     ]
   }
