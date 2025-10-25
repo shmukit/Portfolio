@@ -199,6 +199,8 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${interTight.variable} ${manrope.variable}`}>
       <head>
         <StructuredData />
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="iQDDLOtWrQWy-Mak4OH2Mh_GpPaPCCQgR9vpus3927s" />
         {/* Performance optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
