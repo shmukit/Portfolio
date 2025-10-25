@@ -3,6 +3,7 @@ import { Inter, Inter_Tight, Manrope } from 'next/font/google';
 import './globals.css';
 import StructuredData from './components/StructuredData';
 import PerformanceMonitor from './components/PerformanceMonitor';
+import { Analytics } from './components/Analytics';
 import { ThemeProvider } from '../lib/hooks/useTheme';
 
 // Optimize font loading
@@ -208,6 +209,7 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=no" />
       </head>
       <body className="antialiased font-manrope" suppressHydrationWarning={true}>
+        <Analytics />
         <ThemeProvider>
           <PerformanceMonitor />
           {children}
