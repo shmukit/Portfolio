@@ -6,13 +6,25 @@ import Script from 'next/script';
 // Google Analytics component
 export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
   useEffect(() => {
-    // Initialize Google Analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', measurementId, {
-        page_title: document.title,
-        page_location: window.location.href,
-      });
-    }
+    // Track page view on route change
+    const handleRouteChange = () => {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('config', measurementId, {
+          page_title: document.title,
+          page_location: window.location.href,
+        });
+      }
+    };
+
+    // Track initial page view
+    handleRouteChange();
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener('popstate', handleRouteChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
   }, [measurementId]);
 
   return (
@@ -53,12 +65,12 @@ export function MicrosoftClarity() {
 
 // Combined Analytics component
 export function Analytics() {
-  // You can add your Google Analytics Measurement ID here when you have it
-  const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  // Google Analytics Measurement ID
+  const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-K2973HDR5S';
 
   return (
     <>
-      {googleAnalyticsId && <GoogleAnalytics measurementId={googleAnalyticsId} />}
+      <GoogleAnalytics measurementId={googleAnalyticsId} />
       <MicrosoftClarity />
     </>
   );
