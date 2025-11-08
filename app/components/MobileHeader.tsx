@@ -13,9 +13,11 @@ interface MobileHeaderProps {
   theme: 'light' | 'dark';
   showPortfolio: boolean;
   onTogglePortfolio: () => void;
+  onOpenInvitations: () => void;
+  onOpenDeepDives: () => void;
 }
 
-export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }: MobileHeaderProps) {
+export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, onOpenInvitations, onOpenDeepDives }: MobileHeaderProps) {
   const { toggleTheme } = useTheme();
   return (
     <div className={`lg:hidden bg-transparent p-6 relative z-10 ${!showPortfolio ? 'min-h-screen flex items-center justify-center' : ''}`}>
@@ -90,12 +92,12 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
         </div>
         
         {/* Mobile CTA Buttons - Icons Only */}
-        <div className="flex items-center justify-start gap-3 pt-2">
+        <div className="flex items-end justify-start gap-4 pt-2 flex-wrap">
           <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <button
                 onClick={onTogglePortfolio}
@@ -139,6 +141,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   />
                 </svg>
               </button>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Portfolio
+              </span>
             </motion.div>
           </Suspense>
 
@@ -146,7 +153,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <a
                 href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
@@ -209,6 +216,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   />
                 </svg>
               </a>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Resume
+              </span>
             </motion.div>
           </Suspense>
 
@@ -216,7 +228,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <a
                 href="mailto:shazzadhossainmukit@gmail.com"
@@ -250,6 +262,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   />
                 </svg>
               </a>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Email
+              </span>
             </motion.div>
           </Suspense>
 
@@ -257,7 +274,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <a
                 href="https://www.linkedin.com/in/shazzad-hossain-mukit/"
@@ -277,6 +294,11 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                LinkedIn
+              </span>
             </motion.div>
           </Suspense>
 
@@ -284,7 +306,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex items-center justify-center"
+              className="flex flex-col items-center justify-center gap-1"
             >
               <a
                 href="https://github.com/shmukit"
@@ -304,6 +326,83 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
                   className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
                 />
               </a>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                GitHub
+              </span>
+            </motion.div>
+          </Suspense>
+
+          <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+              className="flex flex-col items-center justify-center gap-1"
+            >
+              <button
+                onClick={onOpenInvitations}
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
+                  theme === 'dark'
+                    ? 'text-gray-200 hover:text-white'
+                    : 'text-gray-700 hover:text-gray-900'
+                }`}
+                aria-label="Open invitations"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
+                >
+                  <path d="M4 4h4l2 3h6l2-3h2v16h-16v-16z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M8 14h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 14h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M16 14h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Invitations
+              </span>
+            </motion.div>
+          </Suspense>
+
+          <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+            <motion.div
+              whileHover={iconHover}
+              whileTap={iconTap}
+              className="flex flex-col items-center justify-center gap-1"
+            >
+              <button
+                onClick={onOpenDeepDives}
+                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
+                  theme === 'dark'
+                    ? 'text-gray-200 hover:text-white'
+                    : 'text-gray-700 hover:text-gray-900'
+                }`}
+                aria-label="Open deep dives"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
+                >
+                  <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <span className={`text-[10px] font-medium leading-none ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Deep dives
+              </span>
             </motion.div>
           </Suspense>
 
@@ -328,18 +427,18 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio }
             theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
           }`}>
           <div className="flex flex-col gap-3">
-            <div className={`text-sm ${
+            <div className={`text-[11px] ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
             }`}>
               Last updated: <span className="font-medium">October 2025</span>
             </div>
             
-            <div className={`text-sm flex items-center gap-2 ${
+            <div className={`text-[11px] flex items-center gap-2 ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
             }`}>
               <span>Vibed while making this site</span>
-              <span className="text-lg">☕</span>
-              <span className={`text-lg ${theme === 'dark' ? '' : 'text-gray-700'}`}>🎧</span>
+              <span className="text-base">☕</span>
+              <span className={`text-base ${theme === 'dark' ? '' : 'text-gray-700'}`}>🎧</span>
             </div>
           </div>
         </div>

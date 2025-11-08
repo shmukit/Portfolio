@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useTheme } from '../../lib/hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
@@ -11,6 +11,7 @@ import CTASection from './CTASection';
 import PortfolioClient from './PortfolioClient';
 import FailuresClient from './FailuresClient';
 import { Project } from '../../types/project';
+import { deepDiveProjects, invitationProjects } from '../data/resources';
 
 const AnimatedBackground = dynamic(() => import('./AnimatedBackground'), {
   ssr: false,
@@ -23,8 +24,55 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ projects }: ClientLayoutProps) {
   const { theme, toggleTheme } = useTheme();
-  const { showPortfolio, togglePortfolio } = usePortfolio();
+  const { showPortfolio, openPortfolio, closePortfolio } = usePortfolio();
   const { toggleFailures } = useFailuresToggle();
+  const [activeCollection, setActiveCollection] = useState<'projects' | 'invitations' | 'deepDives'>('projects');
+
+  const currentProjects = useMemo<Project[]>(() => {
+    if (activeCollection === 'invitations') {
+      return invitationProjects;
+    }
+    if (activeCollection === 'deepDives') {
+      return deepDiveProjects;
+    }
+    return projects;
+  }, [activeCollection, projects]);
+
+  const handlePortfolioToggle = useCallback(() => {
+    if (activeCollection !== 'projects') {
+      setActiveCollection('projects');
+      openPortfolio();
+      return;
+    }
+
+    if (showPortfolio) {
+      closePortfolio();
+    } else {
+      openPortfolio();
+    }
+  }, [activeCollection, closePortfolio, openPortfolio, showPortfolio]);
+
+  const handleCollectionToggle = useCallback((collection: 'invitations' | 'deepDives') => {
+    if (activeCollection === collection) {
+      if (showPortfolio) {
+        closePortfolio();
+      } else {
+        openPortfolio();
+      }
+      return;
+    }
+
+    setActiveCollection(collection);
+    openPortfolio();
+  }, [activeCollection, closePortfolio, openPortfolio, showPortfolio]);
+
+  const handleOpenInvitations = useCallback(() => {
+    handleCollectionToggle('invitations');
+  }, [handleCollectionToggle]);
+
+  const handleOpenDeepDives = useCallback(() => {
+    handleCollectionToggle('deepDives');
+  }, [handleCollectionToggle]);
 
   return (
     <main className="min-h-screen relative" role="main">
@@ -35,7 +83,9 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
       <MobileHeader 
         theme={theme} 
         showPortfolio={showPortfolio} 
-        onTogglePortfolio={togglePortfolio} 
+        onTogglePortfolio={handlePortfolioToggle}
+        onOpenInvitations={handleOpenInvitations}
+        onOpenDeepDives={handleOpenDeepDives}
       />
 
       <div className="hidden lg:block relative z-10">
@@ -44,7 +94,12 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
         <div className="flex">
-          <PortfolioClient projects={projects} theme={theme} showPortfolio={showPortfolio} />
+          <PortfolioClient 
+            key={activeCollection}
+            projects={currentProjects} 
+            theme={theme} 
+            showPortfolio={showPortfolio} 
+          />
 
           <div className={`flex-1 relative ${!showPortfolio && 'flex justify-center'}`}>
             <div className={`${showPortfolio ? 'fixed left-[352px] right-0' : 'w-full'} top-0 h-screen flex items-center justify-center pointer-events-none z-10`}>
@@ -106,8 +161,10 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
 
                   <CTASection 
                     theme={theme} 
-                    onTogglePortfolio={togglePortfolio} 
+                    onTogglePortfolio={handlePortfolioToggle} 
                     onToggleFailures={toggleFailures}
+                    onOpenInvitations={handleOpenInvitations}
+                    onOpenDeepDives={handleOpenDeepDives}
                     hasAnimated={true}
                   />
 
@@ -144,7 +201,12 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
       </div>
 
       <div className="lg:hidden relative z-10">
-        <PortfolioClient projects={projects} theme={theme} showPortfolio={showPortfolio} />
+        <PortfolioClient 
+          key={`${activeCollection}-mobile`}
+          projects={currentProjects} 
+          theme={theme} 
+          showPortfolio={showPortfolio} 
+        />
       </div>
 
       {/* Failures floating entry (both desktop and mobile) */}

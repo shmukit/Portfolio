@@ -5,9 +5,17 @@ import { useState } from 'react';
 export function usePortfolio() {
   const [showPortfolio, setShowPortfolio] = useState(false);
 
-  const togglePortfolio = () => {
-    setShowPortfolio(!showPortfolio);
+  const openPortfolio = () => {
+    setShowPortfolio(true);
   };
 
-  return { showPortfolio, togglePortfolio };
+  const closePortfolio = () => {
+    setShowPortfolio(false);
+  };
+
+  const togglePortfolio = () => {
+    setShowPortfolio((prev) => !prev);
+  };
+
+  return { showPortfolio, openPortfolio, closePortfolio, togglePortfolio };
 }

@@ -28,11 +28,13 @@ interface CTASectionProps {
   theme: 'light' | 'dark';
   onTogglePortfolio: () => void;
   onToggleFailures?: () => void;
+  onOpenInvitations?: () => void;
+  onOpenDeepDives?: () => void;
   isMobile?: boolean;
   hasAnimated?: boolean;
 }
 
-export default function CTASection({ theme, onTogglePortfolio, onToggleFailures, isMobile = false, hasAnimated = false }: CTASectionProps) {
+export default function CTASection({ theme, onTogglePortfolio, onToggleFailures, onOpenInvitations, onOpenDeepDives, isMobile = false, hasAnimated = false }: CTASectionProps) {
   if (isMobile) {
     // Mobile CTAs are handled in MobileHeader component
     return null;
@@ -92,6 +94,28 @@ export default function CTASection({ theme, onTogglePortfolio, onToggleFailures,
           label="GitHub" 
           href="https://github.com/shmukit"
           theme={theme}
+          hasAnimated={hasAnimated}
+        />
+      </Suspense>
+
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
+        <AnimatedCTA
+          type="invitations"
+          label="Invitations"
+          href="#"
+          theme={theme}
+          onClick={onOpenInvitations}
+          hasAnimated={hasAnimated}
+        />
+      </Suspense>
+
+      <Suspense fallback={<SkeletonButton theme={theme} />}>
+        <AnimatedCTA
+          type="deepdives"
+          label="Deep Dives"
+          href="#"
+          theme={theme}
+          onClick={onOpenDeepDives}
           hasAnimated={hasAnimated}
         />
       </Suspense>

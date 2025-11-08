@@ -1,7 +1,7 @@
 'use client';
 
 import { Project } from '../../types/project';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import PerformanceOptimizedImage from './PerformanceOptimizedImage';
 import AutoVideo from './AutoVideo';
@@ -9,9 +9,6 @@ import {
   pillBreathe,
   modalOverlay,
   modalContent,
-  mobileModalSlide,
-  mobileModalSlideLeft,
-  mobileModalSlideRight,
   buttonHover,
   buttonTap,
   iconHover,
@@ -37,6 +34,64 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
   const [glowColors, setGlowColors] = useState<Record<string, string>>({});
   const [slideDirection, setSlideDirection] = useState<'left' | 'right' | 'none'>('none');
   const shouldReduceMotion = useReducedMotion();
+
+  const mobileModalVariants: Variants = {
+    enter: (direction: 'left' | 'right' | 'none') => {
+      if (direction === 'left') {
+        return { x: '100%', y: 0, opacity: 0.85, scale: 0.98 };
+      }
+      if (direction === 'right') {
+        return { x: '-100%', y: 0, opacity: 0.85, scale: 0.98 };
+      }
+      return { x: 0, y: '100%', opacity: 0, scale: 0.95 };
+    },
+    center: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.32,
+        ease: [0.22, 0.61, 0.36, 1]
+      }
+    },
+    exit: (direction: 'left' | 'right' | 'none') => {
+      if (direction === 'left') {
+        return {
+          x: '-100%',
+          y: 0,
+          opacity: 0.85,
+          scale: 0.98,
+          transition: {
+            duration: 0.28,
+            ease: [0.4, 0, 0.2, 1]
+          }
+        };
+      }
+      if (direction === 'right') {
+        return {
+          x: '100%',
+          y: 0,
+          opacity: 0.85,
+          scale: 0.98,
+          transition: {
+            duration: 0.28,
+            ease: [0.4, 0, 0.2, 1]
+          }
+        };
+      }
+      return {
+        x: 0,
+        y: '100%',
+        opacity: 0,
+        scale: 0.95,
+        transition: {
+          duration: 0.26,
+          ease: [0.4, 0, 0.2, 1]
+        }
+      };
+    }
+  };
 
   const gradients = useMemo(() => [
     'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(6, 182, 212, 0.2))',
@@ -65,6 +120,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
   }, [glowColors, isPinned, getRandomGradient]);
 
   const handleProjectSelect = useCallback((project: Project) => {
+    setSlideDirection('none');
     setHoveredProject(project);
     setIsPinned(true);
     const index = projects.findIndex(p => p.id === project.id);
@@ -146,19 +202,12 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
     setTouchEnd(null);
   };
 
-  // Get the appropriate animation variant based on slide direction
-  const getModalAnimation = () => {
-    if (slideDirection === 'left') return mobileModalSlideLeft;
-    if (slideDirection === 'right') return mobileModalSlideRight;
-    return mobileModalSlide;
-  };
-
   // Reset slide direction after animation completes
   useEffect(() => {
     if (slideDirection !== 'none') {
       const timer = setTimeout(() => {
         setSlideDirection('none');
-      }, 300); // Reset after animation duration
+      }, 400); // Reset after animation duration
       return () => clearTimeout(timer);
     }
   }, [slideDirection]);
@@ -395,7 +444,7 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
       </div>
 
       {/* Mobile Modal */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait" initial={false}>
         {hoveredProject && (
           <motion.div
             className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-1"
@@ -476,10 +525,12 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
                   ? 'bg-gray-800 border-gray-700'
                   : 'bg-white border-gray-200'
               }`}
-              variants={getModalAnimation()}
-              initial="hidden"
-              animate="visible"
+              variants={mobileModalVariants}
+              initial="enter"
+              animate="center"
               exit="exit"
+              custom={slideDirection}
+              layout
               onClick={(e) => e.stopPropagation()}
               key={hoveredProject?.id}
             >

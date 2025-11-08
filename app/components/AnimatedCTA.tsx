@@ -11,6 +11,8 @@ const iconsMap: Record<string, string[]> = {
   portfolio: ["💼", "🎯", "🚀", "⚡"],
   tools: ["🛠️", "✏️", "📏", "🔧"],
   failures: ["❌", "⚠️", "💥", "🔄"],
+  invitations: ["🎤", "📢", "🎙️", "📽️"],
+  deepdives: ["🔍", "🧠", "📊", "🗂️"],
 };
 
 interface AnimatedCTAProps {
