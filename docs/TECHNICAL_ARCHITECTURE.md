@@ -75,8 +75,8 @@ const Sidebar = ({ years, activeYear, onYearClick }: SidebarProps) => {
     <aside className="fixed left-0 top-0 h-full w-80 bg-white border-r">
       {/* Name and tagline */}
       <div className="sticky top-0 bg-white p-8 border-b">
-        <h1 className="text-2xl font-bold">Your Name</h1>
-        <p className="text-gray-600">Your Tagline</p>
+        <h1 className="text-2xl font-bold">Shazzad Hossain Mukit</h1>
+        <p className="text-gray-600">Product Manager | Data, Decision & Design</p>
       </div>
 
       {/* Year navigation */}

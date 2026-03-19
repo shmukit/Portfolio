@@ -1,6 +1,8 @@
-# Interactive Portfolio Timeline
+# Shazzad Hossain Mukit – Product Manager Portfolio
 
 A premium, interactive portfolio showcasing project milestones through a dynamic timeline. Built with **Next.js**, **Supabase**, and **Framer Motion**, this project demonstrates a commitment to clean architecture, high-performance web standards, and exceptional UX.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
