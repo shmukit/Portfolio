@@ -1,4 +1,14 @@
-# Technical Architecture
+# System Design & Technical Architecture
+
+This document outlines the architectural decisions, component structure, and data flow of the Portfolio project. It is designed to demonstrate systemic thinking and professional engineering standards.
+
+## Design Decisions
+
+- **Next.js (App Router)**: Chosen for its robust routing, server-side rendering (SSR) capabilities, and excellent developer experience. App Router allows for efficient data fetching and improved performance.
+- **Supabase**: Selected as a "backend-as-a-service" to handle PostgreSQL hosting, real-time features, and secure data access (RLS) without the overhead of managing a custom server.
+- **Tailwind CSS**: Used for rapid UI development with a consistent design system. It ensures the bundle stays lean by purging unused styles.
+- **Framer Motion**: Integrated for high-quality micro-interactions and transitions, elevating the user experience from static to dynamic.
+- **Mobile-First Responsive Design**: Ensures a premium experience across all devices, from smartphones to large desktops.
 
 ## Project Structure
 
@@ -450,3 +460,7 @@ export const staggerContainer: Variants = {
 - **Memory management**: Proper cleanup of event listeners
 
 This architecture provides a solid foundation for a performant, accessible, and maintainable portfolio application that delivers an excellent user experience across all devices.
+
+---
+
+*Last updated: March 2026*
