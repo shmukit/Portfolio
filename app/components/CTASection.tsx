@@ -62,7 +62,7 @@ export default function CTASection({ theme, onTogglePortfolio, onToggleFailures,
         <AnimatedCTA 
           type="cv" 
           label="CV" 
-          href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+          href="https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing"
           theme={theme}
           hasAnimated={hasAnimated}
         />
@@ -72,7 +72,7 @@ export default function CTASection({ theme, onTogglePortfolio, onToggleFailures,
         <AnimatedCTA 
           type="email" 
           label="Email" 
-          href="mailto:shazzadhossainmukit@gmail.com"
+          href="#"
           theme={theme}
           hasAnimated={hasAnimated}
         />

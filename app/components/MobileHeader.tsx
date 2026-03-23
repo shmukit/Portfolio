@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { iconHover, iconTap } from '../../lib/utils/animations';
 import ThemeToggle from './ThemeToggle';
@@ -19,6 +19,82 @@ interface MobileHeaderProps {
 
 export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, onOpenInvitations, onOpenDeepDives }: MobileHeaderProps) {
   const { toggleTheme } = useTheme();
+  const [showEmailTooltip, setShowEmailTooltip] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+  const emailTooltipRef = useRef<HTMLDivElement>(null);
+  const emailContainerRef = useRef<HTMLDivElement>(null);
+  const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const emailAddresses = ["shazzadhossainmukit@gmail.com", "mukit@moncho.ai"];
+
+  const copyEmail = async (emailAddress: string) => {
+    let copied = false;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(emailAddress);
+        copied = true;
+      }
+    } catch {
+      copied = false;
+    }
+
+    if (!copied) {
+      const textArea = document.createElement('textarea');
+      textArea.value = emailAddress;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      copied = document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+
+    if (copied) {
+      setCopiedEmail(emailAddress);
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+      copyResetTimeoutRef.current = setTimeout(() => {
+        setCopiedEmail(null);
+      }, 1800);
+    }
+  };
+
+  useEffect(() => {
+    if (!showEmailTooltip) {
+      return;
+    }
+
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (emailContainerRef.current && !emailContainerRef.current.contains(event.target as Node)) {
+        setShowEmailTooltip(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShowEmailTooltip(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [showEmailTooltip]);
+
+  useEffect(() => {
+    return () => {
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className={`lg:hidden bg-transparent p-6 relative z-10 ${!showPortfolio ? 'min-h-screen flex items-center justify-center' : ''}`}>
       {/* Pin toggle to header's top-right, not viewport */}
@@ -156,7 +232,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
               className="flex flex-col items-center justify-center gap-1"
             >
               <a
-                href="https://drive.google.com/file/d/1kotdk1LONJx3ZYHZqkmIALWtZV7rRDlp/view?usp=sharing"
+                href="https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
@@ -228,40 +304,121 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
             <motion.div
               whileHover={iconHover}
               whileTap={iconTap}
-              className="flex flex-col items-center justify-center gap-1"
+              className="relative flex flex-col items-center justify-center gap-1"
+              ref={emailContainerRef}
             >
-              <a
-                href="mailto:shazzadhossainmukit@gmail.com"
-                className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
-                  theme === 'dark'
-                    ? 'text-gray-200 hover:text-white'
-                    : 'text-gray-700 hover:text-gray-900'
-                }`}
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setShowEmailTooltip((prev) => !prev)}
+                  aria-label="Open email copy tooltip"
+                  aria-expanded={showEmailTooltip}
+                  aria-haspopup="dialog"
+                  className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
+                    theme === 'dark'
+                      ? 'text-gray-200 hover:text-white'
+                      : 'text-gray-700 hover:text-gray-900'
+                  }`}
                 >
-                  <path
-                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
-                    stroke={theme === 'dark' ? 'currentColor' : 'currentColor'}
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <polyline
-                    points="22,6 12,13 2,6"
-                    stroke={theme === 'dark' ? 'currentColor' : 'currentColor'}
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 transition-all duration-150 group-hover:scale-110"
+                  >
+                    <path
+                      d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                      stroke={theme === 'dark' ? 'currentColor' : 'currentColor'}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <polyline
+                      points="22,6 12,13 2,6"
+                      stroke={theme === 'dark' ? 'currentColor' : 'currentColor'}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                {showEmailTooltip && (
+                  <div
+                    ref={emailTooltipRef}
+                    role="dialog"
+                    aria-label="Email address and copy action"
+                    style={{
+                      position: 'absolute',
+                      bottom: 'calc(100% + 10px)',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      zIndex: 60,
+                      minWidth: '240px',
+                      backgroundColor: '#1e293b',
+                      borderRadius: '14px',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      padding: '12px 14px',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.45)',
+                    }}
+                  >
+                    <div
+                      aria-hidden="true"
+                      style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 0,
+                        height: 0,
+                        borderLeft: '8px solid transparent',
+                        borderRight: '8px solid transparent',
+                        borderTop: '8px solid #1e293b',
+                      }}
+                    />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {emailAddresses.map((emailAddress) => (
+                        <div key={emailAddress} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                          <span style={{ fontSize: '11px', color: '#f1f5f9', whiteSpace: 'nowrap' }}>{emailAddress}</span>
+                          <button
+                            type="button"
+                            onClick={() => copyEmail(emailAddress)}
+                            aria-label={`Copy ${emailAddress}`}
+                            style={{
+                              flexShrink: 0,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              backgroundColor: copiedEmail === emailAddress ? '#15803d' : '#334155',
+                              color: '#f1f5f9',
+                              borderRadius: '8px',
+                              border: '1px solid rgba(255,255,255,0.18)',
+                              padding: '4px 10px',
+                              fontSize: '11px',
+                              fontWeight: 500,
+                              cursor: 'pointer',
+                              transition: 'background-color 0.15s',
+                            }}
+                          >
+                            {copiedEmail === emailAddress ? (
+                              <>
+                                <svg width="12" height="12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                  <path d="M4 10.5L8 14.5L16 6.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                <span role="status">Copied</span>
+                              </>
+                            ) : (
+                              'Copy'
+                            )}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
               <span className={`text-[10px] font-medium leading-none ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>

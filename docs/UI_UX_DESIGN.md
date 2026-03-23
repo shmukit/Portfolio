@@ -66,6 +66,10 @@ Technical implementation details live in `docs/TECHNICAL_ARCHITECTURE.md`.
 - **Modal open/close**: backdrop fade + panel motion.
 - **Close affordance**: visible close icon and backdrop dismissal.
 - **Bullet parsing in STAR blocks**: hyphen-separated lines render as visual bullet lists for readability.
+- **Email quick action (desktop + mobile)**: click/tap opens a compact tooltip with email text and `Copy` CTA instead of direct mail client navigation.
+- **Copy confirmation feedback**: successful copy transitions CTA to `Copied` with a check icon for clear acknowledgment.
+- **Tooltip dismissal**: outside click/tap and `Escape` close the tooltip.
+- **Theme-aware tooltip states**: tooltip and copy CTA styling adapt to active light/dark mode with maintained contrast.
 
 ## Motion System
 
@@ -95,6 +99,7 @@ Technical implementation details live in `docs/TECHNICAL_ARCHITECTURE.md`.
 - Rounded cards/chips with soft borders and restrained shadows.
 - Tags use pill treatment and wrap naturally instead of truncating with overflow counters.
 - Media containers preserve aspect constraints and responsive sizing.
+- CTA micro-panels (such as Email tooltip) follow the same semantic contrast rules in both themes.
 
 ## Responsive and Input Adaptation
 
@@ -125,7 +130,7 @@ Technical implementation details live in `docs/TECHNICAL_ARCHITECTURE.md`.
 - **PortfolioClient**: project discovery, modal management, and mobile navigation.
 - **ProjectContent**: STAR narrative readability and evidence density.
 - **FailuresClient**: symmetric detail exploration for failed experiments.
-- **CTASection**: clear wayfinding into portfolio, deep dives, and invitations.
+- **CTASection**: clear wayfinding into portfolio, deep dives, invitations, and email-copy interaction.
 
 ## Future UX Backlog
 

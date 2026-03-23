@@ -39,6 +39,9 @@ flowchart LR
 - `app/layout.tsx`: global metadata, structured data injection, providers.
 - `app/page.tsx`: app entry that loads projects and renders the client layout.
 - `app/components/ClientLayout.tsx`: route-level composition, theme coordination, section orchestration.
+- `app/components/CTASection.tsx`: desktop CTA composition, including Email trigger wiring and CV external link.
+- `app/components/AnimatedCTA.tsx`: shared desktop CTA interaction layer, including theme-aware Email tooltip + copy feedback state.
+- `app/components/MobileHeader.tsx`: mobile hero quick actions, including theme-aware Email tooltip + copy feedback state.
 - `app/components/PortfolioClient.tsx`: interactive portfolio modal/list flows for desktop and mobile.
 - `app/components/ProjectContent.tsx`: project details rendering with STAR blocks, tags, and CTAs.
 - `app/components/FailuresClient.tsx`: failures stream and detail overlay.
@@ -78,6 +81,19 @@ flowchart TD
 - **Derived state**:
   - collection switching (`projects`, `invitations`, `deepDives`)
   - conditional section visibility based on content availability
+
+## Homepage CTA Interaction Notes
+
+- **Email behavior (desktop + mobile)**:
+  - Email CTA opens an inline tooltip instead of navigating to `mailto:`.
+  - Tooltip shows the canonical email address and a copy action.
+  - Copy success state updates to `Copied` with a check icon, then resets automatically.
+  - Tooltip supports outside-click and `Escape` dismissal.
+- **Theme adaptation**:
+  - Tooltip background, border, text, and button hover states are derived from the active light/dark theme.
+- **Resume link**:
+  - Current CV URL used across desktop and mobile CTA surfaces:
+    - `https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing`
 
 ## Performance and Reliability
 
