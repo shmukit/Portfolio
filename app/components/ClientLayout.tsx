@@ -175,7 +175,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
                       <div className={`text-sm ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                   }`}>
-                        Last updated: <span className="font-medium">October 2025</span>
+                        Last Updated: <span className="font-medium">March, 2026</span>
                       </div>
 
                       <div className={`text-sm flex items-center gap-2 ${

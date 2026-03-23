@@ -5,6 +5,44 @@ import { Project } from '../../types/project';
 import UrlCTAMultiple from './UrlCTAMultiple';
 import CollaboratorsSection from './CollaboratorsSection';
 
+const renderParagraphOrBullets = (
+  text: string,
+  theme: string
+) => {
+  const normalizedText = text
+    .replace(/\r\n/g, '\n')
+    .replace(/[•–—−]/g, '-')
+    .replace(/^\s*-\s+/gm, '- ')
+    .replace(/\s+-\s+/g, '\n- ')
+    .trim();
+  const lines = normalizedText.split('\n').map((line) => line.trim()).filter(Boolean);
+  const bulletItems = lines
+    .filter((line) => line.startsWith('-'))
+    .map((line) => line.replace(/^-+\s*/, '').trim())
+    .filter(Boolean);
+
+  const shouldRenderBullets = lines.length > 1 && bulletItems.length === lines.length;
+
+  if (shouldRenderBullets) {
+    return (
+      <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+        {bulletItems.map((item, index) => (
+          <li key={`${item}-${index}`} className="text-sm leading-relaxed flex items-start">
+            <span className="text-gray-500 mr-2 mt-1">•</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+      {text}
+    </p>
+  );
+};
+
 // Memoized Project Content Component for better performance
 const ProjectContent = memo(({ 
   project, 
@@ -12,8 +50,11 @@ const ProjectContent = memo(({
 }: {
   project: Project;
   theme: string;
-}) => (
-  <div className="flex gap-8 h-full">
+}) => {
+  const visibleTags = (project.tags || []).filter((tag) => !/^\+\d+$/.test(tag.trim()));
+
+  return (
+    <div className="flex gap-8 h-full">
     {/* Left Column - Project Details */}
     <div className="flex-1 space-y-6">
       {/* Project Description - Only show if it doesn't contain tag names */}
@@ -51,11 +92,7 @@ const ProjectContent = memo(({
                 <h3 className={`text-sm font-semibold mb-2 ${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
               }`}>Task</h3>
-                <p className={`text-sm leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {project.task}
-              </p>
+                {renderParagraphOrBullets(project.task, theme)}
             </div>
         )}
 
@@ -65,11 +102,7 @@ const ProjectContent = memo(({
                 <h3 className={`text-sm font-semibold mb-2 ${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
               }`}>Result</h3>
-                <p className={`text-sm leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {project.result}
-              </p>
+                {renderParagraphOrBullets(project.result, theme)}
             </div>
         )}
 
@@ -138,7 +171,7 @@ const ProjectContent = memo(({
         )}
 
           {/* Skills & Technologies Card */}
-      {project.tags && project.tags.length > 0 && (
+      {visibleTags.length > 0 && (
             <div className={`p-4 rounded-lg shadow-sm ${
             theme === 'dark'
                 ? 'bg-gray-800/50 border border-gray-700' 
@@ -148,7 +181,7 @@ const ProjectContent = memo(({
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
               }`}>Skills & Technologies</h3>
           <div className="flex flex-wrap gap-2">
-                {project.tags.slice(0, 6).map((tag, index) => (
+                {visibleTags.map((tag, index) => (
                   <span key={index} className={`text-xs px-2 py-1 rounded-full ${
                     theme === 'dark'
                       ? 'bg-gray-700 text-gray-200' 
@@ -157,15 +190,6 @@ const ProjectContent = memo(({
                 {tag}
               </span>
             ))}
-                {project.tags.length > 6 && (
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    theme === 'dark' 
-                      ? 'bg-gray-700 text-gray-200' 
-                      : 'bg-gray-200 text-gray-700'
-                  }`}>
-                    +{project.tags.length - 6}
-                  </span>
-                )}
           </div>
         </div>
       )}
@@ -190,7 +214,8 @@ const ProjectContent = memo(({
       </div>
     </div>
   </div>
-));
+  );
+});
 
 ProjectContent.displayName = 'ProjectContent';
 

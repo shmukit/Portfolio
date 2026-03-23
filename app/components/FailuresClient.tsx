@@ -19,6 +19,39 @@ interface FailuresClientProps {
   theme: string;
 }
 
+const renderParagraphOrBullets = (
+  text: string,
+  theme: string
+) => {
+  const normalizedText = text.replace(/\s-\s+/g, '\n- ').trim();
+  const lines = normalizedText.split('\n').map((line) => line.trim()).filter(Boolean);
+  const bulletItems = lines
+    .filter((line) => line.startsWith('-'))
+    .map((line) => line.replace(/^-+\s*/, '').trim())
+    .filter(Boolean);
+
+  const shouldRenderBullets = lines.length > 1 && bulletItems.length === lines.length;
+
+  if (shouldRenderBullets) {
+    return (
+      <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+        {bulletItems.map((item, index) => (
+          <li key={`${item}-${index}`} className="text-sm leading-relaxed flex items-start">
+            <span className="text-gray-500 mr-2 mt-1">•</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+      {text}
+    </p>
+  );
+};
+
 // Returns true if the failure has enough content to show a modal
 const hasDetails = (failure: Failure): boolean => {
   return !!(
@@ -238,14 +271,14 @@ export default function FailuresClient({ theme }: FailuresClientProps) {
                         {selectedFailure.task && (
                           <div>
                             <h3 className={`text-sm font-semibold mb-2 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>Task</h3>
-                            <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{selectedFailure.task}</p>
+                            {renderParagraphOrBullets(selectedFailure.task, theme)}
                           </div>
                         )}
 
                         {selectedFailure.result && (
                           <div>
                             <h3 className={`text-sm font-semibold mb-2 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>Result</h3>
-                            <p className={`text-sm leading-relaxed ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{selectedFailure.result}</p>
+                            {renderParagraphOrBullets(selectedFailure.result, theme)}
                           </div>
                         )}
                       </div>

@@ -1,36 +1,38 @@
-# Documentation
+# Documentation Index
 
-This folder contains all project documentation, organized by category.
+This index defines canonical ownership for each documentation area.
 
-## 📁 Folder Structure
+## Canonical Docs
 
-### `/seo/`
-- **Purpose**: SEO analysis and implementation documentation
-- **Files**:
-  - `SEO_ANALYSIS_REPORT.md` - Initial SEO analysis
-  - `SEO_COMPLETED.md` - Completed SEO tasks
-  - `SEO_FINAL_SUMMARY.md` - Final SEO summary
-  - `SEO_IMPLEMENTATION_PLAN.md` - SEO implementation plan
-  - `SEO_IMPROVEMENTS_SUMMARY.md` - Summary of SEO improvements
-  - `SEO_KEYWORDS_STRATEGY.md` - Keywords strategy
-  - `SEO_QUICK_REFERENCE.md` - Quick reference guide
+- **System Design**: `docs/TECHNICAL_ARCHITECTURE.md`
+- **UI/UX Design**: `docs/UI_UX_DESIGN.md`
+- **Product Requirements**: `docs/PROJECT_SPEC.md`
+- **SEO Strategy and Ops**: `docs/seo/SEO_FINAL_SUMMARY.md`
+- **SEO Quick Runbook**: `docs/seo/SEO_QUICK_REFERENCE.md`
+- **Project Onboarding**: `docs/project/README.md`
+- **OG Asset Instructions**: `docs/technical/OG_IMAGE_INSTRUCTIONS.md`
 
-### `/technical/`
-- **Purpose**: Technical documentation and guides
-- **Files**:
-  - `OG_IMAGE_INSTRUCTIONS.md` - Open Graph image instructions
-  - `INTERACTION_DESIGN.md` - Interaction design guidelines
-  - `PROJECT_SPEC.md` - Project specifications
-  - `STYLE_GUIDE.md` - Style guide
-  - `TECHNICAL_ARCHITECTURE.md` - Technical architecture
+## Folders
 
-### `/project/`
-- **Purpose**: Project overview and main documentation
-- **Files**:
-  - `README.md` - Main project README
+### `docs/seo/`
+- Active SEO docs and SEO archive.
+- Historical SEO lifecycle docs are under `docs/seo/archive/`.
 
-## 📖 Quick Reference
+### `docs/project/`
+- Quickstart and contributor entrypoint.
 
-- **For SEO**: Check `/seo/` folder for all SEO-related documentation
-- **For Development**: Check `/technical/` folder for technical guidelines
-- **For Project Overview**: Check `/project/README.md` for main project information
+### `docs/technical/`
+- Technical operational instructions (currently OG image workflow).
+
+### `docs/archive/`
+- Non-SEO historical docs that were consolidated into canonical files.
+
+## Consolidation Rules
+
+- Avoid creating parallel docs for the same topic.
+- Update canonical files first; archive superseded docs.
+- Keep runbooks short, and keep strategy in canonical summaries.
+
+---
+
+*Last updated: March 2026*

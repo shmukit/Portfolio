@@ -430,7 +430,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
             <div className={`text-[11px] ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
             }`}>
-              Last updated: <span className="font-medium">October 2025</span>
+              Last Updated: <span className="font-medium">March, 2026</span>
             </div>
             
             <div className={`text-[11px] flex items-center gap-2 ${
