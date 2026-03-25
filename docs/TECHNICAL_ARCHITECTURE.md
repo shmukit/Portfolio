@@ -93,7 +93,7 @@ flowchart TD
   - Tooltip background, border, text, and button hover states are derived from the active light/dark theme.
 - **Resume link**:
   - Current CV URL used across desktop and mobile CTA surfaces:
-    - `https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing`
+    - `https://drive.google.com/file/d/1c845mjNezP856-Tu57qJjesFghtJHi5a/view?usp=sharing`
 
 ## Performance and Reliability
 

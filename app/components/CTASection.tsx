@@ -62,7 +62,7 @@ export default function CTASection({ theme, onTogglePortfolio, onToggleFailures,
         <AnimatedCTA 
           type="cv" 
           label="CV" 
-          href="https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing"
+          href="https://drive.google.com/file/d/1c845mjNezP856-Tu57qJjesFghtJHi5a/view?usp=sharing"
           theme={theme}
           hasAnimated={hasAnimated}
         />

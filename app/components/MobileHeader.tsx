@@ -232,7 +232,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
               className="flex flex-col items-center justify-center gap-1"
             >
               <a
-                href="https://drive.google.com/file/d/1s8rXZ-SGJG6XRAxBCmvyMv18QARF8mBn/view?usp=sharing"
+                href="https://drive.google.com/file/d/1c845mjNezP856-Tu57qJjesFghtJHi5a/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center justify-center w-8 h-8 ${
