@@ -48,8 +48,7 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
   );
 }
 
-// Microsoft Clarity component
-export function MicrosoftClarity() {
+export function MicrosoftClarity({ projectId }: { projectId: string }) {
   return (
     <Script id="microsoft-clarity" strategy="afterInteractive">
       {`
@@ -57,21 +56,20 @@ export function MicrosoftClarity() {
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
           t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "tvkllcaqtr");
+        })(window, document, "clarity", "script", "${projectId}");
       `}
     </Script>
   );
 }
 
-// Combined Analytics component
 export function Analytics() {
-  // Google Analytics Measurement ID
-  const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-K2973HDR5S';
+  const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
 
   return (
     <>
-      <GoogleAnalytics measurementId={googleAnalyticsId} />
-      <MicrosoftClarity />
+      {googleAnalyticsId ? <GoogleAnalytics measurementId={googleAnalyticsId} /> : null}
+      {clarityId ? <MicrosoftClarity projectId={clarityId} /> : null}
     </>
   );
 }

@@ -24,14 +24,39 @@ interface AnimatedCTAProps {
   hasAnimated?: boolean;
 }
 
+interface BurstParam {
+  yExtra: number;
+  xJitter: number;
+  rotate: number;
+  duration: number;
+}
+
 export default function AnimatedCTA({ type, label, href, theme = 'light', onClick, hasAnimated = false }: AnimatedCTAProps) {
   const [hovered, setHovered] = useState(false);
+  const [burstParams, setBurstParams] = useState<BurstParam[] | null>(null);
   const [showEmailTooltip, setShowEmailTooltip] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const items = iconsMap[type] || [];
   const emailAddresses = ["shazzadhossainmukit@gmail.com", "mukit@moncho.ai"];
+
+  const handlePointerEnter = () => {
+    setBurstParams(
+      items.map(() => ({
+        yExtra: Math.random() * 30,
+        xJitter: (Math.random() - 0.5) * 20,
+        rotate: (Math.random() - 0.5) * 60,
+        duration: 1 + Math.random() * 0.5,
+      }))
+    );
+    setHovered(true);
+  };
+
+  const handlePointerLeave = () => {
+    setHovered(false);
+    setBurstParams(null);
+  };
 
   const copyEmail = async (emailAddress: string) => {
     let copied = false;
@@ -104,43 +129,51 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
 
   return (
     <div className="relative inline-block">
-      <motion.a
-        href={href}
-        target={href.startsWith('http') ? "_blank" : undefined}
-        rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onClick={(e) => {
-          if (type === 'email') {
-            e.preventDefault();
-            setShowEmailTooltip((prev) => !prev);
-            return;
-          }
-
-          if (onClick) {
-            e.preventDefault();
-            onClick();
-          }
-        }}
-        aria-label={type === 'email' ? 'Open email copy tooltip' : undefined}
-        aria-expanded={type === 'email' ? showEmailTooltip : undefined}
-        aria-haspopup={type === 'email' ? 'dialog' : undefined}
-        className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
-          theme === 'dark'
-            ? 'text-gray-200 hover:text-white'
-            : 'text-gray-700 hover:text-gray-900'
-        }`}
-        whileHover={{ 
-          scale: 1.02,
-          y: -2
-        }}
-        whileTap={{ scale: 0.98 }}
+      {/*
+        Use a real <a> for the control so ARIA attributes SSR the same as the client.
+        motion.a can omit aria-* on the server, which triggers hydration mismatches.
+      */}
+      <motion.div
+        className="inline-flex"
         initial={hasAnimated ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
+        whileHover={{
+          scale: 1.02,
+          y: -2,
+        }}
+        whileTap={{ scale: 0.98 }}
       >
-        {label}
-      </motion.a>
+        <a
+          href={href}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          onMouseEnter={handlePointerEnter}
+          onMouseLeave={handlePointerLeave}
+          onClick={(e) => {
+            if (type === 'email') {
+              e.preventDefault();
+              setShowEmailTooltip((prev) => !prev);
+              return;
+            }
+
+            if (onClick) {
+              e.preventDefault();
+              onClick();
+            }
+          }}
+          aria-label={type === 'email' ? 'Open email copy tooltip' : undefined}
+          aria-expanded={type === 'email' ? showEmailTooltip : undefined}
+          aria-haspopup={type === 'email' ? 'dialog' : undefined}
+          className={`group relative text-sm font-medium transition-all duration-150 inline-flex items-center ${
+            theme === 'dark'
+              ? 'text-gray-200 hover:text-white'
+              : 'text-gray-700 hover:text-gray-900'
+          }`}
+        >
+          {label}
+        </a>
+      </motion.div>
 
       {type === 'email' && showEmailTooltip && (
         <div
@@ -219,19 +252,23 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
 
       <AnimatePresence>
         {hovered &&
-          items.map((icon, i) => (
+          burstParams &&
+          items.map((icon, i) => {
+            const p = burstParams[i];
+            if (!p) return null;
+            return (
             <motion.div
               key={i}
               initial={{ y: 0, opacity: 1, rotate: 0, x: 0 }}
               animate={{
-                y: [0, -40 - Math.random() * 30],
-                x: [(i - items.length / 2) * 10, (i - items.length / 2) * 15 + (Math.random() - 0.5) * 20],
+                y: [0, -40 - p.yExtra],
+                x: [(i - items.length / 2) * 10, (i - items.length / 2) * 15 + p.xJitter],
                 opacity: [1, 0.8, 0],
-                rotate: [0, (Math.random() - 0.5) * 60],
+                rotate: [0, p.rotate],
               }}
               exit={{ opacity: 0 }}
               transition={{ 
-                duration: 1 + Math.random() * 0.5, 
+                duration: p.duration, 
                 ease: "easeOut",
                 delay: i * 0.05
               }}
@@ -242,7 +279,8 @@ export default function AnimatedCTA({ type, label, href, theme = 'light', onClic
             >
               {icon}
             </motion.div>
-          ))}
+          );
+          })}
       </AnimatePresence>
     </div>
   );

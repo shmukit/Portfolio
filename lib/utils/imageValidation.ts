@@ -1,21 +1,42 @@
 /**
  * Validates if an image URL should be displayed
- * @param imageUrl - The image URL to validate
- * @returns boolean - Whether the image should be displayed
  */
+
+function isTrustedHttpsHost(hostname: string): boolean {
+  if (hostname.endsWith('.supabase.co')) return true;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (supabaseUrl && !supabaseUrl.includes('your-project')) {
+    try {
+      if (new URL(supabaseUrl).hostname === hostname) return true;
+    } catch {
+      /* ignore */
+    }
+  }
+  if (hostname === 'images.unsplash.com') return true;
+  return false;
+}
+
+function isValidRemoteMediaUrl(trimmedUrl: string): boolean {
+  try {
+    const u = new URL(trimmedUrl);
+    if (u.protocol !== 'https:') return false;
+    return isTrustedHttpsHost(u.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function isValidImageUrl(imageUrl: string | null | undefined): boolean {
   if (!imageUrl || typeof imageUrl !== 'string') {
     return false;
   }
 
   const trimmedUrl = imageUrl.trim();
-  
-  // Check for empty or null strings
+
   if (trimmedUrl === '' || trimmedUrl === 'null' || trimmedUrl === 'undefined') {
     return false;
   }
 
-  // Check for placeholder or dummy URLs
   const invalidPatterns = [
     'placeholder',
     'dummy',
@@ -23,7 +44,7 @@ export function isValidImageUrl(imageUrl: string | null | undefined): boolean {
     'sample',
     'test',
     'temp',
-    'temporary'
+    'temporary',
   ];
 
   for (const pattern of invalidPatterns) {
@@ -32,17 +53,11 @@ export function isValidImageUrl(imageUrl: string | null | undefined): boolean {
     }
   }
 
-  // Check if it's a valid image path
-  if (!trimmedUrl.startsWith('/images/')) {
-    return false;
-  }
-
-  // Check for valid media extensions (images + lightweight videos used as previews)
   const validExtensions = [
-    '.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', // images
-    '.webm', '.mp4', '.mov' // videos used in place of images for demos
+    '.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg',
+    '.webm', '.mp4', '.mov',
   ];
-  const hasValidExtension = validExtensions.some(ext => 
+  const hasValidExtension = validExtensions.some((ext) =>
     trimmedUrl.toLowerCase().endsWith(ext)
   );
 
@@ -50,5 +65,9 @@ export function isValidImageUrl(imageUrl: string | null | undefined): boolean {
     return false;
   }
 
-  return true;
+  if (trimmedUrl.startsWith('/images/')) {
+    return true;
+  }
+
+  return isValidRemoteMediaUrl(trimmedUrl);
 }

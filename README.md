@@ -25,13 +25,17 @@ A premium, interactive portfolio showcasing project milestones through a dynamic
 ## 📂 Project Structure
 
 ```bash
-├── app/          # Next.js App Router (UI & Layout)
-├── components/   # Modular Client Components
-├── database/     # SQL Schema & Seed scripts
-├── docs/         # Detailed System Design & Specs
-├── lib/          # Custom Hooks & Utilities
-└── public/       # Optimized Assets & Icons
+├── app/              # Next.js App Router (pages, layout, components/)
+├── database/         # SQL schema & seeds (apply in Supabase SQL editor)
+├── docs/             # System design & specs
+├── lib/              # Hooks, Supabase client, data helpers
+├── data/             # Static projects.json fallback
+└── public/           # Static assets
 ```
+
+Content loading order: **Supabase** (when `NEXT_PUBLIC_SUPABASE_URL` / anon key are set) → else **`data/projects.json`**. Failures still load from Supabase on the client when configured.
+
+Row-level security: re-apply the `collaborators` policy from [`database/schema.sql`](database/schema.sql) on existing databases so collaborators are only readable for **published** projects.
 
 ## 📖 Documentation
 
@@ -64,11 +68,12 @@ For a deeper dive into the engineering behind this project, please refer to:
    ```
 
 3. **Configure Environment:**
-   Create a `.env.local` file based on `env.example`:
+   Copy [`.env.example`](.env.example) to `.env.local` and set variables as needed:
    ```bash
    NEXT_PUBLIC_SUPABASE_URL=your_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
    ```
+   Optional: `NEXT_PUBLIC_GA_MEASUREMENT_ID`, `NEXT_PUBLIC_CLARITY_PROJECT_ID`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (analytics and Search Console are off when unset).
 
 4. **Initialize Database:**
    Run the SQL scripts in `database/schema.sql` within your Supabase SQL editor.

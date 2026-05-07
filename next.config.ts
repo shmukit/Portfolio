@@ -1,14 +1,39 @@
 import type { NextConfig } from "next";
 
+function supabaseImageRemotePattern(): {
+  protocol: "https";
+  hostname: string;
+  port: "";
+  pathname: string;
+} | null {
+  const u = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!u || u.includes("your-project")) return null;
+  try {
+    const { hostname } = new URL(u);
+    if (!hostname) return null;
+    return {
+      protocol: "https",
+      hostname,
+      port: "",
+      pathname: "/**",
+    };
+  } catch {
+    return null;
+  }
+}
+
+const supabaseRemotePattern = supabaseImageRemotePattern();
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
       },
+      ...(supabaseRemotePattern ? [supabaseRemotePattern] : []),
     ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000, // 1 year

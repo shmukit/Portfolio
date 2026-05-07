@@ -200,21 +200,34 @@ export const metadata: Metadata = {
   },
 };
 
+function supabaseDnsPrefetchOrigin(): string | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!url || url === 'https://your-project.supabase.co') return null;
+  try {
+    return new URL(url).origin;
+  } catch {
+    return null;
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabaseOrigin = supabaseDnsPrefetchOrigin();
+  const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
   return (
     <html lang="en" className={`${inter.variable} ${interTight.variable} ${manrope.variable}`}>
       <head>
         <StructuredData />
-        {/* Google Site Verification */}
-        <meta name="google-site-verification" content="iQDDLOtWrQWy-Mak4OH2Mh_GpPaPCCQgR9vpus3927s" />
-        {/* Performance optimizations */}
+        {googleSiteVerification ? (
+          <meta name="google-site-verification" content={googleSiteVerification} />
+        ) : null}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://your-project.supabase.co" />
+        {supabaseOrigin ? <link rel="dns-prefetch" href={supabaseOrigin} /> : null}
         <meta name="format-detection" content="telephone=no" />
       </head>
       <body className="antialiased font-manrope" suppressHydrationWarning={true}>
