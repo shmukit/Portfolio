@@ -147,4 +147,4 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-export const revalidate = 86400;
+export const revalidate = 0;
