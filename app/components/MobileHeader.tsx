@@ -108,6 +108,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
       >
         {/* Enhanced greeting with better typography */}
         <div className="mb-4">
+          <h1 className="sr-only">Mukit - AI Product Manager & Technical Builder</h1>
           <span className={`text-base font-medium ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
           }`}>
@@ -116,7 +117,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
         </div>
 
         {/* Enhanced main heading with gradient text */}
-        <h1 className={`text-3xl font-bold mb-4 leading-tight ${
+        <div className={`text-3xl font-bold mb-4 leading-tight ${
             theme === 'dark' ? 'text-white' : 'text-gray-900'
           }`}>
           <span className={`${
@@ -132,7 +133,7 @@ export default function MobileHeader({ theme, showPortfolio, onTogglePortfolio, 
             className="inline-block origin-[70%_70%] ml-2"
             style={{ filter: 'hue-rotate(-30deg) saturate(0.7) brightness(1.1) sepia(0.3)' }}
           >👋</span>
-        </h1>
+        </div>
 
         {/* Enhanced subtitle with better styling */}
         <div className="mb-4">

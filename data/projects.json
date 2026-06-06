@@ -397,7 +397,7 @@
     "phase": "Scale",
     "project_type": "AI Engineering",
     "situation": "Manual market research across international regions, pricing synthesis, and top-down market sizing calculations was too slow to map 50+ emerging market sectors.",
-    "task": "- Replaced static vector RAG with a dynamic \"Agentic RAG\" pipeline, using Tavily and Exa APIs to retrieve real-time, primary-source market data while actively filtering out aggregator domains.\n- Integrated the Vercel AI SDK to feed search context into LLMs, enforcing strict Zod schemas to guarantee structured JSON outputs for market sizes and currency-adjusted prices.\n- Created a HITL process in CMS before final data ingestion. ",
+    "task": "- Replaced static vector RAG with a dynamic \"Agentic RAG\" pipeline, using Tavily and Exa APIs to retrieve real-time, primary-source market data while actively filtering out aggregator domains.\n- Integrated the Vercel AI SDK to feed search context into LLMs, enforcing strict Zod schemas to guarantee structured JSON outputs for market sizes and currency-adjusted prices.\n- Created a HITL process in CMS before final data ingestion.",
     "result": "- Fully automated complex sector calculations and competitive price gathering, reducing strategic research time from hours to under 60 seconds.\n- Successfully mapped 50+ sectors autonomously, establishing a near-instant digital ingestion pipeline with high-confidence source citations.",
     "contributions": [
       {
@@ -490,21 +490,21 @@
     "title": "Group Guidance/Roadmaps",
     "year": 2025,
     "company": "10 Minute School",
-    "role": "Consultant\n",
+    "role": "Consultant",
     "description": "Vibe coded an R&D platform for mentor-guided learning. In Jan, 2026 enhanced with competency-based roadmaps for Students, multi-batch orchestration for Mentors, and global governance for Admins. Integrated pedagogical engines for adaptive learning.",
     "lessons": null,
     "image_url": "/images/projects/group-guidance-demo.webm",
     "order_index": 4,
-    "category": "Vide Coding\n",
+    "category": "Vibe Coding",
     "is_unlocked": true,
     "published": true,
     "created_at": "2025-10-15T18:53:23.30044+00:00",
     "updated_at": "2026-03-23T08:27:26.54305+00:00",
     "phase": "Feature Suit",
     "project_type": "Rapid Prototyping",
-    "situation": "STEM graduates required guided mentorship to bridge their skills gaps to lands jobs. ",
+    "situation": "STEM graduates required guided mentorship to bridge their skills gaps to lands jobs.",
     "task": "Architected a 3-role ecosystem. Implemented TaRL logic for threshold-driven content unlocking and Spaced Repetition (SM-2 based) for assessment retention. Designed Supabase RLS policies for role-based access.",
-    "result": "Product RnD deployed in record time of 4 days to seek users feedback. ",
+    "result": "Product RnD deployed in record time of 4 days to seek users feedback.",
     "contributions": [
       {
         "type": "System Architecture",
@@ -638,7 +638,7 @@
     "phase": "Feature Suit",
     "project_type": "AI Product Dev",
     "situation": "Bangladeshi students lacked affordable, interactive & locally contextual English-speaking practice platform.",
-    "task": "Design, train, and pilot GenAI conversational tutor in English learning course based on 30 real life scenarios. ",
+    "task": "Design, train, and pilot GenAI conversational tutor in English learning course based on 30 real life scenarios.",
     "result": "Pilot ongoing.",
     "contributions": [
       {
@@ -668,7 +668,7 @@
         "label": "Speech Pipeline",
         "value": "STT-LLM-TTS",
         "category": "GenAI Architecture",
-        "description": "Speech-to-Text → Large Language Model → Text-to-Speech (STT-LLM-TTS) pipeline. Turn-taking is stabilized with VAD + Semantic Turn Detection (STD) to avoid awkward pauses inside the STT-LLM-TTS tutoring loop."
+        "description": "Speech-to-Text \u2192 Large Language Model \u2192 Text-to-Speech (STT-LLM-TTS) pipeline. Turn-taking is stabilized with VAD + Semantic Turn Detection (STD) to avoid awkward pauses inside the STT-LLM-TTS tutoring loop."
       }
     ],
     "tags": [
@@ -721,7 +721,7 @@
         "label": "Speech Pipeline",
         "value": "STT-LLM-TTS",
         "category": "GenAI Architecture",
-        "description": "Speech-to-Text → Large Language Model → Text-to-Speech (STT-LLM-TTS) pipeline. Turn-taking is stabilized with VAD + Semantic Turn Detection (STD) to avoid awkward pauses inside the STT-LLM-TTS tutoring loop."
+        "description": "Speech-to-Text \u2192 Large Language Model \u2192 Text-to-Speech (STT-LLM-TTS) pipeline. Turn-taking is stabilized with VAD + Semantic Turn Detection (STD) to avoid awkward pauses inside the STT-LLM-TTS tutoring loop."
       }
     ],
     "videoPoster": null,
@@ -788,11 +788,11 @@
     "published": true,
     "created_at": "2025-10-17T09:56:44.34014+00:00",
     "updated_at": "2025-12-29T13:15:54.343012+00:00",
-    "phase": "Research\n",
+    "phase": "Research",
     "project_type": "Tech Policy & Platform",
     "situation": "In SEA, due to policymakers lacked contextual frameworks & platform for assessing EdTech tools and making evidence-based integration decisions.",
     "task": "Designed frameworks for EdTech usage assessment, decision-making capability evaluation, and tech platform to find contextualized Edtech solutions for policymakers.",
-    "result": "Research and Tech platform development ongoing. ",
+    "result": "Research and Tech platform development ongoing.",
     "contributions": [
       {
         "type": "Research",
@@ -840,7 +840,7 @@
       {
         "url": "https://idrc-crdi.ca/en/initiative/empowered-technology-inclusive-education",
         "label": "EmpowerED: Technology for Inclusive Education",
-        "description": "Strengthening decision-makers’ capacities for appropriate EdTech use in South and Southeast Asia — Bangladesh"
+        "description": "Strengthening decision-makers\u2019 capacities for appropriate EdTech use in South and Southeast Asia \u2014 Bangladesh"
       }
     ],
     "report_urls": [],
@@ -866,7 +866,7 @@
       {
         "url": "https://idrc-crdi.ca/en/initiative/empowered-technology-inclusive-education",
         "label": "EmpowerED: Technology for Inclusive Education",
-        "description": "Strengthening decision-makers’ capacities for appropriate EdTech use in South and Southeast Asia — Bangladesh"
+        "description": "Strengthening decision-makers\u2019 capacities for appropriate EdTech use in South and Southeast Asia \u2014 Bangladesh"
       }
     ],
     "reportUrls": [],
@@ -914,7 +914,7 @@
   },
   {
     "id": "6665081a-dd35-4fe7-ac0a-ec2886cce3b5",
-    "title": "Gamification: Financial Literacy Course\n",
+    "title": "Gamification: Financial Literacy Course",
     "year": 2025,
     "company": "10 Minute School x bKash",
     "role": "Lead Product Manager",
@@ -1082,9 +1082,9 @@
     "updated_at": "2025-10-22T14:06:26.792109+00:00",
     "phase": "Prototype",
     "project_type": "Global B2C Edtech",
-    "situation": "A/O level students needed personalized exam preparation and progress tracking tools. ",
-    "task": "Conducted 30+ teachers/student interviews and competitor analysis; designed student experience and MVP for personalized learning. ",
-    "result": "Handed off design for development in 3 weeks — reduced MVP delivery timeline from 1 year to 1 month for client. Assisting in scalable digital distribution framework for user acquisition.\n",
+    "situation": "A/O level students needed personalized exam preparation and progress tracking tools.",
+    "task": "Conducted 30+ teachers/student interviews and competitor analysis; designed student experience and MVP for personalized learning.",
+    "result": "Handed off design for development in 3 weeks \u2014 reduced MVP delivery timeline from 1 year to 1 month for client. Assisting in scalable digital distribution framework for user acquisition.",
     "contributions": [
       {
         "type": "Data Analysis",
@@ -1111,7 +1111,7 @@
       },
       {
         "label": "Timeline Reduction",
-        "value": "1 Year → 1 Month",
+        "value": "1 Year \u2192 1 Month",
         "category": "Impact",
         "description": "MVP delivery acceleration"
       },
@@ -1178,7 +1178,7 @@
       },
       {
         "label": "Timeline Reduction",
-        "value": "1 Year → 1 Month",
+        "value": "1 Year \u2192 1 Month",
         "category": "Impact",
         "description": "MVP delivery acceleration"
       },
@@ -1324,7 +1324,7 @@
     "project_type": "RCT",
     "situation": "Class 3-5 students lacked adaptive learning support aligned with their actual learning levels in Math and English.",
     "task": "Build and pilot TARA app using TaRL methodology in collaboration with Monash researchers.",
-    "result": "Project paused but it helped to develop a comprehensive and dynamic adaptive learning system for 10 Minute School. ",
+    "result": "Project paused but it helped to develop a comprehensive and dynamic adaptive learning system for 10 Minute School.",
     "contributions": [
       {
         "type": "Data Analysis",
@@ -1522,7 +1522,7 @@
     "updated_at": "2025-10-21T21:16:31.126275+00:00",
     "phase": "Feature Suit",
     "project_type": "B2B",
-    "situation": "Bangladesh lacked digital teaching infrastructure at high school level for 140K+ teachers and would take 50+ years for Govt to physically train all teachers. ",
+    "situation": "Bangladesh lacked digital teaching infrastructure at high school level for 140K+ teachers and would take 50+ years for Govt to physically train all teachers.",
     "task": "Design comprehensive LMS for learning rollout, coordinate with FSU, Chemonics Int, A2i & Education Ministry/DSHE.",
     "result": "Secured $3M grant; trained 500 teachers and led the prototyping of the platform in 21 days. Later discontinued (USAID).",
     "contributions": [
@@ -1700,9 +1700,9 @@
     "updated_at": "2025-10-22T17:08:09.560908+00:00",
     "phase": "Feature Suit",
     "project_type": "Strategy",
-    "situation": "10MS did not have a detailed plan to scale the gamification system, particularly for converter and drainage system in the game economy. ",
+    "situation": "10MS did not have a detailed plan to scale the gamification system, particularly for converter and drainage system in the game economy.",
     "task": "Planned gamified system based on game economy, proper drainage/converter system and MDA (Mechanism > Design > Aesthetics) philosophy to achieve learning outcome and commercial goals.",
-    "result": "Clarity & Scaleable plan to build cascade of features and gamification system on the platform. ",
+    "result": "Clarity & Scaleable plan to build cascade of features and gamification system on the platform.",
     "contributions": [
       {
         "type": "UX Design",
@@ -1993,7 +1993,7 @@
       },
       {
         "label": "Initial Performance",
-        "value": "8.11s → Under 3s",
+        "value": "8.11s \u2192 Under 3s",
         "category": "Baseline",
         "description": "Brought top pages under 3 seconds."
       }
@@ -2059,7 +2059,7 @@
       },
       {
         "label": "Initial Performance",
-        "value": "8.11s → Under 3s",
+        "value": "8.11s \u2192 Under 3s",
         "category": "Baseline",
         "description": "Brought top pages under 3 seconds."
       }
@@ -2335,7 +2335,7 @@
     "year": 2023,
     "company": "10 Minute School",
     "role": "Lead Product Manager",
-    "description": "Introduced a new trust-based course rating metric — % of users rating 5/5.",
+    "description": "Introduced a new trust-based course rating metric \u2014 % of users rating 5/5.",
     "lessons": "Trust-based metrics often provide more meaningful signals than traditional average ratings for educational content.",
     "image_url": "/images/projects/rating-system.png",
     "order_index": 21,
@@ -2346,8 +2346,8 @@
     "updated_at": "2025-10-21T21:08:03.6564+00:00",
     "phase": "Feature",
     "project_type": "Rating System Innovation",
-    "situation": "Traditional rating systems didn't effectively communicate course quality and credibility to learners. Most of them mention, number of users rating 4 and above. ",
-    "task": "Conceptualized and implemented rating logic for credibility benchmarking using percentage of 5-star ratings. \n",
+    "situation": "Traditional rating systems didn't effectively communicate course quality and credibility to learners. Most of them mention, number of users rating 4 and above.",
+    "task": "Conceptualized and implemented rating logic for credibility benchmarking using percentage of 5-star ratings.",
     "result": "First-of-its-kind course rating approach so far we knew.",
     "contributions": [
       {
@@ -2650,7 +2650,7 @@
     "created_at": "2025-10-17T11:58:56.948135+00:00",
     "updated_at": "2025-10-17T22:17:17.782118+00:00",
     "phase": "Feature",
-    "project_type": "Learning Experience\n",
+    "project_type": "Learning Experience",
     "situation": "After purchasing courses, users were not progressing or finishing courses, leading to poor completion rates and reduced learning outcomes.",
     "task": "Implemented Course validation date system to create urgency and drive user engagement with clear deadlines for course completion.",
     "result": "In 6 months, increased user course progress (for first 7 days) from 48% to 77%.",
@@ -2674,7 +2674,7 @@
     "key_results": [
       {
         "label": "Progress Improvement",
-        "value": "48% → 77%",
+        "value": "48% \u2192 77%",
         "category": "Engagement",
         "description": "User course progress increase in first 7 days"
       },
@@ -2718,7 +2718,7 @@
     "isUnlocked": true,
     "createdAt": "2025-10-17T11:58:56.948135+00:00",
     "updatedAt": "2025-10-17T22:17:17.782118+00:00",
-    "projectType": "Learning Experience\n",
+    "projectType": "Learning Experience",
     "companyUrl": null,
     "projectUrl": null,
     "reportUrl": null,
@@ -2734,7 +2734,7 @@
     "keyResults": [
       {
         "label": "Progress Improvement",
-        "value": "48% → 77%",
+        "value": "48% \u2192 77%",
         "category": "Engagement",
         "description": "User course progress increase in first 7 days"
       },
@@ -2961,7 +2961,7 @@
     "id": "b495ab11-29f3-43be-a253-ac9ade03f66d",
     "title": "Co-authored book on SMEs digital adoption",
     "year": 2022,
-    "company": "Friedrich-Ebert-Stiftung (FES) x SME Foundation\n",
+    "company": "Friedrich-Ebert-Stiftung (FES) x SME Foundation",
     "role": "Co-Author & Researcher",
     "description": "Co-authored book and journal exploring ICT adoption pace and challenges among Bangladeshi SMEs.",
     "lessons": "SME digitization depends on managerial attitude more than technology cost.",
@@ -2972,7 +2972,7 @@
     "published": true,
     "created_at": "2025-10-15T18:53:23.30044+00:00",
     "updated_at": "2025-10-21T21:01:50.644491+00:00",
-    "phase": "B2B\n",
+    "phase": "B2B",
     "project_type": "Digital Adoption",
     "situation": "SMEs lagged in adopting ICT for productivity and competitiveness.",
     "task": "Conduct nationwide interviews and co-author publication.",
@@ -3119,7 +3119,7 @@
     "company": "10 Minute School",
     "role": "Strategy Consultant",
     "description": "My \"Bangladesh Edtech Market Thesis\" facilitated a 2Mn investment from Sequoia Capital India in 10MS.",
-    "lessons": "Vision must be backed by credible narrative and data — that's how ecosystems get funded.",
+    "lessons": "Vision must be backed by credible narrative and data \u2014 that's how ecosystems get funded.",
     "image_url": null,
     "order_index": 5,
     "category": "Strategy",
@@ -3130,7 +3130,7 @@
     "phase": "Research",
     "project_type": "Market Research & Strategic Narrative",
     "situation": "Edtech funding ecosystem lacked credible data on market size and user adoption.",
-    "task": "Authored comprehensive market landscape and TAM analysis of Bangladesh's EdTech sector and different segments. ",
+    "task": "Authored comprehensive market landscape and TAM analysis of Bangladesh's EdTech sector and different segments.",
     "result": "Enabled Sequoia's $2M seed investment into 10MS.",
     "contributions": [
       {
@@ -3282,7 +3282,7 @@
     "year": 2021,
     "company": "Innovision Consulting",
     "role": "Portfolio Manager",
-    "description": "Assisted to set up DAEF team to study digital economy, consumer behavior, and startup ecosystems across Bangladesh.\n",
+    "description": "Assisted to set up DAEF team to study digital economy, consumer behavior, and startup ecosystems across Bangladesh.",
     "lessons": "Sectoral insights scale when frameworks are replicable and localized.",
     "image_url": null,
     "order_index": 14,
@@ -3294,7 +3294,7 @@
     "phase": "Research",
     "project_type": "B2B",
     "situation": "Growing need for private sector-aligned research in development context.",
-    "task": "Manage 20+ clients, publish 15+ reports. Lead several experimental projects. ",
+    "task": "Manage 20+ clients, publish 15+ reports. Lead several experimental projects.",
     "result": "Delivered 4 industry white papers and 20 consulting outputs.",
     "contributions": [
       {
@@ -3475,7 +3475,7 @@
   },
   {
     "id": "9091cbf7-5089-47dd-b5e9-831aa5da4c5c",
-    "title": "CareerKi – Workforce EdTech",
+    "title": "CareerKi \u2013 Workforce EdTech",
     "year": 2018,
     "company": "CareerKi",
     "role": "Co-founder & Product Lead",
@@ -3492,7 +3492,7 @@
     "project_type": "Workforce Edtech",
     "situation": "Bangladesh has the 7th largest labor market in the world, but students & parents had no way to take evidence based decisions to pursue careers.",
     "task": "To help students take evidence based career decisions, we researched and profiled 300+ white collar, blue collar and entrepreneurial job roles from labor market with data on salary, technical skills, academic qualification, career challenges, etc. Along with career related evidence based 200 contents, we launched CareerKi in 2018.",
-    "result": "MAU range: 30K-45K, Till date served over 1.5 million users. ",
+    "result": "MAU range: 30K-45K, Till date served over 1.5 million users.",
     "contributions": [
       {
         "type": "Decision Strategy",
@@ -3693,7 +3693,7 @@
       },
       {
         "label": "Grant Won",
-        "value": "€30K",
+        "value": "\u20ac30K",
         "category": "Financial",
         "description": "Genopole Young Biotech Prize, France"
       },
@@ -3770,7 +3770,7 @@
       },
       {
         "label": "Grant Won",
-        "value": "€30K",
+        "value": "\u20ac30K",
         "category": "Financial",
         "description": "Genopole Young Biotech Prize, France"
       },
@@ -3838,7 +3838,7 @@
   },
   {
     "id": "d31b5b0b-7055-45d6-ba2a-e857cc7fe859",
-    "title": "Quizards – Bangla Edutainment Platform",
+    "title": "Quizards \u2013 Bangla Edutainment Platform",
     "year": 2014,
     "company": "Quizards",
     "role": "Co-founder & Product Lead",

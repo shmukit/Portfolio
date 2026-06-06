@@ -111,6 +111,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
                     
                     <div className="relative z-10">
                       <div className="mb-4">
+                        <h1 className="sr-only">Mukit - AI Product Manager & Technical Builder</h1>
                         <span className={`text-lg lg:text-xl font-medium ${
                           theme === 'dark' ? 'text-gray-400' : 'text-gray-700'
                         }`}>
@@ -118,7 +119,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
                         </span>
                       </div>
 
-                      <h1 className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight ${
+                      <div className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 lg:mb-8 leading-tight ${
                           theme === 'dark' ? 'text-white' : 'text-gray-900'
                         }`}>
                         <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
@@ -130,7 +131,7 @@ export default function ClientLayout({ projects }: ClientLayoutProps) {
                           className="inline-block origin-[70%_70%] ml-3"
                           style={{ filter: 'hue-rotate(-30deg) saturate(0.7) brightness(1.1) sepia(0.3)' }}
                         >👋</span>
-                      </h1>
+                      </div>
 
                       <div className="space-y-4">
                         <p className={`text-xl lg:text-2xl leading-relaxed font-medium ${

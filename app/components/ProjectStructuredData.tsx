@@ -21,7 +21,7 @@ export default function ProjectStructuredData({ projects }: ProjectStructuredDat
     creator: {
       '@type': 'Person',
       name: 'Shazzad Hossain Mukit',
-      jobTitle: 'Product Manager',
+      jobTitle: 'AI Product Manager & Product Consultant',
       url: 'https://www.mukit.xyz'
     },
     dateCreated: project.createdAt || `${project.year}-01-01T00:00:00+00:00`,
@@ -52,7 +52,7 @@ export default function ProjectStructuredData({ projects }: ProjectStructuredDat
     },
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Shazzad Hossain Mukit - Product Manager Portfolio',
+      name: 'Shazzad Hossain Mukit - AI Product Manager & Builder',
       url: 'https://www.mukit.xyz'
     },
     mainEntity: {
@@ -73,7 +73,7 @@ export default function ProjectStructuredData({ projects }: ProjectStructuredDat
     publisher: {
       '@type': 'Organization',
       name: project.company,
-      url: project.companyUrl || `https://${project.company.toLowerCase().replace(/\s+/g, '')}.com`
+      ...(project.companyUrl && { url: project.companyUrl })
     },
     // Add work example if it's a software project
     ...(project.projectType === 'Prod Dev' && {
@@ -91,15 +91,15 @@ export default function ProjectStructuredData({ projects }: ProjectStructuredDat
     .map((project) => ({
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      '@id': `https://www.mukit.xyz/company/${project.company.toLowerCase().replace(/\s+/g, '-')}`,
+      '@id': `https://www.mukit.xyz/company/${project.company.toLowerCase().replace(/\\s+/g, '-')}`,
       name: project.company,
-      url: project.companyUrl || `https://${project.company.toLowerCase().replace(/\s+/g, '')}.com`,
+      ...(project.companyUrl && { url: project.companyUrl }),
       description: `${project.company} - Company where Mukit worked as ${project.role}`,
       industry: project.category === 'EdTech' ? 'Education Technology' : 'Technology',
       employee: {
         '@type': 'Person',
         name: 'Shazzad Hossain Mukit',
-        jobTitle: 'Product Manager',
+        jobTitle: 'AI Product Manager & Product Consultant',
         worksFor: {
           '@type': 'Organization',
           name: project.company
@@ -107,68 +107,10 @@ export default function ProjectStructuredData({ projects }: ProjectStructuredDat
       }
     }));
 
-  // Generate Article schemas for case studies
-  const articleSchemas = projects.map((project) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    '@id': `https://www.mukit.xyz/case-study/${project.id}`,
-    headline: `${project.title} - Product Management Case Study`,
-    description: `Case study: ${project.role} at ${project.company} - ${project.title}`,
-    author: {
-      '@type': 'Person',
-      name: 'Shazzad Hossain Mukit',
-      url: 'https://www.mukit.xyz'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Shazzad Hossain Mukit - Product Manager Portfolio',
-      url: 'https://www.mukit.xyz'
-    },
-    datePublished: project.createdAt || `${project.year}-01-01T00:00:00+00:00`,
-    dateModified: project.updatedAt || `${project.year}-12-31T23:59:59+00:00`,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://www.mukit.xyz'
-    },
-    about: [
-      {
-        '@type': 'Thing',
-        name: 'Product Management'
-      },
-      {
-        '@type': 'Thing',
-        name: project.category || 'Product Development'
-      }
-    ],
-    keywords: [
-      project.title,
-      project.role,
-      project.company,
-      'Product Management Case Study',
-      'Data-driven Product Development',
-      ...(project.tags || [])
-    ].filter(Boolean),
-    articleSection: 'Product Management',
-    wordCount: project.description ? project.description.split(' ').length : 100,
-    // Add structured content sections
-    ...(project.situation && {
-      abstract: project.situation
-    }),
-    // Add methodology if available
-    ...(project.task && {
-      teaches: project.task
-    }),
-    // Add outcomes
-    ...(project.result && {
-      discusses: project.result
-    })
-  }));
-
-  // Combine all schemas
+  // Combine all schemas (Removed Article Schemas to prevent spam)
   const allSchemas = [
     ...projectSchemas,
-    ...companySchemas,
-    ...articleSchemas
+    ...companySchemas
   ];
 
   return (

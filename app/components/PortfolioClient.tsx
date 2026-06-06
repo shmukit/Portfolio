@@ -209,6 +209,17 @@ export default function PortfolioClient({ projects, theme, showPortfolio }: Port
 
   return (
     <>
+      {/* SEO Links for Crawlers */}
+      <div className="sr-only" aria-hidden="true">
+        {projects.map(project => {
+          const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          return (
+            <a key={`seo-${project.id}`} href={`/project/${slug}`}>
+              {project.title}
+            </a>
+          );
+        })}
+      </div>
       {/* Desktop Project Pills */}
       {showPortfolio && (
         <div className="hidden lg:block w-80 z-30">
