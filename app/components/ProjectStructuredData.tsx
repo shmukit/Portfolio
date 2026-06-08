@@ -11,11 +11,14 @@ interface ProjectStructuredDataProps {
 }
 
 export default function ProjectStructuredData({ projects }: ProjectStructuredDataProps) {
+  // Helper to generate consistent slugs
+  const generateSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
   // Generate CreativeWork schemas for each project
   const projectSchemas = projects.map((project) => ({
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
-    '@id': `https://www.mukit.xyz/project/${project.id}`,
+    '@id': `https://www.mukit.xyz/project/${generateSlug(project.title)}`,
     name: project.title,
     description: project.description || `${project.role} at ${project.company} - ${project.title}`,
     creator: {
